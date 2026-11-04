@@ -96,3 +96,9 @@ create policy "equipe exclui" on public.leads for delete to authenticated using 
 revoke all on public.leads from anon;
 grant insert on public.leads to anon;
 grant select, update, delete on public.leads to authenticated;
+
+-- ===== MÉTRICAS DO SITE (aplicado como migração "metricas_eventos") =====
+-- Tabela public.eventos: visitas, tempo (pings de 15 s), rolagem, seções, cliques,
+-- funil da avaliação, vídeos e abas. O site só insere (anon); só a equipe lê.
+-- Função public.painel_metricas(dias): resumo para o painel; recusa quem não está em public.admins.
+-- A definição completa está no histórico de migrações do projeto jessica-sousa-leads.
