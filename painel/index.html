@@ -74,6 +74,46 @@ dt{color:var(--muted)}dd{min-width:0;overflow-wrap:anywhere}
 .empty{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:40px 20px;text-align:center;color:var(--muted)}
 @media(max-width:1000px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:560px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.list{grid-template-columns:1fr}.top .wrap{min-height:60px}.brand small{display:none}.tools select{flex:1 1 45%}}
+/* abas do painel */
+.views{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px;width:max-content;max-width:100%;margin-bottom:24px}
+.views button{border:0;background:none;padding:10px 20px;border-radius:999px;font:600 .9rem var(--body);color:var(--muted);cursor:pointer}
+.views button[aria-selected="true"]{background:var(--black);color:var(--gold)}
+/* métricas */
+.m-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.m-head h2{font:600 1.5rem var(--display)}
+.m-head select{width:auto}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-bottom:14px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;min-width:0}
+.panel h3{font:600 1rem var(--body);margin-bottom:4px}
+.panel .sub{font-size:.82rem;color:var(--muted);margin-bottom:14px}
+.panel.wide{grid-column:1/-1}
+.kpi .delta{font-size:.78rem;color:var(--muted)}
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart text{font:500 11px var(--body);fill:var(--muted)}
+.chart .bar{fill:#8C5636}
+.chart .bar:hover,.chart .bar.on{fill:#5E3620}
+.chart .grid{stroke:#E8DDD0;stroke-width:1}
+.tip{position:fixed;pointer-events:none;background:var(--black);color:#F4EFE6;font:500 .82rem var(--body);padding:7px 10px;border-radius:8px;z-index:20;white-space:nowrap}
+.hbars{display:grid;gap:9px}
+.hb{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;align-items:center;font-size:.9rem}
+.hb .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hb .val{font-variant-numeric:tabular-nums;font-weight:600}
+.hb .trk{grid-column:1/-1;height:8px;background:#EFE6DA;border-radius:4px;overflow:hidden}
+.hb .trk span{display:block;height:100%;background:#8C5636;border-radius:0 4px 4px 0}
+.hb small{color:var(--muted);font-weight:400}
+.funnel{display:grid;gap:10px}
+.fstep{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center;font-size:.92rem}
+.fstep .trk{height:30px;background:#EFE6DA;border-radius:8px;overflow:hidden}
+.fstep .trk span{display:flex;align-items:center;padding-left:10px;height:100%;background:#8C5636;color:#FFF8F1;font-weight:600;font-size:.85rem;border-radius:8px;min-width:2.4em;font-variant-numeric:tabular-nums}
+.fstep .pct{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.empty-m{color:var(--muted);font-size:.9rem;padding:8px 0}
+.note-m{font-size:.82rem;color:var(--muted);margin-top:18px;line-height:1.5}
+table.t{width:100%;border-collapse:collapse;font-size:.9rem}
+table.t th,table.t td{text-align:left;padding:8px 6px;border-bottom:1px solid #EFE6DA}
+table.t th{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+table.t td.n{text-align:right;font-variant-numeric:tabular-nums}
+table.t th.n{text-align:right}
+@media(max-width:800px){.grid2{grid-template-columns:1fr}.fstep{grid-template-columns:110px 1fr 60px}}
 </style>
 </head>
 <body>
@@ -98,6 +138,38 @@ dt{color:var(--muted)}dd{min-width:0;overflow-wrap:anywhere}
     </div>
   </header>
   <main class="wrap">
+    <div class="views" role="tablist">
+      <button role="tab" aria-selected="true" data-view="v-leads">Avaliações</button>
+      <button role="tab" aria-selected="false" data-view="v-met">Métricas do site</button>
+    </div>
+    <section id="v-met" hidden>
+      <div class="m-head"><h2>Métricas do site</h2>
+        <select id="m-dias" aria-label="Período"><option value="7">Últimos 7 dias</option><option value="30" selected>Últimos 30 dias</option><option value="90">Últimos 90 dias</option><option value="365">Últimos 12 meses</option></select></div>
+      <section class="kpis" aria-label="Resumo do site">
+        <div class="kpi"><span>Visitas</span><b id="m-visitas">0</b><small id="m-novos">—</small></div>
+        <div class="kpi"><span>Visitantes únicos</span><b id="m-visitantes">0</b><small>pessoas diferentes</small></div>
+        <div class="kpi"><span>Tempo médio</span><b id="m-tempo">0s</b><small id="m-mediana">—</small></div>
+        <div class="kpi"><span>Saíram rápido</span><b id="m-rej">0%</b><small>menos de 10 s no site</small></div>
+        <div class="kpi"><span>Avaliações</span><b id="m-aval">0</b><small id="m-quentes">—</small></div>
+        <div class="kpi"><span>Conversão</span><b id="m-conv">0%</b><small>visitas → avaliação</small></div>
+      </section>
+      <div class="grid2">
+        <div class="panel wide"><h3>Visitas por dia</h3><p class="sub">Sessões no período selecionado</p><div id="c-dia"></div></div>
+        <div class="panel"><h3>Funil de conversão</h3><p class="sub">Do acesso ao WhatsApp</p><div id="c-funil" class="funnel"></div></div>
+        <div class="panel"><h3>Onde as pessoas desistem da avaliação</h3><p class="sub">Quantas chegaram a cada pergunta</p><div id="c-etapas" class="hbars"></div></div>
+        <div class="panel"><h3>De onde vêm as visitas</h3><p class="sub">Origem e avaliações geradas</p><div id="c-origens"></div></div>
+        <div class="panel"><h3>Dispositivo</h3><p class="sub">Sessões por tipo de aparelho</p><div id="c-disp" class="hbars"></div></div>
+        <div class="panel"><h3>O que mais é visto</h3><p class="sub">Sessões que chegaram a cada seção</p><div id="c-secoes" class="hbars"></div></div>
+        <div class="panel"><h3>Até onde rolam a página</h3><p class="sub">Sessões que passaram de cada ponto</p><div id="c-rol" class="hbars"></div></div>
+        <div class="panel wide"><h3>Horários de acesso</h3><p class="sub">Visitas por hora do dia (horário da Bahia). Bom para escolher a hora dos posts e anúncios.</p><div id="c-hora"></div></div>
+        <div class="panel"><h3>Botões mais clicados</h3><p class="sub">Botão · seção da página</p><div id="c-ctas" class="hbars"></div></div>
+        <div class="panel"><h3>Provas sociais</h3><p class="sub">Vídeos assistidos e abas abertas</p><div id="c-provas" class="hbars"></div></div>
+        <div class="panel"><h3>Queixas das avaliações</h3><p class="sub">Principal queixa informada</p><div id="c-queixas" class="hbars"></div></div>
+        <div class="panel"><h3>Temperatura das avaliações</h3><p class="sub">Classificação automática</p><div id="c-temp" class="hbars"></div></div>
+      </div>
+      <p class="note-m">As métricas contam apenas visitantes que aceitaram os cookies, conforme a LGPD. Por isso, os números de visitas tendem a ser menores que o total real de acessos. As avaliações são contadas todas.</p>
+    </section>
+    <div id="v-leads">
     <section class="kpis" aria-label="Resumo">
       <div class="kpi"><span>Total</span><b id="k-total">0</b><small id="k-semana">0 nos últimos 7 dias</small></div>
       <div class="kpi"><span>Novos</span><b id="k-novos">0</b><small>aguardando contato</small></div>
@@ -122,6 +194,7 @@ dt{color:var(--muted)}dd{min-width:0;overflow-wrap:anywhere}
     </div>
     <p class="count" id="contagem"></p>
     <div class="list" id="lista"></div>
+    </div>
   </main>
 </div>
 
@@ -196,6 +269,60 @@ $('exportar').addEventListener('click',()=>{const cols=['created_at','nome','wha
   const cel=v=>{v=Array.isArray(v)?v.join(', '):v??'';v=String(v);if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
   const csv='﻿'+cols.join(';')+'\n'+filtrados().map(l=>cols.map(c=>cel(c==='created_at'?data(l[c]):l[c])).join(';')).join('\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=`avaliacoes-${new Date().toISOString().slice(0,10)}.csv`;a.click()});
+
+// ===== MÉTRICAS =====
+document.querySelectorAll('.views button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.views button').forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on);$(x.dataset.view).hidden=!on});
+  if(b.dataset.view==='v-met')carregarMetricas()}));
+$('m-dias').addEventListener('change',carregarMetricas);
+const nf=n=>Number(n||0).toLocaleString('pt-BR');
+const dur=s=>{s=Math.round(s||0);return s<60?s+'s':Math.floor(s/60)+'min '+String(s%60).padStart(2,'0')+'s'};
+const pct=(a,b)=>b?Math.round(a/b*100):0;
+const tip=document.createElement('div');tip.className='tip';tip.hidden=true;document.body.appendChild(tip);
+function bars(el,items,lab,val,extra){
+  if(!items.length){el.innerHTML='<p class="empty-m">Ainda sem dados no período.</p>';return}
+  const max=Math.max(...items.map(val),1);
+  el.innerHTML=items.map(i=>`<div class="hb"><span class="lbl" title="${esc(lab(i))}">${esc(lab(i))}</span><span class="val">${nf(val(i))}${extra?` <small>${extra(i)}</small>`:''}</span><span class="trk"><span style="width:${Math.max(2,val(i)/max*100)}%"></span></span></div>`).join('')}
+function colunas(el,pts,fmtX){
+  if(!pts.length||!pts.some(p=>p.y)){el.innerHTML='<p class="empty-m">Ainda sem dados no período.</p>';return}
+  const W=900,H=220,pl=34,pb=26,pt=10,max=Math.max(...pts.map(p=>p.y),1),step=niceStep(max),top=Math.ceil(max/step)*step;
+  const bw=(W-pl)/pts.length,gap=Math.min(6,bw*.25);
+  let g='';for(let v=0;v<=top;v+=step){const y=pt+(H-pt-pb)*(1-v/top);g+=`<line class="grid" x1="${pl}" x2="${W}" y1="${y}" y2="${y}"/><text x="${pl-6}" y="${y+4}" text-anchor="end">${v}</text>`}
+  const every=Math.ceil(pts.length/12);
+  const b=pts.map((p,i)=>{const h=(H-pt-pb)*(p.y/top),x=pl+i*bw+gap/2,y=H-pb-h;const w=Math.max(1,bw-gap);
+    return `<rect class="bar" x="${x}" y="${y}" width="${w}" height="${Math.max(0,h)}" rx="${Math.min(4,w/2)}" data-t="${esc(p.t)}: ${p.y} visita${p.y===1?'':'s'}"/>${i%every===0?`<text x="${x+w/2}" y="${H-8}" text-anchor="middle">${esc(fmtX(p))}</text>`:''}<rect x="${pl+i*bw}" y="${pt}" width="${bw}" height="${H-pt-pb}" fill="transparent" data-t="${esc(p.t)}: ${p.y} visita${p.y===1?'':'s'}"/>`}).join('');
+  el.innerHTML=`<svg class="chart" viewBox="0 0 ${W} ${H}" role="img" aria-label="Gráfico de colunas">${g}${b}</svg>`;
+  el.querySelectorAll('[data-t]').forEach(r=>{r.addEventListener('mousemove',e=>{tip.textContent=r.dataset.t;tip.hidden=false;tip.style.left=(e.clientX+12)+'px';tip.style.top=(e.clientY-36)+'px'});r.addEventListener('mouseleave',()=>tip.hidden=true)})}
+function niceStep(m){const raw=m/4,p=Math.pow(10,Math.floor(Math.log10(raw||1))),n=raw/p;return Math.max(1,(n<=1?1:n<=2?2:n<=5?5:10)*p)}
+async function carregarMetricas(){
+  const dias=+$('m-dias').value;
+  const {data:m,error}=await db.rpc('painel_metricas',{dias});
+  if(error){$('c-dia').innerHTML='<p class="empty-m">Não foi possível carregar as métricas.</p>';return}
+  const f=m.funil,L=m.leads||{};
+  $('m-visitas').textContent=nf(m.visitas);$('m-novos').textContent=`${nf(m.novos)} de visitantes novos`;
+  $('m-visitantes').textContent=nf(m.visitantes);$('m-tempo').textContent=dur(m.tempo_medio_seg);$('m-mediana').textContent='metade fica até '+dur(m.tempo_mediano_seg);
+  $('m-rej').textContent=m.rejeicao_pct+'%';$('m-aval').textContent=nf(L.total);$('m-quentes').textContent=`${nf(L.quente)} quentes`;
+  $('m-conv').textContent=pct(f.concluiram,f.visitas)+'%';
+  // por dia (preenche dias sem visita)
+  const mapa=Object.fromEntries((m.por_dia||[]).map(d=>[d.dia,d.visitas]));const pts=[];
+  for(let i=dias-1;i>=0;i--){const d=new Date(Date.now()-i*864e5);const k=d.toLocaleDateString('sv-SE',{timeZone:'America/Bahia'});pts.push({t:d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}),y:mapa[k]||0})}
+  colunas($('c-dia'),pts,p=>p.t);
+  const hm=Object.fromEntries((m.por_hora||[]).map(h=>[h.hora,h.visitas]));
+  colunas($('c-hora'),Array.from({length:24},(_,h)=>({t:h+'h',y:hm[h]||0})),p=>p.t);
+  const fs=[['Visitaram o site',f.visitas],['Abriram a avaliação',f.abriram],['Concluíram',f.concluiram],['Foram ao WhatsApp',f.whatsapp]];
+  $('c-funil').innerHTML=f.visitas?fs.map(([n,v])=>`<div class="fstep"><span>${n}</span><span class="trk"><span style="width:${Math.max(4,pct(v,f.visitas))}%">${nf(v)}</span></span><span class="pct">${pct(v,f.visitas)}%</span></div>`).join(''):'<p class="empty-m">Ainda sem dados no período.</p>';
+  const pergunta=['','Queixa','Tempo das manchas','Tratamento anterior','Saúde','Cidade e formato','Quando começar','Nome e WhatsApp'];
+  bars($('c-etapas'),(m.etapas||[]).filter(e=>e.etapa>=1&&e.etapa<=7),e=>`${e.etapa}. ${pergunta[e.etapa]}`,e=>e.sessoes);
+  const o=m.origens||[];
+  $('c-origens').innerHTML=o.length?`<table class="t"><thead><tr><th>Origem</th><th class="n">Visitas</th><th class="n">Avaliações</th><th class="n">Conversão</th></tr></thead><tbody>${o.map(r=>`<tr><td>${esc(r.nome)}</td><td class="n">${nf(r.visitas)}</td><td class="n">${nf(r.avaliacoes)}</td><td class="n">${pct(r.avaliacoes,r.visitas)}%</td></tr>`).join('')}</tbody></table>`:'<p class="empty-m">Ainda sem dados no período.</p>';
+  bars($('c-disp'),m.dispositivos||[],d=>d.nome,d=>d.visitas,d=>pct(d.visitas,m.visitas)+'%');
+  bars($('c-secoes'),m.secoes||[],s=>s.nome,s=>s.sessoes,s=>pct(s.sessoes,m.visitas)+'%');
+  bars($('c-rol'),(m.rolagem||[]),r=>`${r.marca}% da página`,r=>r.sessoes,r=>pct(r.sessoes,m.visitas)+'%');
+  bars($('c-ctas'),m.ctas||[],c=>c.nome,c=>c.cliques);
+  bars($('c-provas'),[...(m.videos||[]).map(v=>({n:v.nome+' (play)',v:v.plays})),...(m.abas||[]).map(a=>({n:'Aba '+a.nome,v:a.sessoes}))],x=>x.n,x=>x.v);
+  bars($('c-queixas'),L.queixas||[],q=>q.nome||'—',q=>q.n);
+  bars($('c-temp'),[['Quente',L.quente],['Morna',L.morna],['Fria',L.fria],['Contraindicado',L.contraindicado]].filter(x=>x[1]).map(([n,v])=>({n,v})),x=>x.n,x=>x.v,x=>pct(x.v,L.total)+'%');
+}
 </script>
 </body>
 </html>

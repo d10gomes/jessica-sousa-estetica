@@ -1137,7 +1137,7 @@ h2 em,h1 em{font-weight:400!important}
       <li><b>Enviar novidades e conteúdos pelo WhatsApp:</b> somente se você marcar essa opção (art. 7º, I). Você pode pedir para parar a qualquer momento.</li>
       <li><b>Manter o site funcionando e seguro:</b> legítimo interesse (art. 7º, IX).</li>
       <li><b>Realizar o atendimento e manter o registro dos procedimentos:</b> tutela da saúde, cumprimento de obrigação legal e regulatória e execução de contrato (arts. 7º, II e V, e 11, II, “a” e “f”).</li>
-      <li><b>Medir o uso do site e anúncios, quando houver:</b> consentimento (art. 7º, I), dado pelo botão “Aceitar cookies”.</li>
+      <li><b>Medir o uso do site (métricas anônimas) e anúncios, quando houver:</b> consentimento (art. 7º, I), dado pelo botão “Aceitar cookies”.</li>
       <li><b>Publicar fotos de antes e depois e depoimentos:</b> consentimento específico e destacado da cliente, por escrito (art. 11, I). Esse consentimento pode ser revogado a qualquer momento, e o conteúdo é retirado do site.</li>
     </ul>
 
@@ -1145,7 +1145,8 @@ h2 em,h1 em{font-weight:400!important}
     <p>Cookies são pequenos arquivos guardados no seu navegador. Neste site:</p>
     <ul>
       <li><b>Essencial:</b> guardamos a sua escolha sobre cookies (“aceito” ou “recusado”) no armazenamento do seu navegador, para não perguntar de novo a cada visita. Ela fica até você apagar os dados do navegador.</li>
-      <li><b>Medição e marketing:</b> no momento, o site não utiliza cookies de medição ou de publicidade. Se passar a utilizar, como Google Analytics ou Pixel da Meta, eles só serão ativados depois que você clicar em “Aceitar cookies”.</li>
+      <li><b>Medição (com o seu aceite):</b> se você clicar em “Aceitar cookies”, guardamos no seu navegador um código aleatório que não identifica você, para contar visitas e visitantes únicos. Registramos de forma anônima: páginas e seções vistas, tempo no site, até onde a página foi rolada, botões clicados, tipo de aparelho e por onde você chegou (por exemplo, Instagram ou anúncio). Não registramos o seu nome, telefone nem endereço IP nessas métricas. Se você clicar em “Recusar”, nada disso é coletado.</li>
+      <li><b>Ferramentas de anúncios:</b> no momento, o site não utiliza Pixel da Meta nem Google Analytics. Se passar a utilizar, eles também só serão ativados depois do seu aceite.</li>
     </ul>
     <p>Você pode mudar sua escolha a qualquer momento pelo link “Gerenciar cookies” no rodapé, ou apagar os cookies nas configurações do seu navegador.</p>
 
@@ -1267,12 +1268,50 @@ const ORIGEM=(()=>{const q=new URLSearchParams(location.search);const k=['utm_so
   if(!o.referrer&&document.referrer&&!document.referrer.includes(location.host))o.referrer=document.referrer.slice(0,200);
   try{sessionStorage.setItem('jsousa-origem',JSON.stringify(o))}catch(e){}return o})();
 
+
+// ================= MÉTRICAS PRÓPRIAS (só com consentimento) =================
+let MET=null;
+function uuid(){return (crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return (c==='x'?r:(r&3|8)).toString(16)}))}
+function met(tipo,valor){
+  if(!MET||!SUPABASE_URL)return;
+  const body={visitante:MET.v,sessao:MET.s,tipo,valor:valor==null?null:String(valor).slice(0,80)};
+  if(tipo==='visita')Object.assign(body,{dispositivo:MET.d,origem:ORIGEM.utm_source||null,midia:ORIGEM.utm_medium||null,campanha:ORIGEM.utm_campaign||null,referencia:ORIGEM.referrer||null,novo:MET.novo});
+  try{fetch(SUPABASE_URL+'/rest/v1/eventos',{method:'POST',keepalive:true,headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(body)}).catch(()=>{})}catch(e){}
+}
+function iniciarMetricas(){
+  if(MET)return;
+  let v=null,novo=false;try{v=localStorage.getItem('jsousa-vid')}catch(e){}
+  if(!v){v=uuid();novo=true;try{localStorage.setItem('jsousa-vid',v)}catch(e){}}
+  let s=null;try{s=sessionStorage.getItem('jsousa-sid')}catch(e){}
+  if(!s){s=uuid();try{sessionStorage.setItem('jsousa-sid',s)}catch(e){}}
+  const w=innerWidth;MET={v,s,novo,d:w<700?'celular':w<1100?'tablet':'computador'};
+  met('visita');
+  // tempo na página: um sinal a cada 15 s com a aba visível (até 30 min)
+  let pings=0;setInterval(()=>{if(document.visibilityState==='visible'&&pings<120){pings++;met('ping')}},15000);
+  // rolagem
+  const marcas=[25,50,75,100],feitas=new Set();
+  const rol=()=>{const h=document.documentElement,p=(scrollY+innerHeight)/h.scrollHeight*100;marcas.forEach(m=>{if(p>=m-1&&!feitas.has(m)){feitas.add(m);met('rolagem',m)}})};
+  addEventListener('scroll',rol,{passive:true});rol();
+  // seções vistas
+  const nomes={sobre:'Conheça Jéssica',melasma:'Entenda o melasma',metodo:'O que é o método',etapas:'Como funciona',indicacoes:'Para quem é indicado',provas:'Provas sociais',cuidados:'Contraindicações',duvidas:'Primeira avaliação e dúvidas'};
+  const vistas=new Set();const io2=new IntersectionObserver(es=>es.forEach(e=>{const id=e.target.id;if(e.isIntersecting&&!vistas.has(id)){vistas.add(id);met('secao',nomes[id]||id)}}),{threshold:.35});
+  Object.keys(nomes).forEach(id=>{const el=document.getElementById(id);if(el)io2.observe(el)});
+  // cliques em botões
+  document.addEventListener('click',e=>{const a=e.target.closest('a,button');if(!a)return;
+    if(a.matches('.js-wa,.js-quiz')){const sec=a.closest('section,header,.mbar,.wa');met('cta',(a.textContent.trim()||'Botão flutuante').slice(0,40)+' · '+(sec?(sec.id||sec.className.split(' ')[0]):'página'))}
+    else if(a.matches('.tab'))met('aba',a.textContent.trim().replace(/\d+$/,'').trim());
+    else if(a.matches('.loc,[href*="google.com/maps"]'))met('mapa');},true);
+  document.querySelectorAll('video').forEach((v,i)=>v.addEventListener('play',()=>met('video','Vídeo '+(i+1)),{once:true}));
+}
+
 // ================= MEDIÇÃO (só após consentimento) =================
 function carregarMedicao(){
+  iniciarMetricas();
   if(META_PIXEL_ID&&!window.fbq){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',META_PIXEL_ID);fbq('track','PageView')}
   if(GA4_ID&&!window.gtag){const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA4_ID;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA4_ID)}
 }
 function rastrear(evento,dados){
+  const mapa={IniciouAvaliacao:'avaliacao_aberta',Lead:'avaliacao_concluida',Contact:'whatsapp'};if(mapa[evento])met(mapa[evento],dados&&(dados.temperatura||dados.tipo||dados.origem));
   if(window.cookieConsent!=='aceito')return;
   try{if(window.fbq){['Lead','Contact'].includes(evento)?fbq('track',evento,dados||{}):fbq('trackCustom',evento,dados||{})}}catch(e){}
   try{if(window.gtag)gtag('event',evento,dados||{})}catch(e){}
@@ -1285,7 +1324,7 @@ const resp={queixa:'',tempo:'',historico:'',condicoes:[],presencial:'',inicio:''
 const linkWA=txt=>`https://wa.me/${WA_NUMERO}?text=${encodeURIComponent(txt)}`;
 const CELULAR=/Android|iPhone|iPad|iPod|Mobile|Instagram|FBAN|FBAV/i.test(navigator.userAgent);
 const alvoWA=a=>{if(CELULAR){a.removeAttribute('target')}else{a.target='_blank';a.rel='noopener'}};
-function mostrar(n){passo=n;passos.forEach(p=>p.hidden=+p.dataset.step!==n);
+function mostrar(n){passo=n;if(n<=TOTAL)met('avaliacao_etapa',n);passos.forEach(p=>p.hidden=+p.dataset.step!==n);
   document.getElementById('q-bar').style.width=Math.min(100,(Math.min(n,TOTAL)/TOTAL)*100)+'%';
   document.getElementById('q-step').textContent=Math.min(n,TOTAL);
   document.getElementById('q-back').disabled=n===1||n>TOTAL;
