@@ -3,7 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}</style>
+<style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+/* COOKIES E PRIVACIDADE */
+.cookie{position:fixed;left:0;right:0;bottom:0;z-index:70;padding:0 max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));pointer-events:none}
+.cookie[hidden]{display:none}
+.cookie-box{pointer-events:auto;max-width:980px;margin:0 auto;background:var(--black);color:var(--on-dark);border:1px solid var(--gold);border-radius:14px;padding:20px 24px;display:flex;align-items:center;gap:18px 28px;box-shadow:0 24px 60px -20px rgba(0,0,0,.7);animation:up .5s cubic-bezier(.2,.7,.2,1)}
+@keyframes up{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+.cookie-box p{font-size:.92rem;line-height:1.6;color:var(--on-dark);flex:1;min-width:0}
+.cookie-box p b{color:var(--gold);font-weight:500}
+.linklike{background:none;border:0;padding:0;font:inherit;color:var(--gold);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.cookie-actions{display:flex;gap:10px;flex:none}
+.cookie-actions .btn{padding:12px 22px}
+.btn-ghost{background:transparent;border-color:var(--line-dark);color:var(--on-dark)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.privacy{position:fixed;inset:0;z-index:90;background:rgba(6,5,5,.82);display:grid;place-items:center;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.privacy[hidden]{display:none}
+.privacy-box{background:var(--off);color:var(--text);max-width:680px;width:100%;max-height:100%;overflow:auto;border-radius:14px;padding:clamp(24px,4vw,40px);position:relative}
+.privacy-box h2{font-size:clamp(1.6rem,4vw,2.1rem);margin:0 0 16px;padding-right:44px}
+.privacy-box h3{font:500 1.15rem var(--display);margin:22px 0 6px}
+.privacy-box p,.privacy-box li{font-size:.95rem;line-height:1.65;color:var(--muted)}
+.privacy-box ul{padding-left:20px}
+.privacy-box .updated{font-size:.82rem;color:var(--gold-deep);margin:-6px 0 14px}
+.privacy-box .fill{background:#FFF1C9;color:#5A4513;padding:0 4px;border-radius:3px}
+.privacy-box li+li{margin-top:6px}
+.privacy-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--text);font-size:1.4rem;line-height:1;cursor:pointer}
+@media(max-width:700px){
+  .cookie-box{flex-direction:column;align-items:stretch;padding:18px}
+  .cookie-actions{flex-direction:column-reverse}
+  .cookie-actions .btn{justify-content:center}
+}
+</style>
 <title>Jéssica Sousa Estética</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Jéssica Sousa, esteticista, cosmetóloga e biomédica, pós-graduada em Saúde Estética. Criadora do Método Clean Pro de clareamento facial.">
@@ -19,11 +48,11 @@
   --black-3:#1E1B18;
   --gold:#CDB27A;         /* dourado champagne */
   --gold-soft:#E4D3AE;
-  --gold-deep:#9C7E45;    /* dourado para texto sobre claro */
+  --gold-deep:#8A6D35;    /* dourado para texto sobre claro */
   --off:#F8F5EF;          /* off-white */
   --stone:#EFE9DF;
   --text:#1B1815;
-  --muted:#6E665B;
+  --muted:#4D463D;
   --on-dark:#F4EFE6;
   --on-dark-muted:rgba(244,239,230,.62);
   --line:rgba(27,24,21,.12);
@@ -35,7 +64,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;overflow-x:clip}
-body{background:var(--off);color:var(--text);font:300 16px/1.75 var(--body);-webkit-font-smoothing:antialiased}
+body{background:var(--off);color:var(--text);font:400 16px/1.75 var(--body);-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--black)}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
@@ -158,8 +187,8 @@ header.scrolled{background:rgba(11,10,9,.9);backdrop-filter:blur(14px);box-shado
 .ind{background:var(--off);padding:30px 28px;display:flex;gap:18px;align-items:flex-start;min-width:0;transition:background .3s}
 .ind:hover{background:#fff}
 .ind .n{font:italic 400 1.15rem var(--display);color:var(--gold-deep);flex:none;width:28px;font-variant-numeric:tabular-nums}
-.ind h3{font-size:1.45rem;margin-bottom:4px}
-.ind p{font-size:.86rem;color:var(--muted);line-height:1.55}
+.ind h3{font-size:1.5rem;font-weight:500;margin-bottom:6px;color:var(--text)}
+.ind p{font-size:.97rem;color:var(--muted);line-height:1.6}
 @media(max-width:900px){.ind-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.ind-grid{grid-template-columns:1fr}}
 
@@ -172,8 +201,8 @@ header.scrolled{background:rgba(11,10,9,.9);backdrop-filter:blur(14px);box-shado
 .alert .pill{grid-row:span 2;font:500 .6rem var(--body);letter-spacing:.2em;text-transform:uppercase;padding:6px 11px;border-radius:999px;white-space:nowrap;align-self:start;margin-top:4px}
 .pill.no{background:var(--black);color:var(--gold)}
 .pill.eval{border:1px solid var(--gold-deep);color:var(--gold-deep)}
-.alert h3{font-size:1.3rem}
-.alert p{font-size:.9rem;color:var(--muted);line-height:1.55}
+.alert h3{font-size:1.35rem;font-weight:500}
+.alert p{font-size:.97rem;color:var(--muted);line-height:1.6}
 .must{margin-top:30px;background:var(--black);color:var(--on-dark);padding:26px 28px;display:flex;gap:18px;align-items:center}
 .must svg{width:30px;height:30px;color:var(--gold);flex:none}
 .must p{font:400 1.2rem/1.4 var(--display)}
@@ -596,11 +625,103 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
       <a href="#top" class="foot-logo"><img src="img/logo-completo.png" alt="Centro Estético Jessica Sousa — Estética, Saúde, Beleza"></a>
       <nav><a href="#sobre">Sobre</a><a href="#metodo">O método</a><a href="#indicacoes">Indicações</a><a class="js-wa" href="#">WhatsApp</a><a class="js-ig" href="#">Instagram</a></nav>
     </div>
-    <div class="copy"><span>© <span id="y">2026</span> Centro Estético Jéssica Sousa · Atendimento: <span style="white-space:nowrap">(75) 99800-9902</span></span><span>Esteticista · Cosmetóloga · Biomédica</span></div>
+    <div class="copy"><span>© <span id="y">2026</span> Centro Estético Jéssica Sousa · Atendimento: <span style="white-space:nowrap">(75) 99800-9902</span></span><span><button type="button" class="linklike js-privacy">Política de Privacidade</button> · <button type="button" class="linklike js-privacy-reset">Gerenciar cookies</button> · Esteticista · Cosmetóloga · Biomédica</span></div>
   </div>
 </footer>
 
 <a class="wa js-wa" href="#" aria-label="Agendar pelo WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.6-4-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.3Z"/></svg></a>
+
+
+<div class="cookie" id="cookie" role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
+  <div class="cookie-box">
+    <p><b>Sua privacidade importa.</b> Usamos cookies para garantir o funcionamento do site e, com a sua permissão, entender como ele é usado para melhorar sua experiência. Saiba mais na nossa <button type="button" class="linklike js-privacy">Política de Privacidade</button>.</p>
+    <div class="cookie-actions">
+      <button type="button" class="btn btn-ghost" id="cookie-recusar">Recusar</button>
+      <button type="button" class="btn btn-gold" id="cookie-aceitar">Aceitar cookies</button>
+    </div>
+  </div>
+</div>
+
+<div class="privacy" id="privacy" role="dialog" aria-modal="true" aria-labelledby="privacy-title" hidden>
+  <div class="privacy-box">
+    <button type="button" class="privacy-close" aria-label="Fechar">×</button>
+    <h2 id="privacy-title">Política de Privacidade e Cookies</h2>
+    <p class="updated">Última atualização: 4 de novembro de 2026</p>
+    <p>Esta política explica como o Centro Estético Jéssica Sousa trata os dados pessoais de quem visita este site e de quem entra em contato para agendar atendimento, em conformidade com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018, “LGPD”).</p>
+
+    <h3>1. Quem é responsável pelos seus dados</h3>
+    <p>Controlador: <b>Centro Estético Jéssica Sousa</b>, responsável técnica Jéssica Sousa.<br>
+    CNPJ/CPF: <span class="fill">[preencher]</span><br>
+    Endereço: <span class="fill">[preencher]</span><br>
+    Encarregado pelo tratamento de dados (DPO): <span class="fill">[preencher nome]</span><br>
+    Contato para assuntos de privacidade: WhatsApp (75) 99800-9902 · E-mail: <span class="fill">[preencher]</span></p>
+
+    <h3>2. Quais dados tratamos</h3>
+    <ul>
+      <li><b>Dados de navegação:</b> endereço IP, tipo de dispositivo e navegador, páginas acessadas e data e hora do acesso, registrados automaticamente pelo serviço de hospedagem para o site funcionar com segurança.</li>
+      <li><b>Dados de contato:</b> nome, número de telefone e o conteúdo das mensagens que você envia ao tocar em um botão de WhatsApp. O site não possui formulários; o contato acontece diretamente no WhatsApp.</li>
+      <li><b>Dados de atendimento:</b> informações sobre sua pele e saúde, histórico, fotos de evolução e ficha de avaliação, coletados apenas no atendimento e com o seu conhecimento. São dados pessoais sensíveis e recebem proteção reforçada.</li>
+    </ul>
+
+    <h3>3. Para que usamos e com qual base legal</h3>
+    <ul>
+      <li><b>Responder seu contato e agendar sua avaliação:</b> procedimentos preliminares a pedido do titular (art. 7º, V).</li>
+      <li><b>Manter o site funcionando e seguro:</b> legítimo interesse (art. 7º, IX).</li>
+      <li><b>Realizar o atendimento e manter o registro dos procedimentos:</b> tutela da saúde, cumprimento de obrigação legal e regulatória e execução de contrato (arts. 7º, II e V, e 11, II, “a” e “f”).</li>
+      <li><b>Medir o uso do site e anúncios, quando houver:</b> consentimento (art. 7º, I), dado pelo botão “Aceitar cookies”.</li>
+      <li><b>Publicar fotos de antes e depois e depoimentos:</b> consentimento específico e destacado da cliente, por escrito (art. 11, I). Esse consentimento pode ser revogado a qualquer momento, e o conteúdo é retirado do site.</li>
+    </ul>
+
+    <h3>4. Cookies e armazenamento no navegador</h3>
+    <p>Cookies são pequenos arquivos guardados no seu navegador. Neste site:</p>
+    <ul>
+      <li><b>Essencial:</b> guardamos a sua escolha sobre cookies (“aceito” ou “recusado”) no armazenamento do seu navegador, para não perguntar de novo a cada visita. Ela fica até você apagar os dados do navegador.</li>
+      <li><b>Medição e marketing:</b> no momento, o site não utiliza cookies de medição ou de publicidade. Se passar a utilizar, como Google Analytics ou Pixel da Meta, eles só serão ativados depois que você clicar em “Aceitar cookies”.</li>
+    </ul>
+    <p>Você pode mudar sua escolha a qualquer momento pelo link “Gerenciar cookies” no rodapé, ou apagar os cookies nas configurações do seu navegador.</p>
+
+    <h3>5. Com quem compartilhamos</h3>
+    <p>Não vendemos seus dados. Eles podem ser tratados pelos fornecedores necessários para o site e o atendimento funcionarem:</p>
+    <ul>
+      <li><b>Vercel Inc.:</b> hospedagem do site.</li>
+      <li><b>Google LLC:</b> fontes tipográficas do site (Google Fonts), que recebem o endereço IP do visitante.</li>
+      <li><b>Meta Platforms (WhatsApp e Instagram):</b> quando você entra em contato ou acessa nossos perfis.</li>
+      <li><b>Autoridades públicas:</b> somente quando houver obrigação legal ou ordem judicial.</li>
+    </ul>
+    <p>Alguns desses fornecedores armazenam dados fora do Brasil. Nesses casos, a transferência internacional segue o art. 33 da LGPD, com fornecedores que adotam padrões de proteção compatíveis.</p>
+
+    <h3>6. Por quanto tempo guardamos</h3>
+    <ul>
+      <li>Conversas de contato e agendamento: pelo tempo necessário ao atendimento e, depois, até 2 anos, salvo se você pedir a exclusão antes.</li>
+      <li>Registros de atendimento e ficha de avaliação: pelo prazo exigido pelas normas profissionais e de saúde aplicáveis.</li>
+      <li>Fotos e depoimentos publicados: enquanto durar o consentimento da cliente.</li>
+      <li>Registros de acesso ao site: pelo prazo do serviço de hospedagem e, quando aplicável, 6 meses (Marco Civil da Internet, art. 15).</li>
+    </ul>
+
+    <h3>7. Como protegemos</h3>
+    <p>Adotamos medidas técnicas e administrativas razoáveis para proteger seus dados contra acessos não autorizados, perda ou alteração, como acesso restrito às informações de atendimento e conexão segura (HTTPS) no site. Em caso de incidente de segurança que possa causar risco relevante, comunicaremos os titulares afetados e a ANPD, conforme o art. 48 da LGPD.</p>
+
+    <h3>8. Seus direitos</h3>
+    <p>Pela LGPD (art. 18), você pode, a qualquer momento e gratuitamente:</p>
+    <ul>
+      <li>confirmar se tratamos seus dados e acessá-los;</li>
+      <li>corrigir dados incompletos, inexatos ou desatualizados;</li>
+      <li>pedir anonimização, bloqueio ou eliminação de dados desnecessários ou tratados em desacordo com a lei;</li>
+      <li>pedir a portabilidade dos seus dados;</li>
+      <li>pedir a eliminação dos dados tratados com base no seu consentimento;</li>
+      <li>saber com quem compartilhamos seus dados;</li>
+      <li>ser informada sobre a possibilidade de não consentir e as consequências disso;</li>
+      <li>revogar o consentimento, inclusive o de uso de imagem.</li>
+    </ul>
+    <p>Para exercer seus direitos, fale conosco pelo WhatsApp (75) 99800-9902. Responderemos em até 15 dias. Você também pode apresentar reclamação à Autoridade Nacional de Proteção de Dados (ANPD), em gov.br/anpd.</p>
+
+    <h3>9. Menores de idade</h3>
+    <p>Atendimentos a menores de 18 anos só acontecem com autorização e acompanhamento dos pais ou responsáveis legais, que respondem pelo consentimento em nome deles.</p>
+
+    <h3>10. Alterações desta política</h3>
+    <p>Esta política pode ser atualizada. A data da última versão fica sempre no topo deste texto.</p>
+  </div>
+</div>
 
 <script>
 const WHATSAPP = "https://wa.me/5575998009902?text=" + encodeURIComponent("Olá! Vim pelo site e gostaria de agendar minha avaliação do Método Clean Pro.");
@@ -637,6 +758,23 @@ const lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img');
 document.querySelectorAll('.shot').forEach(b=>b.addEventListener('click',()=>{lbImg.src=b.dataset.zoom;lbImg.alt=b.querySelector('img').alt;lb.hidden=false}));
 lb.addEventListener('click',e=>{if(e.target!==lbImg)lb.hidden=true});
 addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true});
+
+// Cookies (LGPD): a escolha fica em window.cookieConsent ("aceito" ou "recusado").
+// Scripts de medição (ex.: Pixel da Meta, Google Analytics) devem ser carregados só dentro de liberarMedicao().
+const COOKIE_KEY='jsousa-cookies';
+const banner=document.getElementById('cookie'),privacy=document.getElementById('privacy');
+const lerEscolha=()=>{try{return localStorage.getItem(COOKIE_KEY)}catch(e){return null}};
+const salvarEscolha=v=>{try{localStorage.setItem(COOKIE_KEY,v)}catch(e){}};
+function liberarMedicao(){ /* inserir aqui os scripts de medição quando houver */ }
+function aplicar(v){window.cookieConsent=v;if(v==='aceito')liberarMedicao()}
+const escolha=lerEscolha();
+if(escolha){aplicar(escolha)}else{setTimeout(()=>{banner.hidden=false},700)}
+document.getElementById('cookie-aceitar').addEventListener('click',()=>{salvarEscolha('aceito');aplicar('aceito');banner.hidden=true});
+document.getElementById('cookie-recusar').addEventListener('click',()=>{salvarEscolha('recusado');aplicar('recusado');banner.hidden=true});
+document.querySelectorAll('.js-privacy').forEach(b=>b.addEventListener('click',()=>{privacy.hidden=false}));
+document.querySelector('.js-privacy-reset').addEventListener('click',()=>{banner.hidden=false});
+privacy.addEventListener('click',e=>{if(e.target===privacy||e.target.closest('.privacy-close'))privacy.hidden=true});
+addEventListener('keydown',e=>{if(e.key==='Escape')privacy.hidden=true});
 </script>
 </body>
 </html>
