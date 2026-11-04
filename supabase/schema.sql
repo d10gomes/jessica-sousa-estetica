@@ -8,7 +8,12 @@ create table if not exists public.admins (
 alter table public.admins enable row level security;
 -- ninguém lê ou altera esta tabela pelo site; ela é mantida pelo painel do Supabase.
 
-create or replace function public.is_admin()
+-- Função de permissão fica num schema privado (não exposto pela API do site).
+create schema if not exists private;
+revoke all on schema private from public, anon;
+grant usage on schema private to authenticated;
+
+create or replace function private.is_admin()
 returns boolean
 language sql
 stable
@@ -20,8 +25,8 @@ as $$
     where lower(a.email) = lower(coalesce(auth.jwt() ->> 'email', ''))
   );
 $$;
-revoke all on function public.is_admin() from public;
-grant execute on function public.is_admin() to authenticated;
+revoke all on function private.is_admin() from public, anon;
+grant execute on function private.is_admin() to authenticated;
 
 create table if not exists public.leads (
   id uuid primary key default gen_random_uuid(),
@@ -82,11 +87,11 @@ create policy "site cadastra avaliacao" on public.leads
 
 -- Somente a equipe autorizada (tabela admins) lê, atualiza e exclui pelo painel.
 drop policy if exists "equipe le" on public.leads;
-create policy "equipe le" on public.leads for select to authenticated using (public.is_admin());
+create policy "equipe le" on public.leads for select to authenticated using (private.is_admin());
 drop policy if exists "equipe atualiza" on public.leads;
-create policy "equipe atualiza" on public.leads for update to authenticated using (public.is_admin()) with check (public.is_admin());
+create policy "equipe atualiza" on public.leads for update to authenticated using (private.is_admin()) with check (private.is_admin());
 drop policy if exists "equipe exclui" on public.leads;
-create policy "equipe exclui" on public.leads for delete to authenticated using (public.is_admin());
+create policy "equipe exclui" on public.leads for delete to authenticated using (private.is_admin());
 
 revoke all on public.leads from anon;
 grant insert on public.leads to anon;

@@ -26,7 +26,7 @@ Site do Centro Estético Jéssica Sousa e do Método Clean Pro, com avaliação 
 4. Em **Authentication → Users → Add user**, crie o login da Jéssica (e-mail e senha).
 5. Autorize esse e-mail no painel, no **SQL Editor**:
    `insert into public.admins (email) values ('email-da-jessica@exemplo.com');`
-6. Em **Settings → API**, copie a **Project URL** e a chave **anon/publishable** e preencha `SUPABASE_URL` e `SUPABASE_KEY` em `index.html` e em `painel/index.html`.
+6. O projeto `jessica-sousa-leads` (São Paulo) já está ligado: `SUPABASE_URL` e `SUPABASE_KEY` estão preenchidos em `index.html` e `painel/index.html`. A chave usada é a pública (anon), que só permite cadastrar avaliações.
 
 ## Medição (opcional)
 
