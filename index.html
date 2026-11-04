@@ -1064,7 +1064,8 @@ h2 em,h1 em{font-weight:400!important}
           <button type="button" class="q-opt" data-value="Presencial">Presencial, em Palmeiras – BA</button>
           <button type="button" class="q-opt" data-value="Online">Online</button>
         </div>
-        <p class="q-help">O tratamento é realizado presencialmente, na Praça Souto Soares, Centro, Palmeiras – BA.</p>
+        <p class="q-help" style="margin-top:12px">O tratamento é realizado presencialmente, na Praça Souto Soares, Centro, Palmeiras – BA.</p>
+        <button type="button" class="btn btn-gold q-next" id="q-next5" disabled>Continuar</button>
       </fieldset>
 
       <fieldset class="q-step" data-step="6" hidden>
@@ -1294,7 +1295,7 @@ function mostrar(n){passo=n;passos.forEach(p=>p.hidden=+p.dataset.step!==n);
 function abrirQuiz(origem){quiz.hidden=false;document.body.style.overflow='hidden';if(passo>TOTAL)reiniciar();mostrar(passo);
   if(!iniciou){iniciou=true;rastrear('IniciouAvaliacao',{origem})}}
 function fecharQuiz(){quiz.hidden=true;document.body.style.overflow=''}
-function reiniciar(){Object.assign(resp,{queixa:'',tempo:'',historico:'',condicoes:[],presencial:'',inicio:''});form.reset();form.querySelectorAll('.q-opt').forEach(b=>b.setAttribute('aria-pressed','false'));passo=1;atualizarMulti()}
+function reiniciar(){Object.assign(resp,{queixa:'',tempo:'',historico:'',condicoes:[],presencial:'',inicio:''});form.reset();form.querySelectorAll('.q-opt').forEach(b=>b.setAttribute('aria-pressed','false'));passo=1;atualizarMulti();atualizar5()}
 document.querySelectorAll('.js-wa,.js-quiz').forEach(a=>{a.removeAttribute('target');a.href='#avaliacao';a.addEventListener('click',e=>{e.preventDefault();abrirQuiz(a.textContent.trim().slice(0,40)||'botão flutuante')})});
 document.querySelectorAll('.js-wa-direct').forEach(a=>{a.href=linkWA('Olá, Jéssica! Vim pelo site e gostaria de mais informações sobre o Método Clean Pro.');alvoWA(a);a.addEventListener('click',()=>rastrear('Contact',{tipo:'direto'}))});
 document.getElementById('q-close').addEventListener('click',fecharQuiz);
@@ -1305,9 +1306,13 @@ if(location.hash==='#avaliacao')setTimeout(()=>abrirQuiz('link direto'),400);
 
 form.querySelectorAll('.q-opts:not(.multi)').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('.q-opt');if(!b)return;
   g.querySelectorAll('.q-opt').forEach(x=>x.setAttribute('aria-pressed',x===b));resp[g.dataset.name]=b.dataset.value;
-  if(g.dataset.name==='presencial'&&!document.getElementById('q-cidade').value.trim()){document.getElementById('q-cidade').focus();return}
+  if(g.dataset.name==='presencial'){atualizar5();if(!document.getElementById('q-cidade').value.trim()){document.getElementById('q-cidade').focus();return}}
   setTimeout(()=>mostrar(passo+1),220)}));
-document.getElementById('q-cidade').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(resp.presencial)mostrar(6)}});
+const cid=document.getElementById('q-cidade'),btn5=document.getElementById('q-next5');
+function atualizar5(){btn5.disabled=!(cid.value.trim()&&resp.presencial)}
+cid.addEventListener('input',atualizar5);
+cid.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(!btn5.disabled)mostrar(6)}});
+btn5.addEventListener('click',()=>{if(!btn5.disabled)mostrar(6)});
 const multi=form.querySelector('.q-opts.multi'),btnMulti=multi.parentElement.querySelector('[data-next]');
 function atualizarMulti(){btnMulti.disabled=resp.condicoes.length===0}
 multi.addEventListener('click',e=>{const b=e.target.closest('.q-opt');if(!b)return;const v=b.dataset.value;
