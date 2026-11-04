@@ -399,37 +399,6 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
 .q-result .btn{width:100%;justify-content:center;margin-top:8px}
 @media(max-width:600px){.quiz{padding:0}.quiz-box{max-width:none;height:100%;border-radius:0;padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}}
 
-/* SEÇÕES ESCURAS (antes claras) */
-.about,#indicacoes,.care,.faqsec{color:var(--on-dark);--muted:rgba(244,239,230,.8);--gold-deep:var(--gold);--line:var(--line-dark);border-top:1px solid rgba(205,178,122,.12)}
-.about{background:#141210}
-#indicacoes{background:#0F0D0C}
-.care{background:#141210}
-.faqsec{background:#0F0D0C}
-.about h2,#indicacoes h2,.care h2,.faqsec h2{color:#F7F2EA}
-.about h2 em,#indicacoes h2 em,.care h2 em,.faqsec h2 em{color:var(--gold)}
-.about h2 small{color:rgba(244,239,230,.72)}
-.about .eyebrow,#indicacoes .eyebrow,.care .eyebrow,.faqsec .eyebrow{color:var(--gold)}
-.about .lead,#indicacoes .lead,.care .lead,.faqsec .lead{color:rgba(244,239,230,.82)}
-.focus span{color:#F4EFE6;border-color:rgba(205,178,122,.35)}
-.idcard{border:1px solid rgba(205,178,122,.25)}
-.ind-grid{background:rgba(205,178,122,.2);border-color:rgba(205,178,122,.2)}
-.ind,.ind:hover{background:#1A1714}
-.ind h3,.alert h3,.flow h3{color:#F7F2EA}
-.ind p,.alert p,.flow p{color:rgba(244,239,230,.8)}
-.ind .n{color:var(--gold)}
-.alert{background:#1A1714;border-color:rgba(205,178,122,.2)}
-.pill.no{background:var(--gold);color:var(--black)}
-.pill.eval{border-color:var(--gold);color:var(--gold)}
-.must{background:#1F1B17;border:1px solid var(--gold)}
-.flow li{background:#1A1714;border-color:rgba(205,178,122,.2)}
-.flow .fn{background:var(--gold);color:var(--black)}
-.faq details{background:#1A1714;border-color:rgba(205,178,122,.2)}
-.faq summary{color:#F7F2EA}
-.faq summary::after{color:var(--gold)}
-.faq details p{color:rgba(244,239,230,.8)}
-.faq details a{color:var(--gold)}
-.faq-cta p{color:#F7F2EA}
-
 /* CELULAR */
 @media(max-width:900px){
   .what-grid{grid-template-columns:1fr;gap:28px}
@@ -471,6 +440,100 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
   .copy{flex-direction:column}
   .wa{width:54px;height:54px}
 }
+/* ===== PALETA TONS DE PELE ===== */
+/* Claros: porcelana, areia e nude. Escuros: cacau e café (no lugar do preto). Destaque: caramelo e mel. */
+:root{
+  --black:#3A2519;      /* café: fundos escuros, cartões e textos sobre botões claros */
+  --black-2:#4A3022;    /* cacau */
+  --black-3:#5A3A29;
+  --gold:#E2BC92;       /* mel claro: destaques sobre fundo escuro */
+  --gold-soft:#F1D9BE;
+  --gold-deep:#8C5636;  /* caramelo: destaques sobre fundo claro */
+  --off:#FBF3EC;        /* porcelana */
+  --stone:#F2E2D5;      /* areia */
+  --nude:#E9CDB8;       /* nude */
+  --text:#2E1D14;
+  --muted:#5B4335;
+  --on-dark:#FFF6EE;
+  --on-dark-muted:rgba(255,246,238,.82);
+  --line:#E6D0BF;
+  --line-dark:rgba(226,188,146,.3);
+}
+body{background:var(--off);color:var(--text)}
+
+/* botões */
+.btn-gold{background:#8C5636;color:#FFF8F1}
+.btn-gold:hover{background:#74452A;box-shadow:0 14px 30px -14px rgba(140,86,54,.7)}
+.dark .btn-gold,.proof .btn-gold,.cookie .btn-gold,.what .btn-gold{background:var(--gold);color:#2E1D14}
+.dark .btn-gold:hover,.proof .btn-gold:hover,.cookie .btn-gold:hover{background:var(--gold-soft)}
+
+/* topo sempre em café, para o menu ficar legível sobre a abertura clara */
+header{background:rgba(58,37,25,.96);box-shadow:0 1px 0 var(--line-dark)}
+header.scrolled{background:rgba(58,37,25,.96)}
+
+/* ABERTURA clara */
+.hero.dark{background:radial-gradient(900px 600px at 82% 30%,rgba(233,205,184,.9),transparent 62%),radial-gradient(700px 520px at 0% 100%,rgba(242,226,213,.9),transparent 60%),var(--off);color:var(--text)}
+.hero .kicker{color:var(--gold-deep);font-weight:600}
+.hero .btn-gold{background:#8C5636;color:#FFF8F1}
+.hero .btn-gold:hover{background:#74452A}
+.hero h1{color:var(--text);font-weight:500}
+.hero h1 em{color:var(--gold-deep)}
+.hero .lead{color:var(--muted)}
+.hero .btn-line{border-color:#C9A88F;color:var(--text)}
+.hero .btn-line:hover{border-color:var(--gold-deep);color:var(--gold-deep)}
+.creds{border-top-color:var(--line)}
+.creds li{border-right-color:var(--line)}
+.creds b{color:var(--gold-deep);font-weight:600}
+.creds span{color:var(--muted)}
+.portrait::before{border-color:#D9B99F}
+.hero::before{opacity:.07}
+
+/* seções claras: textos escuros e firmes */
+.about,#indicacoes,.care,.faqsec,.how{color:var(--text);--muted:#5B4335;--gold-deep:#8C5636;--line:#E6D0BF;border-top:0}
+.about{background:var(--stone)}
+.how{background:var(--off)}
+#indicacoes{background:var(--stone)}
+.care{background:var(--off)}
+.faqsec{background:var(--stone)}
+.about h2,#indicacoes h2,.care h2,.faqsec h2,.how h2{color:var(--text);font-weight:600}
+.about h2 em,#indicacoes h2 em,.care h2 em,.faqsec h2 em,.how h2 em{color:var(--gold-deep);font-weight:500}
+.about h2 small{color:var(--muted)}
+.about .eyebrow,#indicacoes .eyebrow,.care .eyebrow,.faqsec .eyebrow,.how .eyebrow{color:var(--gold-deep);font-weight:600}
+.about .lead,#indicacoes .lead,.care .lead,.faqsec .lead,.how .lead{color:var(--muted)}
+.focus span{color:var(--text);border-color:#D9B99F;background:#FFF9F4}
+.idcard{border:0}
+.ind-grid{background:var(--line);border-color:var(--line)}
+.ind,.ind:hover,.alert,.flow li,.faq details{background:#FFF9F4;border-color:var(--line)}
+.ind h3,.alert h3,.flow h3,.faq summary{color:var(--text)}
+.ind p,.alert p,.flow p,.faq details p{color:var(--muted)}
+.ind .n{color:var(--gold-deep)}
+.pill.no{background:var(--black);color:var(--gold)}
+.pill.eval{border-color:var(--gold-deep);color:var(--gold-deep)}
+.must{background:var(--black);border:0}
+.flow .fn{background:var(--gold-deep);color:#FFF8F1}
+.faq summary::after,.faq details a{color:var(--gold-deep)}
+.faq-cta p{color:var(--text)}
+
+/* COMO FUNCIONA (etapas) em claro */
+.how .eyebrow::before{background:currentColor}
+.steps li{border-top-color:var(--line)}
+.steps li::before{color:var(--gold-deep)}
+.steps h3{color:var(--text);font:600 1.15rem/1.3 var(--body)}
+.steps p{color:var(--muted);font-size:.95rem}
+
+/* seções escuras em cacau, com brilho quente */
+.what{background:radial-gradient(800px 500px at 15% 50%,rgba(140,86,54,.45),transparent 70%),var(--black-2)}
+.proof{background:radial-gradient(900px 500px at 50% 0%,rgba(226,188,146,.18),transparent 70%),var(--black)}
+.essence{background:radial-gradient(700px 420px at 50% 0%,rgba(226,188,146,.2),transparent 70%),var(--black-2)}
+footer.site{background:#2E1D14}
+.q,.story{background:rgba(255,246,238,.05)}
+.vframe,.shot{background:var(--black-2)}
+
+/* avaliação online e política: caramelo como destaque */
+.quiz-box,.privacy-box{--gold-deep:#8C5636;--muted:#5B4335;background:var(--off)}
+.q-opt[aria-pressed="true"]{background:#F8E9DC}
+.q-opt[aria-pressed="true"]::before{box-shadow:inset 0 0 0 3px #F8E9DC}
+.q-check input{accent-color:#8C5636}
 </style>
 </head>
 <body>
@@ -486,7 +549,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
       <a href="#provas">Provas</a>
       <a href="#duvidas">Dúvidas</a>
     </nav>
-    <a class="btn btn-gold js-wa" href="#">Agendar avaliação</a>
+    <a class="btn btn-gold js-wa" href="https://wa.me/5575998009902?text=Ol%C3%A1%2C%20J%C3%A9ssica!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o.">Agendar avaliação</a>
     <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>
@@ -498,7 +561,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
       <h1>Muito além de clarear manchas, é cuidar da pele com <em>estratégia</em>.</h1>
       <p class="lead">Clareamento facial e cuidado de peles com melasma e hiperpigmentações, com avaliação criteriosa, planejamento individual e acompanhamento em cada etapa.</p>
       <div class="ctas">
-        <a class="btn btn-gold js-wa" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.6-4-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.3Z"/></svg>Agendar avaliação</a>
+        <a class="btn btn-gold js-wa" href="https://wa.me/5575998009902?text=Ol%C3%A1%2C%20J%C3%A9ssica!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o."><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.6-4-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.3Z"/></svg>Agendar avaliação</a>
         <a class="btn btn-line" href="#provas">Ver resultados reais</a>
       </div>
       <ul class="creds">
@@ -555,7 +618,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
   </div>
 </section>
 
-<section id="etapas" class="dark how">
+<section id="etapas" class="how">
   <div class="wrap">
     <div class="sec-head">
       <div>
@@ -698,7 +761,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
 
     <div class="proof-cta">
       <p>A próxima história pode ser a sua.</p>
-      <a class="btn btn-gold js-wa" href="#">Quero agendar minha avaliação</a>
+      <a class="btn btn-gold js-wa" href="https://wa.me/5575998009902?text=Ol%C3%A1%2C%20J%C3%A9ssica!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o.">Quero agendar minha avaliação</a>
     </div>
   </div>
 </section>
@@ -753,7 +816,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
     </div>
     <div class="faq-cta">
       <p>Pronta para dar o primeiro passo?</p>
-      <a class="btn btn-gold js-quiz" href="#avaliacao">Fazer minha avaliação online</a>
+      <a class="btn btn-gold js-quiz" href="https://wa.me/5575998009902?text=Ol%C3%A1%2C%20J%C3%A9ssica!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o.">Fazer minha avaliação online</a>
     </div>
   </div>
 </section>
@@ -768,7 +831,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
       <div class="final-card">
         <p class="wordmark"><span>Método</span>Clean <em>Pro</em></p>
         <p>Uma experiência de cuidado facial pensada para valorizar a saúde, a aparência e a autoestima da sua pele.</p>
-        <div class="ctas"><a class="btn btn-gold js-wa" href="#">Agendar minha avaliação</a></div>
+        <div class="ctas"><a class="btn btn-gold js-wa" href="https://wa.me/5575998009902?text=Ol%C3%A1%2C%20J%C3%A9ssica!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o.">Agendar minha avaliação</a></div>
       </div>
     </div>
   </div>
@@ -778,13 +841,13 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
   <div class="wrap">
     <div class="foot">
       <a href="#top" class="foot-logo"><img src="img/logo-completo.png" alt="Centro Estético Jessica Sousa — Estética, Saúde, Beleza"></a>
-      <nav><a href="#sobre">Sobre</a><a href="#metodo">O método</a><a href="#indicacoes">Indicações</a><a class="js-wa-direct" href="#">WhatsApp</a><a class="js-ig" href="#">Instagram</a></nav>
+      <nav><a href="#sobre">Sobre</a><a href="#metodo">O método</a><a href="#indicacoes">Indicações</a><a class="js-wa-direct" href="https://wa.me/5575998009902?text=Ol%C3%A1%2C%20J%C3%A9ssica!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o.">WhatsApp</a><a class="js-ig" href="#">Instagram</a></nav>
     </div>
     <div class="copy"><span>© <span id="y">2026</span> Centro Estético Jéssica Sousa · Atendimento: <span style="white-space:nowrap">(75) 99800-9902</span></span><span><button type="button" class="linklike js-privacy">Política de Privacidade</button> · <button type="button" class="linklike js-privacy-reset">Gerenciar cookies</button> · Esteticista · Cosmetóloga · Biomédica</span></div>
   </div>
 </footer>
 
-<a class="wa js-wa" href="#" aria-label="Agendar pelo WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.6-4-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.3Z"/></svg></a>
+<a class="wa js-wa" href="https://wa.me/5575998009902?text=Ol%C3%A1%2C%20J%C3%A9ssica!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o." aria-label="Agendar pelo WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.6-4-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.3Z"/></svg></a>
 
 
 <div class="quiz" id="quiz" role="dialog" aria-modal="true" aria-labelledby="quiz-title" hidden>
@@ -875,7 +938,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
         <div id="q-res"></div>
       </div>
     </form>
-    <p class="q-direct" id="q-direct">Prefere conversar direto? <a class="js-wa-direct" href="#">Falar no WhatsApp</a></p>
+    <p class="q-direct" id="q-direct">Prefere conversar direto? <a class="js-wa-direct" href="https://wa.me/5575998009902?text=Ol%C3%A1%2C%20J%C3%A9ssica!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o.">Falar no WhatsApp</a></p>
   </div>
 </div>
 
@@ -1058,6 +1121,8 @@ const quiz=document.getElementById('quiz'),form=document.getElementById('quiz-fo
 const passos=[...form.querySelectorAll('.q-step')];const TOTAL=7;let passo=1;let iniciou=false;
 const resp={queixa:'',tempo:'',historico:'',condicoes:[],presencial:'',inicio:''};
 const linkWA=txt=>`https://wa.me/${WA_NUMERO}?text=${encodeURIComponent(txt)}`;
+const CELULAR=/Android|iPhone|iPad|iPod|Mobile|Instagram|FBAN|FBAV/i.test(navigator.userAgent);
+const alvoWA=a=>{if(CELULAR){a.removeAttribute('target')}else{a.target='_blank';a.rel='noopener'}};
 function mostrar(n){passo=n;passos.forEach(p=>p.hidden=+p.dataset.step!==n);
   document.getElementById('q-bar').style.width=Math.min(100,(Math.min(n,TOTAL)/TOTAL)*100)+'%';
   document.getElementById('q-step').textContent=Math.min(n,TOTAL);
@@ -1070,7 +1135,7 @@ function abrirQuiz(origem){quiz.hidden=false;document.body.style.overflow='hidde
 function fecharQuiz(){quiz.hidden=true;document.body.style.overflow=''}
 function reiniciar(){Object.assign(resp,{queixa:'',tempo:'',historico:'',condicoes:[],presencial:'',inicio:''});form.reset();form.querySelectorAll('.q-opt').forEach(b=>b.setAttribute('aria-pressed','false'));passo=1;atualizarMulti()}
 document.querySelectorAll('.js-wa,.js-quiz').forEach(a=>{a.removeAttribute('target');a.href='#avaliacao';a.addEventListener('click',e=>{e.preventDefault();abrirQuiz(a.textContent.trim().slice(0,40)||'botão flutuante')})});
-document.querySelectorAll('.js-wa-direct').forEach(a=>{a.href=linkWA('Olá, Jéssica! Vim pelo site e gostaria de mais informações sobre o Método Clean Pro.');a.target='_blank';a.rel='noopener';a.addEventListener('click',()=>rastrear('Contact',{tipo:'direto'}))});
+document.querySelectorAll('.js-wa-direct').forEach(a=>{a.href=linkWA('Olá, Jéssica! Vim pelo site e gostaria de mais informações sobre o Método Clean Pro.');alvoWA(a);a.addEventListener('click',()=>rastrear('Contact',{tipo:'direto'}))});
 document.getElementById('q-close').addEventListener('click',fecharQuiz);
 document.getElementById('q-back').addEventListener('click',()=>{if(passo>1)mostrar(passo-1)});
 quiz.addEventListener('click',e=>{if(e.target===quiz)fecharQuiz()});
@@ -1134,13 +1199,14 @@ form.addEventListener('submit',async e=>{e.preventDefault();
   const icone='<div class="r-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div>';
   let html;
   if(elegibilidade==='nao_indicado'){
-    html=`${icone}<h3>${esc(primeiro)}, obrigada por confiar.</h3><p>Pela sua segurança, o Método Clean Pro <b>não é indicado</b> para gestantes nem durante o tratamento oncológico. Quando essa fase passar, a Jéssica terá prazer em avaliar a sua pele.</p><div class="r-note">Se tiver dúvidas sobre o seu caso, você pode falar com a Jéssica pelo WhatsApp.</div><a class="btn btn-gold" target="_blank" rel="noopener" href="${linkWA(texto.replace('Gostaria de agendar minha avaliação.','Gostaria de tirar uma dúvida sobre o meu caso.'))}" data-wa>Tirar dúvidas no WhatsApp</a>`;
+    html=`${icone}<h3>${esc(primeiro)}, obrigada por confiar.</h3><p>Pela sua segurança, o Método Clean Pro <b>não é indicado</b> para gestantes nem durante o tratamento oncológico. Quando essa fase passar, a Jéssica terá prazer em avaliar a sua pele.</p><div class="r-note">Se tiver dúvidas sobre o seu caso, você pode falar com a Jéssica pelo WhatsApp.</div><a class="btn btn-gold" target="_blank" rel="noopener" href="${linkWA(texto.replace('Gostaria de agendar minha avaliação.','Gostaria de tirar uma dúvida sobre o meu caso.'))}" data-wa>Tirar dúvidas no WhatsApp</a><p style="font-size:.85rem;margin-top:10px">Se o WhatsApp não abrir, chame no <b style="white-space:nowrap">(75) 99800-9902</b>.</p>`;
   }else{
     const nota=elegibilidade==='avaliacao_especial'?`<div class="r-note"><b>Atenção:</b> pelo que você informou (${esc(cond.join(', '))}), o seu caso precisa de uma <b>avaliação especial</b>. A Jéssica vai analisar com cuidado antes de indicar o tratamento.</div>`:'';
     const fora=resp.presencial!=='Sim'?`<div class="r-note">O tratamento é presencial. Em alguns casos, a avaliação inicial pode ser feita online. A Jéssica vai te orientar.</div>`:'';
-    html=`${icone}<h3>Tudo certo, ${esc(primeiro)}!</h3><p>Agora é só enviar as suas respostas para a Jéssica no WhatsApp. Ela vai entender o seu caso e combinar o melhor horário para a sua avaliação.</p>${resumo}${nota}${fora}<a class="btn btn-gold" target="_blank" rel="noopener" href="${linkWA(texto)}" data-wa>Enviar para a Jéssica no WhatsApp</a><p style="font-size:.85rem;margin-top:12px">Os valores são apresentados na avaliação, conforme o seu caso.</p>`;
+    html=`${icone}<h3>Tudo certo, ${esc(primeiro)}!</h3><p>Agora é só enviar as suas respostas para a Jéssica no WhatsApp. Ela vai entender o seu caso e combinar o melhor horário para a sua avaliação.</p>${resumo}${nota}${fora}<a class="btn btn-gold" target="_blank" rel="noopener" href="${linkWA(texto)}" data-wa>Enviar para a Jéssica no WhatsApp</a><p style="font-size:.85rem;margin-top:10px">Se o WhatsApp não abrir, chame no <b style="white-space:nowrap">(75) 99800-9902</b>.</p><p style="font-size:.85rem;margin-top:12px">Os valores são apresentados na avaliação, conforme o seu caso.</p>`;
   }
   document.getElementById('q-res').innerHTML=html;
+  alvoWA(document.querySelector('#q-res [data-wa]'));
   document.querySelector('#q-res [data-wa]').addEventListener('click',()=>rastrear('Contact',{tipo:'avaliacao',temperatura}));
   mostrar(TOTAL+1);
 });
