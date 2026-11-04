@@ -658,6 +658,38 @@ h2 em,h1 em{font-weight:400!important}
 .men h3{font:600 1.1rem/1.3 var(--body);color:var(--text);margin-bottom:4px}
 .men p{font-size:.98rem;line-height:1.6;color:var(--muted);max-width:75ch}
 @media(max-width:600px){.men{padding:18px;gap:14px}}
+/* PARCERIAS */
+.parc{background:var(--stone);color:var(--text)}
+.parc h2{color:var(--text)}.parc h2 em{color:var(--gold-deep)}
+.parc .eyebrow{color:var(--gold-deep);font-weight:600}
+.parc .lead{color:var(--muted)}
+.parc-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(32px,6vw,80px);align-items:start}
+.parc-grid>*{min-width:0}
+.parc-list{list-style:none;display:grid;gap:12px;margin-top:28px}
+.parc-list li{background:#FFF9F4;border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.parc-list b{display:block;font:600 1rem var(--body);color:var(--text)}
+.parc-list span{font-size:.95rem;color:var(--muted)}
+.parc-form{background:#FFF9F4;border:1px solid var(--line);border-radius:var(--r);padding:clamp(22px,3vw,34px);--gold-deep:#8C5636;--muted:#5B4335}
+.parc-form h3{font:500 1.6rem var(--display);color:var(--text)}
+.pf-sub{color:var(--muted);font-size:.95rem;margin:4px 0 20px}
+.pf-row{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.parc-form select,.parc-form textarea{font:400 1rem var(--body);color:var(--text);background:#fff;border:1.5px solid #DCD2C2;border-radius:10px;padding:13px 14px;width:100%}
+.parc-form select:focus,.parc-form textarea:focus{outline:none;border-color:var(--gold-deep);box-shadow:0 0 0 3px rgba(140,86,54,.18)}
+.pf-set{border:0;margin:6px 0 16px;padding:0;min-width:0}
+.pf-set legend{font:600 .9rem var(--body);color:var(--text);margin-bottom:10px}
+.chips-check{display:flex;flex-wrap:wrap;gap:8px}
+.chips-check label{cursor:pointer}
+.chips-check input{position:absolute;opacity:0;pointer-events:none}
+.chips-check span{display:inline-block;border:1.5px solid #DCD2C2;background:#fff;border-radius:999px;padding:8px 14px;font-size:.9rem;color:var(--text);transition:.2s}
+.chips-check input:checked+span{background:#8C5636;border-color:#8C5636;color:#FFF8F1}
+.chips-check input:focus-visible+span{outline:2px solid var(--gold-deep);outline-offset:2px}
+.parc-form .btn{width:100%;justify-content:center;margin-top:6px}
+.pf-ok{text-align:center;padding:10px 0}
+.pf-ok h4{font:500 1.5rem var(--display);margin:10px 0 6px;color:var(--text)}
+.pf-ok p{color:var(--muted)}
+.pf-ok .btn{margin-top:14px}
+@media(max-width:900px){.parc-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.pf-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -985,6 +1017,77 @@ h2 em,h1 em{font-weight:400!important}
   </div>
 </section>
 
+<section id="parcerias" class="parc">
+  <div class="wrap parc-grid">
+    <div class="parc-intro">
+      <span class="eyebrow">Para profissionais e clínicas</span>
+      <h2>Vamos crescer <em>juntos</em>?</h2>
+      <p class="lead">Clínicas, consultórios e espaços de saúde e beleza podem contar com o Método Clean Pro para os seus pacientes com manchas e melasma. Também buscamos parceiros para indicações e atendimentos em conjunto.</p>
+      <ul class="parc-list">
+        <li><b>Indicação de pacientes</b><span>Encaminhe casos de manchas e melasma com acompanhamento especializado.</span></li>
+        <li><b>Atendimento no seu espaço</b><span>Leve o Método Clean Pro para a sua clínica ou consultório.</span></li>
+        <li><b>Parcerias e ações conjuntas</b><span>Eventos, conteúdos e campanhas em parceria.</span></li>
+      </ul>
+    </div>
+    <form class="parc-form" id="parc-form" novalidate>
+      <h3>Proposta de parceria</h3>
+      <p class="pf-sub">Leva menos de 2 minutos. A Jéssica retorna pelo WhatsApp.</p>
+      <div class="pf-row">
+        <label class="q-field">Seu nome<input type="text" id="p-resp" autocomplete="name" maxlength="80" required></label>
+        <label class="q-field">Nome do seu espaço<input type="text" id="p-espaco" autocomplete="organization" maxlength="100" required></label>
+      </div>
+      <div class="pf-row">
+        <label class="q-field">Cidade<input type="text" id="p-cidade" autocomplete="address-level2" maxlength="80" required></label>
+        <label class="q-field">Área de atuação
+          <select id="p-area" required>
+            <option value="">Selecione</option>
+            <option>Clínica de estética</option><option>Dermatologia</option><option>Odontologia</option><option>Clínica médica / multidisciplinar</option>
+            <option>Ginecologia / saúde da mulher</option><option>Nutrição</option><option>Fisioterapia</option><option>Salão de beleza / barbearia</option>
+            <option>Spa / bem-estar</option><option>Farmácia de manipulação / cosméticos</option><option>Academia</option><option>Outra</option>
+          </select>
+        </label>
+      </div>
+      <label class="q-field" id="p-area-outra-wrap" hidden>Qual área?<input type="text" id="p-area-outra" maxlength="80"></label>
+      <fieldset class="pf-set"><legend>Quais profissionais já atendem no seu espaço?</legend>
+        <div class="chips-check" id="p-prof">
+          <label><input type="checkbox" value="Esteticista"><span>Esteticista</span></label>
+          <label><input type="checkbox" value="Biomédico(a)"><span>Biomédico(a)</span></label>
+          <label><input type="checkbox" value="Dermatologista"><span>Dermatologista</span></label>
+          <label><input type="checkbox" value="Médico(a)"><span>Médico(a)</span></label>
+          <label><input type="checkbox" value="Dentista"><span>Dentista</span></label>
+          <label><input type="checkbox" value="Nutricionista"><span>Nutricionista</span></label>
+          <label><input type="checkbox" value="Fisioterapeuta"><span>Fisioterapeuta</span></label>
+          <label><input type="checkbox" value="Enfermeiro(a)"><span>Enfermeiro(a)</span></label>
+          <label><input type="checkbox" value="Cabeleireiro(a) / barbeiro"><span>Cabeleireiro(a) / barbeiro</span></label>
+          <label><input type="checkbox" value="Maquiador(a) / designer de sobrancelhas"><span>Maquiador(a) / sobrancelhas</span></label>
+          <label><input type="checkbox" value="Massoterapeuta"><span>Massoterapeuta</span></label>
+          <label><input type="checkbox" value="Psicólogo(a)"><span>Psicólogo(a)</span></label>
+        </div>
+        <label class="q-field" style="margin-top:10px">Outros profissionais (opcional)<input type="text" id="p-prof-outros" maxlength="200"></label>
+      </fieldset>
+      <fieldset class="pf-set"><legend>Que tipo de parceria interessa a você?</legend>
+        <div class="chips-check" id="p-int">
+          <label><input type="checkbox" value="Indicar pacientes"><span>Indicar pacientes</span></label>
+          <label><input type="checkbox" value="Atendimento no meu espaço"><span>Atendimento no meu espaço</span></label>
+          <label><input type="checkbox" value="Receber indicações"><span>Receber indicações</span></label>
+          <label><input type="checkbox" value="Ações e conteúdos em conjunto"><span>Ações e conteúdos em conjunto</span></label>
+          <label><input type="checkbox" value="Outro"><span>Outro</span></label>
+        </div>
+      </fieldset>
+      <div class="pf-row">
+        <label class="q-field">WhatsApp com DDD<input type="tel" id="p-whats" inputmode="tel" autocomplete="tel-national" placeholder="(75) 99999-9999" maxlength="16" required></label>
+        <label class="q-field">Instagram do espaço (opcional)<input type="text" id="p-insta" maxlength="60" placeholder="@seuespaco"></label>
+      </div>
+      <label class="q-field">Mensagem (opcional)<textarea id="p-msg" maxlength="1000" rows="3" placeholder="Conte um pouco sobre a sua proposta"></textarea></label>
+      <label class="hp" aria-hidden="true">Não preencha<input type="text" id="p-hp" tabindex="-1" autocomplete="off"></label>
+      <label class="q-check"><input type="checkbox" id="p-ok" required><span>Li e concordo com a <button type="button" class="linklike js-privacy">Política de Privacidade</button> e autorizo o contato sobre esta proposta.</span></label>
+      <p class="q-error" id="p-erro" role="alert" hidden></p>
+      <button type="submit" class="btn btn-gold" id="p-enviar">Enviar proposta de parceria</button>
+      <div class="pf-ok" id="p-sucesso" hidden></div>
+    </form>
+  </div>
+</section>
+
 <section class="essence dark">
   <div class="wrap">
     <div class="inner">
@@ -1006,7 +1109,7 @@ h2 em,h1 em{font-weight:400!important}
   <div class="wrap">
     <div class="foot">
       <a href="#top" class="foot-logo"><img src="img/logo-completo.png" alt="Centro Estético Jessica Sousa — Estética, Saúde, Beleza"></a>
-      <nav><a href="#sobre">Sobre</a><a href="#metodo">O método</a><a href="#indicacoes">Indicações</a><a class="js-wa-direct" href="https://wa.me/5575998009902?text=Ol%C3%A1%2C%20J%C3%A9ssica!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o.">WhatsApp</a><a class="js-ig" href="#">Instagram</a></nav>
+      <nav><a href="#parcerias">Parcerias</a><a href="#sobre">Sobre</a><a href="#metodo">O método</a><a href="#indicacoes">Indicações</a><a class="js-wa-direct" href="https://wa.me/5575998009902?text=Ol%C3%A1%2C%20J%C3%A9ssica!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar%20minha%20avalia%C3%A7%C3%A3o.">WhatsApp</a><a class="js-ig" href="#">Instagram</a></nav>
     </div>
     <div class="copy"><span>© <span id="y">2026</span> Centro Estético Jéssica Sousa · <a href="https://www.google.com/maps/search/?api=1&amp;query=Pra%C3%A7a%20Souto%20Soares%2C%20Centro%2C%20Palmeiras%20-%20BA" target="_blank" rel="noopener" style="text-decoration:underline;text-underline-offset:3px">Praça Souto Soares, Centro, Palmeiras – BA</a> · Atendimento: <span style="white-space:nowrap">(75) 99800-9902</span></span><span><button type="button" class="linklike js-privacy">Política de Privacidade</button> · <button type="button" class="linklike js-privacy-reset">Gerenciar cookies</button> · Esteticista · Cosmetóloga · Biomédica</span></div>
   </div>
@@ -1137,6 +1240,7 @@ h2 em,h1 em{font-weight:400!important}
     <ul>
       <li><b>Dados de navegação:</b> endereço IP, tipo de dispositivo e navegador, páginas acessadas e data e hora do acesso, registrados automaticamente pelo serviço de hospedagem para o site funcionar com segurança.</li>
       <li><b>Dados da avaliação online:</b> nome, WhatsApp, cidade, a sua queixa principal, há quanto tempo tem as manchas, tratamentos anteriores, se você se encaixa em alguma condição que exige cuidado (gestação, tratamento oncológico, uso de Roacutan ou rosácea), quando pretende começar e por onde chegou ao site (por exemplo, um anúncio ou o Instagram).</li>
+      <li><b>Dados de propostas de parceria:</b> nome do responsável, nome do espaço, cidade, área de atuação, profissionais que atendem no local, tipo de parceria de interesse, WhatsApp, Instagram e mensagem, usados apenas para avaliar e responder a proposta (art. 7º, I e V).</li>
       <li><b>Dados de contato:</b> nome, número de telefone e o conteúdo das mensagens que você envia pelo WhatsApp.</li>
       <li><b>Dados de atendimento:</b> informações sobre sua pele e saúde, histórico, fotos de evolução e ficha de avaliação, coletados apenas no atendimento e com o seu conhecimento. São dados pessoais sensíveis e recebem proteção reforçada.</li>
     </ul>
@@ -1304,7 +1408,7 @@ function iniciarMetricas(){
   const rol=()=>{const h=document.documentElement,p=(scrollY+innerHeight)/h.scrollHeight*100;marcas.forEach(m=>{if(p>=m-1&&!feitas.has(m)){feitas.add(m);met('rolagem',m)}})};
   addEventListener('scroll',rol,{passive:true});rol();
   // seções vistas
-  const nomes={sobre:'Conheça Jéssica',melasma:'Entenda o melasma',metodo:'O que é o método',etapas:'Como funciona',indicacoes:'Para quem é indicado',provas:'Provas sociais',cuidados:'Contraindicações',duvidas:'Primeira avaliação e dúvidas'};
+  const nomes={sobre:'Conheça Jéssica',melasma:'Entenda o melasma',metodo:'O que é o método',etapas:'Como funciona',indicacoes:'Para quem é indicado',provas:'Provas sociais',cuidados:'Contraindicações',duvidas:'Primeira avaliação e dúvidas',parcerias:'Parcerias'};
   const vistas=new Set();const io2=new IntersectionObserver(es=>es.forEach(e=>{const id=e.target.id;if(e.isIntersecting&&!vistas.has(id)){vistas.add(id);met('secao',nomes[id]||id)}}),{threshold:.35});
   Object.keys(nomes).forEach(id=>{const el=document.getElementById(id);if(el)io2.observe(el)});
   // cliques em botões
@@ -1426,6 +1530,39 @@ form.addEventListener('submit',async e=>{e.preventDefault();
   document.querySelector('#q-res [data-wa]').addEventListener('click',()=>rastrear('Contact',{tipo:'avaliacao',temperatura}));
   mostrar(TOTAL+1);
 });
+
+// ================= PARCERIAS =================
+(function(){
+  const f=document.getElementById('parc-form');if(!f)return;
+  const area=document.getElementById('p-area'),outraW=document.getElementById('p-area-outra-wrap');
+  area.addEventListener('change',()=>{outraW.hidden=area.value!=='Outra'});
+  const pw=document.getElementById('p-whats');
+  pw.addEventListener('input',()=>{let d=pw.value.replace(/\D/g,'').slice(0,11);pw.value=d.length>10?`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`:d.length>6?`(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`:d.length>2?`(${d.slice(0,2)}) ${d.slice(2)}`:d});
+  const erro=document.getElementById('p-erro');f.addEventListener('input',()=>erro.hidden=true);
+  const marcados=id=>[...document.querySelectorAll('#'+id+' input:checked')].map(i=>i.value);
+  f.addEventListener('submit',async e=>{e.preventDefault();
+    const v=id=>document.getElementById(id).value.trim();
+    const resp=v('p-resp'),esp=v('p-espaco'),cid=v('p-cidade'),ar=area.value==='Outra'?v('p-area-outra'):area.value,fone=pw.value.replace(/\D/g,'');
+    let msg='';
+    if(resp.length<2)msg='Digite o seu nome.';else if(esp.length<2)msg='Digite o nome do seu espaço.';else if(cid.length<2)msg='Digite a cidade.';
+    else if(ar.length<2)msg='Informe a área de atuação.';else if(fone.length<10)msg='Digite um WhatsApp válido, com DDD.';
+    else if(!document.getElementById('p-ok').checked)msg='Para enviar, marque a autorização.';
+    if(msg){erro.textContent=msg;erro.hidden=false;return}
+    if(v('p-hp'))return;
+    const btn=document.getElementById('p-enviar');btn.disabled=true;btn.textContent='Enviando…';
+    const dados={responsavel:resp,espaco:esp,cidade:cid,area:ar,profissionais:marcados('p-prof'),profissionais_outros:v('p-prof-outros')||null,interesse:marcados('p-int'),whatsapp:fone,instagram:v('p-insta')||null,mensagem:v('p-msg')||null,consentimento:true,utm_source:ORIGEM.utm_source||null};
+    let ok=false;
+    if(SUPABASE_URL){const c=new AbortController(),t=setTimeout(()=>c.abort(),6000);
+      try{const r=await fetch(SUPABASE_URL+'/rest/v1/parcerias',{method:'POST',signal:c.signal,headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(dados)});ok=r.ok}catch(e){}finally{clearTimeout(t)}}
+    met('parceria_enviada',ar);
+    btn.disabled=false;btn.textContent='Enviar proposta de parceria';
+    const texto=`Olá, Jéssica! Tenho interesse em uma parceria.\n\n• Nome: ${resp}\n• Espaço: ${esp} (${cid})\n• Área: ${ar}${dados.profissionais.length?`\n• Profissionais: ${dados.profissionais.join(', ')}`:''}${dados.interesse.length?`\n• Interesse: ${dados.interesse.join(', ')}`:''}`;
+    const s=document.getElementById('p-sucesso');
+    [...f.children].forEach(el=>{if(el!==s)el.hidden=true});
+    s.innerHTML=`<div class="r-icon" style="width:58px;height:58px;border-radius:50%;margin:0 auto;display:grid;place-items:center;background:var(--black);color:var(--gold)"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m5 12 4.5 4.5L19 7"/></svg></div><h4>${ok?'Proposta recebida!':'Quase lá!'}</h4><p>${ok?'Obrigada pelo interesse. A Jéssica vai analisar e retornar pelo WhatsApp.':'Não conseguimos registrar agora. Envie a proposta direto pelo WhatsApp.'}</p><a class="btn btn-gold" href="https://wa.me/${WA_NUMERO}?text=${encodeURIComponent(texto)}" target="_blank" rel="noopener">${ok?'Adiantar conversa no WhatsApp':'Enviar pelo WhatsApp'}</a>`;
+    s.hidden=false;
+  });
+})();
 </script>
 </body>
 </html>

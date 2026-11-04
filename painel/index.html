@@ -75,7 +75,7 @@ dt{color:var(--muted)}dd{min-width:0;overflow-wrap:anywhere}
 @media(max-width:1000px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:560px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.list{grid-template-columns:1fr}.top .wrap{min-height:60px}.brand small{display:none}.tools select{flex:1 1 45%}}
 /* abas do painel */
-.views{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px;width:max-content;max-width:100%;margin-bottom:24px}
+.views{overflow-x:auto;display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px;width:max-content;max-width:100%;margin-bottom:24px}
 .views button{border:0;background:none;padding:10px 20px;border-radius:999px;font:600 .9rem var(--body);color:var(--muted);cursor:pointer}
 .views button[aria-selected="true"]{background:var(--black);color:var(--gold)}
 /* métricas */
@@ -140,8 +140,14 @@ table.t th.n{text-align:right}
   <main class="wrap">
     <div class="views" role="tablist">
       <button role="tab" aria-selected="true" data-view="v-leads">Avaliações</button>
+      <button role="tab" aria-selected="false" data-view="v-parc">Parcerias</button>
       <button role="tab" aria-selected="false" data-view="v-met">Métricas do site</button>
     </div>
+    <section id="v-parc" hidden>
+      <div class="m-head"><h2>Propostas de parceria</h2><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-line" id="p-atualizar">Atualizar</button><button class="btn btn-gold" id="p-exportar">Baixar planilha</button></div></div>
+      <p class="count" id="p-contagem"></p>
+      <div class="list" id="p-lista"></div>
+    </section>
     <section id="v-met" hidden>
       <div class="m-head"><h2>Métricas do site</h2>
         <select id="m-dias" aria-label="Período"><option value="7">Últimos 7 dias</option><option value="30" selected>Últimos 30 dias</option><option value="90">Últimos 90 dias</option><option value="365">Últimos 12 meses</option></select></div>
@@ -273,7 +279,7 @@ $('exportar').addEventListener('click',()=>{const cols=['created_at','nome','wha
 // ===== MÉTRICAS =====
 document.querySelectorAll('.views button').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.views button').forEach(x=>{const on=x===b;x.setAttribute('aria-selected',on);$(x.dataset.view).hidden=!on});
-  if(b.dataset.view==='v-met')carregarMetricas()}));
+  if(b.dataset.view==='v-met')carregarMetricas();if(b.dataset.view==='v-parc')carregarParcerias()}));
 $('m-dias').addEventListener('change',carregarMetricas);
 const nf=n=>Number(n||0).toLocaleString('pt-BR');
 const dur=s=>{s=Math.round(s||0);return s<60?s+'s':Math.floor(s/60)+'min '+String(s%60).padStart(2,'0')+'s'};
@@ -323,6 +329,41 @@ async function carregarMetricas(){
   bars($('c-queixas'),L.queixas||[],q=>q.nome||'—',q=>q.n);
   bars($('c-temp'),[['Quente',L.quente],['Morna',L.morna],['Fria',L.fria],['Contraindicado',L.contraindicado]].filter(x=>x[1]).map(([n,v])=>({n,v})),x=>x.n,x=>x.v,x=>pct(x.v,L.total)+'%');
 }
+
+// ===== PARCERIAS =====
+const PST={novo:'Novo',em_conversa:'Em conversa',reuniao_marcada:'Reunião marcada',parceria_fechada:'Parceria fechada',sem_interesse:'Sem interesse'};
+let parcs=[];
+async function carregarParcerias(){
+  const {data,error}=await db.from('parcerias').select('*').order('created_at',{ascending:false}).limit(1000);
+  if(error){$('p-lista').innerHTML='<div class="empty">Não foi possível carregar as propostas.</div>';return}
+  parcs=data||[];$('p-contagem').textContent=`${parcs.length} proposta${parcs.length===1?'':'s'}`;
+  if(!parcs.length){$('p-lista').innerHTML='<div class="empty">Nenhuma proposta de parceria ainda.</div>';return}
+  $('p-lista').innerHTML=parcs.map(p=>{const wa=`https://wa.me/55${p.whatsapp}?text=${encodeURIComponent(`Olá, ${p.responsavel.split(' ')[0]}! Aqui é a Jéssica Sousa. Recebi a proposta de parceria do ${p.espaco} pelo site e gostaria de conversar.`)}`;
+    return `<article class="lead" data-id="${p.id}">
+      <div class="lead-h"><div><h2>${esc(p.espaco)}</h2><time>${data(p.created_at)}</time></div></div>
+      <dl>
+        <dt>Responsável</dt><dd>${esc(p.responsavel)}</dd>
+        <dt>WhatsApp</dt><dd>${fone(p.whatsapp)}</dd>
+        <dt>Cidade</dt><dd>${esc(p.cidade)}</dd>
+        <dt>Área</dt><dd>${esc(p.area)}</dd>
+        <dt>Profissionais</dt><dd>${esc([...(p.profissionais||[]),p.profissionais_outros].filter(Boolean).join(', ')||'—')}</dd>
+        <dt>Interesse</dt><dd>${esc((p.interesse||[]).join(', ')||'—')}</dd>
+        ${p.instagram?`<dt>Instagram</dt><dd>${esc(p.instagram)}</dd>`:''}
+        ${p.mensagem?`<dt>Mensagem</dt><dd>${esc(p.mensagem)}</dd>`:''}
+      </dl>
+      <div class="lead-f"><select aria-label="Status" data-pf="status">${Object.entries(PST).map(([k,v])=>`<option value="${k}"${k===p.status?' selected':''}>${v}</option>`).join('')}</select>
+        <a class="btn btn-gold" href="${wa}" target="_blank" rel="noopener">WhatsApp</a></div>
+      <textarea aria-label="Observações" placeholder="Observações internas" data-pf="observacoes" maxlength="2000">${esc(p.observacoes||'')}</textarea>
+      <span class="saved" aria-live="polite"></span>
+    </article>`}).join('')}
+$('p-atualizar').addEventListener('click',carregarParcerias);
+$('p-lista').addEventListener('change',async e=>{const el=e.target.closest('[data-pf]');if(!el)return;const card=el.closest('.lead'),ok=card.querySelector('.saved');ok.textContent='Salvando…';
+  const {error}=await db.from('parcerias').update({[el.dataset.pf]:el.value||null}).eq('id',card.dataset.id);
+  ok.style.color=error?'#8A2A16':'';ok.textContent=error?'Não foi possível salvar.':'Salvo';if(!error)setTimeout(()=>ok.textContent='',2000)});
+$('p-exportar').addEventListener('click',()=>{const cols=['created_at','espaco','responsavel','whatsapp','cidade','area','profissionais','profissionais_outros','interesse','instagram','mensagem','status','observacoes'];
+  const cel=v=>{v=Array.isArray(v)?v.join(', '):v??'';v=String(v);if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
+  const csv='﻿'+cols.join(';')+'\n'+parcs.map(l=>cols.map(c=>cel(c==='created_at'?data(l[c]):l[c])).join(';')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=`parcerias-${new Date().toISOString().slice(0,10)}.csv`;a.click()});
 </script>
 </body>
 </html>
