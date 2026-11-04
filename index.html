@@ -952,13 +952,13 @@ h2 em,h1 em{font-weight:400!important}
       <ol class="flow">
         <li><span class="fn">1</span><div><h3>Avaliação online</h3><p>Responda 7 perguntas rápidas sobre a sua pele. Leva menos de 1 minuto.</p></div></li>
         <li><span class="fn">2</span><div><h3>Contato pelo WhatsApp</h3><p>A Jéssica recebe as suas respostas, tira suas dúvidas e agenda o melhor horário para você.</p></div></li>
-        <li><span class="fn">3</span><div><h3>Avaliação presencial</h3><p>Análise da pele, do histórico e das suas queixas, com o planejamento do seu tratamento.</p></div></li>
+        <li><span class="fn">3</span><div><h3>Avaliação presencial ou online</h3><p>Como for melhor para você: análise da pele, do histórico e das suas queixas, com o planejamento do seu tratamento.</p></div></li>
       </ol>
     </div>
     <div class="faq">
       <h2 class="faq-title">Perguntas <em>frequentes</em></h2>
       <details><summary>Quanto custa o tratamento?</summary><p>Cada pele é um caso único: tipo de mancha, profundidade, histórico e rotina mudam o planejamento. Os valores são informados pela Jéssica diretamente no WhatsApp, de acordo com o seu caso.</p></details>
-      <details><summary>O atendimento é presencial ou online?</summary><p>O tratamento é realizado somente de forma presencial, no Centro Estético Jéssica Sousa, na Praça Souto Soares, Centro, Palmeiras – BA. Em alguns casos, a avaliação inicial pode ser feita online. Consulte essa possibilidade pelo WhatsApp.</p></details>
+      <details><summary>O atendimento é presencial ou online?</summary><p>O tratamento é realizado somente de forma presencial, no Centro Estético Jéssica Sousa, na Praça Souto Soares, Centro, Palmeiras – BA. Já a avaliação pode ser feita presencialmente ou online, como for melhor para você.</p></details>
       <details><summary>Quantas sessões vou precisar?</summary><p>Depende do tipo de mancha, da profundidade e de como a sua pele responde. O número de sessões e o intervalo entre elas só são definidos depois que a Jéssica avalia a sua pele.</p></details>
       <details><summary>O tratamento usa aparelhos?</summary><p>Não. O Método Clean Pro não utiliza equipamentos para o clareamento. Os cuidados e procedimentos são definidos na avaliação, de acordo com as necessidades da sua pele.</p></details>
       <details><summary>Vou precisar cuidar da pele em casa?</summary><p>Sim, e isso faz parte do método. Você recebe orientações e um kit home care direcionado à sua pele, para potencializar e manter o resultado entre as sessões.</p></details>
@@ -1058,13 +1058,13 @@ h2 em,h1 em{font-weight:400!important}
       </fieldset>
 
       <fieldset class="q-step" data-step="5" hidden>
-        <legend>O atendimento é presencial, em Palmeiras – BA. Você consegue vir até o centro estético?</legend>
+        <legend>Como você prefere fazer a sua avaliação?</legend>
         <label class="q-field">Sua cidade<input type="text" id="q-cidade" name="cidade" autocomplete="address-level2" maxlength="80" placeholder="Digite sua cidade"></label>
         <div class="q-opts" data-name="presencial">
-          <button type="button" class="q-opt" data-value="Sim">Sim, consigo ir presencialmente</button>
-          <button type="button" class="q-opt" data-value="Moro em outra cidade">Moro em outra cidade e quero saber mais</button>
+          <button type="button" class="q-opt" data-value="Presencial">Presencial, em Palmeiras – BA</button>
+          <button type="button" class="q-opt" data-value="Online">Online</button>
         </div>
-        <p class="q-help">Em alguns casos, a avaliação inicial pode ser feita online, sempre sob consulta.</p>
+        <p class="q-help">O tratamento é realizado presencialmente, na Praça Souto Soares, Centro, Palmeiras – BA.</p>
       </fieldset>
 
       <fieldset class="q-step" data-step="6" hidden>
@@ -1236,7 +1236,7 @@ const salvarEscolha=v=>{try{localStorage.setItem(COOKIE_KEY,v)}catch(e){}};
 function liberarMedicao(){carregarMedicao()}
 function aplicar(v){window.cookieConsent=v;if(v==='aceito')liberarMedicao()}
 const escolha=lerEscolha();
-if(escolha){aplicar(escolha)}else{setTimeout(()=>{banner.hidden=false},700)}
+if(escolha){setTimeout(()=>aplicar(escolha),0)}else{setTimeout(()=>{banner.hidden=false},700)}
 document.getElementById('cookie-aceitar').addEventListener('click',()=>{salvarEscolha('aceito');aplicar('aceito');banner.hidden=true});
 document.getElementById('cookie-recusar').addEventListener('click',()=>{salvarEscolha('recusado');aplicar('recusado');banner.hidden=true});
 document.querySelectorAll('.js-privacy').forEach(b=>b.addEventListener('click',()=>{privacy.hidden=false}));
@@ -1326,7 +1326,7 @@ function classificar(){const c=resp.condicoes;
   let temperatura='morna';
   if(elegibilidade==='nao_indicado')temperatura='contraindicado';
   else if(resp.inicio==='Só estou pesquisando')temperatura='fria';
-  else if(['O quanto antes','Ainda este mês'].includes(resp.inicio)&&resp.presencial==='Sim')temperatura='quente';
+  else if(['O quanto antes','Ainda este mês'].includes(resp.inicio)&&resp.presencial)temperatura='quente';
   return {elegibilidade,temperatura}}
 
 async function salvar(lead){
@@ -1355,7 +1355,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();
   rastrear('Lead',{queixa:resp.queixa,temperatura});
   btn.disabled=false;btn.textContent='Ver meu resultado';
   const primeiro=nome.split(' ')[0];
-  const texto=`Olá, Jéssica! Fiz a avaliação inicial pelo site.\n\n• Nome: ${nome}\n• Queixa: ${resp.queixa} (${resp.tempo.toLowerCase()})\n• Tratamento anterior: ${resp.historico}\n• Cidade: ${cidade||'não informada'}${resp.presencial==='Sim'?' (posso ir presencialmente)':' (moro em outra cidade)'}\n• Quero começar: ${resp.inicio}${cond.length?`\n• Observação de saúde: ${cond.join(', ')}`:''}\n\nGostaria de agendar minha avaliação.`;
+  const texto=`Olá, Jéssica! Fiz a avaliação inicial pelo site.\n\n• Nome: ${nome}\n• Queixa: ${resp.queixa} (${resp.tempo.toLowerCase()})\n• Tratamento anterior: ${resp.historico}\n• Cidade: ${cidade||'não informada'}\n• Avaliação: ${resp.presencial.toLowerCase()}\n• Quero começar: ${resp.inicio}${cond.length?`\n• Observação de saúde: ${cond.join(', ')}`:''}\n\nGostaria de agendar minha avaliação.`;
   const resumo=`<div class="r-sum"><b>Queixa:</b> ${esc(resp.queixa)} · ${esc(resp.tempo)}<br><b>Tratamento anterior:</b> ${esc(resp.historico)}<br><b>Cidade:</b> ${esc(cidade||'não informada')}<br><b>Início:</b> ${esc(resp.inicio)}</div>`;
   const icone='<div class="r-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div>';
   let html;
@@ -1363,7 +1363,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();
     html=`${icone}<h3>${esc(primeiro)}, obrigada por confiar.</h3><p>Pela sua segurança, o Método Clean Pro <b>não é indicado</b> para gestantes nem durante o tratamento oncológico. Quando essa fase passar, a Jéssica terá prazer em avaliar a sua pele.</p><div class="r-note">Se tiver dúvidas sobre o seu caso, você pode falar com a Jéssica pelo WhatsApp.</div><a class="btn btn-gold" target="_blank" rel="noopener" href="${linkWA(texto.replace('Gostaria de agendar minha avaliação.','Gostaria de tirar uma dúvida sobre o meu caso.'))}" data-wa>Tirar dúvidas no WhatsApp</a><p style="font-size:.85rem;margin-top:10px">Se o WhatsApp não abrir, chame no <b style="white-space:nowrap">(75) 99800-9902</b>.</p>`;
   }else{
     const nota=elegibilidade==='avaliacao_especial'?`<div class="r-note"><b>Atenção:</b> pelo que você informou (${esc(cond.join(', '))}), o seu caso precisa de uma <b>avaliação especial</b>. A Jéssica vai analisar com cuidado antes de indicar o tratamento.</div>`:'';
-    const fora=resp.presencial!=='Sim'?`<div class="r-note">O tratamento é presencial. Em alguns casos, a avaliação inicial pode ser feita online. A Jéssica vai te orientar.</div>`:'';
+    const fora=resp.presencial==='Online'?`<div class="r-note">Sua avaliação será online. O tratamento é realizado presencialmente, em Palmeiras – BA.</div>`:'';
     html=`${icone}<h3>Tudo certo, ${esc(primeiro)}!</h3><p>Agora é só enviar as suas respostas para a Jéssica no WhatsApp. Ela vai entender o seu caso e combinar o melhor horário para a sua avaliação.</p>${resumo}${nota}${fora}<a class="btn btn-gold" target="_blank" rel="noopener" href="${linkWA(texto)}" data-wa>Enviar para a Jéssica no WhatsApp</a><p style="font-size:.85rem;margin-top:10px">Se o WhatsApp não abrir, chame no <b style="white-space:nowrap">(75) 99800-9902</b>.</p><p style="font-size:.85rem;margin-top:12px">Valores e horários são informados pela Jéssica no WhatsApp.</p>`;
   }
   document.getElementById('q-res').innerHTML=html;

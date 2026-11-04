@@ -175,7 +175,7 @@ function render(){const L=filtrados();$('contagem').textContent=`${L.length} de 
         <dt>Queixa</dt><dd>${esc(l.queixa)} · ${esc(l.tempo)}</dd>
         <dt>Histórico</dt><dd>${esc(l.historico)}</dd>
         <dt>Saúde</dt><dd>${l.condicoes?.length?esc(l.condicoes.join(', ')):'Nenhuma condição informada'}</dd>
-        <dt>Cidade</dt><dd>${esc(l.cidade||'—')} · ${l.presencial==='Sim'?'vem presencialmente':'outra cidade'}</dd>
+        <dt>Cidade</dt><dd>${esc(l.cidade||'—')}</dd><dt>Avaliação</dt><dd>${esc(l.presencial||'—')}</dd>
         <dt>Início</dt><dd>${esc(l.inicio)}</dd>
         <dt>Origem</dt><dd>${esc(origem)}</dd>
         <dt>Novidades</dt><dd>${l.consentimento_marketing?'Aceita receber':'Não aceitou'}</dd>
