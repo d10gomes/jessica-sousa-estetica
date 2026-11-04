@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>[hidden]{display:none!important}:root{padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}</style>
+<title>Jéssica Sousa Estética</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Jéssica Sousa, esteticista, cosmetóloga e biomédica, pós-graduada em Saúde Estética. Criadora do Método Clean Pro de clareamento facial.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: preto profundo e off-white alternados, dourado champagne só em detalhes e ações.
+   A página segue a jornada do método: quem é, o que é, como funciona, para quem, provas sociais, contraindicações. */
+:root{
+  --black:#0B0A09;        /* preto profundo */
+  --black-2:#151311;
+  --black-3:#1E1B18;
+  --gold:#CDB27A;         /* dourado champagne */
+  --gold-soft:#E4D3AE;
+  --gold-deep:#9C7E45;    /* dourado para texto sobre claro */
+  --off:#F8F5EF;          /* off-white */
+  --stone:#EFE9DF;
+  --text:#1B1815;
+  --muted:#6E665B;
+  --on-dark:#F4EFE6;
+  --on-dark-muted:rgba(244,239,230,.62);
+  --line:rgba(27,24,21,.12);
+  --line-dark:rgba(205,178,122,.22);
+  --display:'Bodoni Moda',Didot,'Times New Roman',serif;
+  --body:'Jost','Helvetica Neue',Arial,sans-serif;
+  --r:16px;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{background:var(--off);color:var(--text);font:300 16px/1.75 var(--body);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--black)}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible+.handle{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1220px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(76px,10vw,130px)}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(2.1rem,4.4vw,3.4rem);margin:.4em 0 .5em}
+h2 em,h1 em{font-style:italic;color:var(--gold-deep)}
+.dark h2 em,.dark h1 em{color:var(--gold)}
+.eyebrow{font:500 .7rem var(--body);letter-spacing:.32em;text-transform:uppercase;color:var(--gold-deep);display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+.dark .eyebrow{color:var(--gold)}
+.lead{font-size:1.06rem;color:var(--muted);max-width:60ch}
+.lead+.lead{margin-top:16px}
+.dark{background:var(--black);color:var(--on-dark)}
+.dark .lead{color:var(--on-dark-muted)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:999px;font:500 .74rem var(--body);letter-spacing:.2em;text-transform:uppercase;transition:.3s;border:1px solid transparent;cursor:pointer}
+.btn svg{width:18px;height:18px;flex:none}
+.btn-gold{background:var(--gold);color:var(--black)}
+.btn-gold:hover{background:var(--gold-soft);transform:translateY(-2px);box-shadow:0 14px 30px -14px rgba(205,178,122,.8)}
+.btn-line{border-color:var(--line-dark);color:var(--on-dark)}
+.btn-line:hover{border-color:var(--gold);color:var(--gold)}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:24px 48px;flex-wrap:wrap;margin-bottom:52px}
+.sec-head>*{min-width:0}
+.ornament{display:flex;align-items:center;gap:14px;color:var(--gold)}
+.ornament::before,.ornament::after{content:"";height:1px;flex:1;background:currentColor;opacity:.4}
+
+/* NAV */
+header{position:fixed;inset:0 0 auto;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:.35s;color:var(--on-dark)}
+header.scrolled{background:rgba(11,10,9,.9);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line-dark)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:80px;gap:20px}
+.logo{display:flex;align-items:center;gap:12px;line-height:1}
+.logo>span{display:flex;flex-direction:column}
+.logo img{width:44px;height:auto;flex:none}
+.logo b{font:400 1.35rem var(--display);letter-spacing:.02em}
+.logo small{font-size:.56rem;letter-spacing:.36em;text-transform:uppercase;color:var(--gold);margin-top:6px}
+.menu{display:flex;gap:30px;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase}
+.menu a{opacity:.78;transition:.25s}.menu a:hover{opacity:1;color:var(--gold)}
+.nav .btn{padding:11px 22px}
+.burger{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer}
+.burger span{display:block;height:1px;background:var(--on-dark);margin:7px 6px}
+@media(max-width:980px){
+  .menu,.nav .btn{display:none}.burger{display:block}
+  .menu.open{display:flex;position:fixed;inset:calc(80px + env(safe-area-inset-top,0px)) 0 auto;flex-direction:column;background:var(--black);padding:26px max(20px,env(safe-area-inset-left,0px)) 34px;gap:20px;border-top:1px solid var(--line-dark)}
+}
+
+/* HERO */
+.hero{padding-top:calc(140px + env(safe-area-inset-top,0px));padding-bottom:90px;position:relative;overflow:hidden;
+  background:radial-gradient(800px 560px at 78% 34%,rgba(205,178,122,.16),transparent 62%),var(--black)}
+.hero::before{content:"";position:absolute;width:560px;height:560px;left:-160px;bottom:-200px;background:url("img/logo-monograma.png") center/contain no-repeat;opacity:.05;pointer-events:none}
+.hero-grid{position:relative;display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(36px,6vw,84px);align-items:center}
+.hero-grid>div{min-width:0}
+.hero .kicker{font:500 .72rem var(--body);letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.hero h1{font-size:clamp(2.5rem,5.2vw,4.4rem);margin:.4em 0 .4em}
+.hero .lead{margin-bottom:34px}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.creds{list-style:none;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:0;margin-top:46px;border-top:1px solid var(--line-dark);padding-top:24px}
+.creds li{padding-right:26px;margin-right:26px;border-right:1px solid var(--line-dark);min-width:0}
+.creds li:last-child{border:0;margin:0;padding:0}
+.creds b{font:400 1.6rem/1 var(--display);color:var(--gold);display:block;font-variant-numeric:tabular-nums}
+.creds span{font-size:.74rem;letter-spacing:.08em;color:var(--on-dark-muted);display:block;margin-top:8px}
+.portrait{position:relative;justify-self:end;width:min(400px,100%)}
+.portrait .frame{aspect-ratio:354/520;border-radius:999px 999px 6px 6px;overflow:hidden;background:var(--black-3)}
+.portrait .frame{position:relative}
+.portrait .frame img{width:100%;height:100%;object-fit:cover;object-position:50% 100%}
+.portrait .frame::after{content:"";position:absolute;inset:auto 0 0;height:22%;background:linear-gradient(transparent,rgba(11,10,9,.35));pointer-events:none}
+.portrait::before{content:"";position:absolute;inset:-14px;border:1px solid var(--line-dark);border-radius:999px 999px 10px 10px;pointer-events:none}
+.portrait .plate{position:relative;margin:30px auto 0;width:max-content;max-width:100%;text-align:center;background:var(--black);border-block:1px solid var(--gold);padding:12px 26px}
+.plate b{font:italic 400 1.25rem var(--display);color:var(--on-dark);display:block}
+.plate small{font-size:.58rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+@media(max-width:920px){
+  .hero-grid{grid-template-columns:1fr}
+  .portrait{justify-self:center;width:min(330px,80%);margin:22px auto 10px}
+  .creds{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .creds li{padding-right:12px;margin-right:12px}
+  .creds b{font-size:1.25rem}
+}
+@media(max-width:420px){.creds span{font-size:.68rem;letter-spacing:.02em}}
+
+/* SOBRE */
+.about-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(40px,7vw,100px);align-items:start}
+.about-grid>div{min-width:0}
+.idcard{background:var(--black);color:var(--on-dark);padding:clamp(30px,4vw,46px);position:relative}
+.idcard::after{content:"";position:absolute;inset:10px;border:1px solid var(--line-dark);pointer-events:none}
+.idcard .photo{width:100%;aspect-ratio:1/1;object-fit:cover;margin-bottom:28px;position:relative;z-index:1}
+.idcard .name{font:400 clamp(2rem,3.4vw,2.7rem)/1 var(--display)}
+.idcard .roles{font-size:.74rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:14px 0 26px}
+.idcard ul{list-style:none;display:grid;gap:14px;border-top:1px solid var(--line-dark);padding-top:24px}
+.idcard li{display:grid;grid-template-columns:22px 1fr;gap:12px;font-size:.95rem;color:var(--on-dark)}
+.idcard li svg{width:18px;height:18px;color:var(--gold);margin-top:4px}
+.idcard li small{display:block;color:var(--on-dark-muted);font-size:.8rem}
+.idcard .quote{margin-top:28px;font:italic 400 1.15rem/1.45 var(--display);color:var(--gold-soft)}
+.about h2 small{display:block;font:italic 400 .5em/1.4 var(--display);color:var(--muted);margin-top:.6em}
+.focus{display:flex;flex-wrap:wrap;gap:8px;margin-top:30px}
+.focus span{font-size:.78rem;letter-spacing:.06em;border:1px solid var(--line);padding:7px 16px;border-radius:999px;color:var(--text)}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr}.about-grid .idcard{order:2}}
+
+/* MÉTODO: O QUE É */
+.what{position:relative;overflow:hidden}
+.what-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,7vw,100px);align-items:center}
+.what-grid>div{min-width:0}
+.wordmark{font:400 clamp(3.4rem,9vw,7.4rem)/.88 var(--display);letter-spacing:-.02em}
+.wordmark span{display:block;font:500 .16em var(--body);letter-spacing:.5em;color:var(--gold);margin-bottom:1.4em}
+.wordmark em{color:var(--gold)}
+.what .tagline{font:italic 400 clamp(1.3rem,2.2vw,1.65rem)/1.4 var(--display);color:var(--on-dark);margin-bottom:22px}
+
+/* MÉTODO: ETAPAS */
+.how{background:var(--black-2)}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:s}
+.steps li{padding:26px 22px 0 0;position:relative;min-width:0;border-top:1px solid var(--line-dark)}
+.steps li::before{counter-increment:s;content:"0" counter(s);font:italic 400 2.6rem/1 var(--display);color:var(--gold);display:block;margin-bottom:18px}
+.steps h3{font-size:1.3rem;margin-bottom:8px;color:var(--on-dark)}
+.steps p{font-size:.88rem;color:var(--on-dark-muted);line-height:1.6}
+@media(max-width:1000px){.steps{grid-template-columns:1fr 1fr;gap:40px 28px}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+
+/* INDICAÇÕES */
+.ind-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.ind{background:var(--off);padding:30px 28px;display:flex;gap:18px;align-items:flex-start;min-width:0;transition:background .3s}
+.ind:hover{background:#fff}
+.ind .n{font:italic 400 1.15rem var(--display);color:var(--gold-deep);flex:none;width:28px;font-variant-numeric:tabular-nums}
+.ind h3{font-size:1.45rem;margin-bottom:4px}
+.ind p{font-size:.86rem;color:var(--muted);line-height:1.55}
+@media(max-width:900px){.ind-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.ind-grid{grid-template-columns:1fr}}
+
+/* CONTRAINDICAÇÕES */
+.care{background:var(--stone)}
+.care-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(36px,6vw,90px);align-items:start}
+.care-grid>div{min-width:0}
+.alerts{display:grid;gap:14px}
+.alert{background:var(--off);border:1px solid var(--line);padding:22px 24px;display:grid;grid-template-columns:auto 1fr;gap:6px 18px;align-items:baseline}
+.alert .pill{grid-row:span 2;font:500 .6rem var(--body);letter-spacing:.2em;text-transform:uppercase;padding:6px 11px;border-radius:999px;white-space:nowrap;align-self:start;margin-top:4px}
+.pill.no{background:var(--black);color:var(--gold)}
+.pill.eval{border:1px solid var(--gold-deep);color:var(--gold-deep)}
+.alert h3{font-size:1.3rem}
+.alert p{font-size:.9rem;color:var(--muted);line-height:1.55}
+.must{margin-top:30px;background:var(--black);color:var(--on-dark);padding:26px 28px;display:flex;gap:18px;align-items:center}
+.must svg{width:30px;height:30px;color:var(--gold);flex:none}
+.must p{font:400 1.2rem/1.4 var(--display)}
+@media(max-width:900px){.care-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.alert{grid-template-columns:1fr}.alert .pill{grid-row:auto;justify-self:start}}
+
+/* RESULTADOS */
+/* PROVAS SOCIAIS */
+.proof{background:radial-gradient(900px 500px at 50% 0%,rgba(205,178,122,.12),transparent 70%),var(--black)}
+.proof-head{text-align:center;max-width:760px;margin:0 auto 44px}
+.proof-head .lead{margin-inline:auto}
+.tabs{display:flex;justify-content:center;gap:6px;margin:0 auto 48px;padding:6px;border:1px solid var(--line-dark);border-radius:999px;width:max-content;max-width:100%;overflow-x:auto}
+.tab{display:inline-flex;align-items:center;gap:10px;border:0;background:none;color:var(--on-dark-muted);padding:12px 22px;border-radius:999px;font:500 .72rem var(--body);letter-spacing:.18em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:.25s}
+.tab small{font:500 .66rem var(--body);letter-spacing:0;min-width:22px;height:22px;border-radius:999px;display:grid;place-items:center;background:rgba(205,178,122,.14);color:var(--gold)}
+.tab[hidden]{display:none}
+.tab[aria-selected="true"]{background:var(--gold);color:var(--black)}
+.tab[aria-selected="true"] small{background:var(--black);color:var(--gold)}
+.tab:hover:not([aria-selected="true"]){color:var(--on-dark)}
+.panel{animation:fade .5s ease}
+@keyframes fade{from{opacity:.4;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,340px));justify-content:center;gap:28px}
+.vcard{margin:0}
+.vframe{aspect-ratio:9/16;background:var(--black-3);border:1px solid var(--line-dark);border-radius:var(--r);overflow:hidden}
+.vframe video{width:100%;height:100%;object-fit:cover;display:block;background:#000}
+.vcard figcaption,.ba-card figcaption{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px;padding-inline:2px}
+.vcard figcaption b,.ba-card figcaption b{font:400 1.15rem var(--display);color:var(--on-dark)}
+.vcard figcaption span,.ba-card figcaption span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+
+.ba-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.ba-card{margin:0;min-width:0}
+.ba-card.feature{grid-column:1/-1;max-width:840px;width:100%;justify-self:center}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--line-dark);padding:6px;border-radius:var(--r)}
+.shot{position:relative;display:block;padding:0;border:0;background:var(--black-3);cursor:zoom-in;aspect-ratio:4/5;overflow:hidden;border-radius:calc(var(--r) - 6px)}
+.shot img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.shot:hover img{transform:scale(1.03)}
+.shot .tag{position:absolute;left:10px;top:10px;font:500 .58rem var(--body);letter-spacing:.22em;text-transform:uppercase;background:rgba(11,10,9,.78);color:var(--on-dark);padding:6px 10px;border-radius:999px}
+.shot .tag.gold{background:var(--gold);color:var(--black)}
+.fine{text-align:center;font-size:.76rem;color:var(--on-dark-muted);margin-top:30px}
+
+.story{max-width:880px;margin:0 auto 64px;border:1px solid var(--line-dark);padding:clamp(28px,5vw,52px);position:relative}
+.story .kicker{display:block;font:500 .66rem var(--body);letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.story p{font:400 clamp(1.05rem,1.6vw,1.25rem)/1.65 var(--display);color:var(--on-dark)}
+.story p+p{margin-top:14px}
+.story footer,.q footer{margin-top:20px;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+mark{background:none;color:var(--gold-soft);box-shadow:inset 0 -.38em 0 rgba(205,178,122,.22)}
+.objection{margin-top:56px}
+.objection h3{display:flex;align-items:center;gap:18px;font:italic 400 clamp(1.4rem,2.6vw,1.9rem) var(--display);color:var(--on-dark);margin-bottom:24px}
+.objection h3::after{content:"";flex:1;height:1px;background:var(--line-dark)}
+.q-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.q-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.q{margin:0;background:var(--black-2);border:1px solid var(--line-dark);padding:28px 26px;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+.q p{font-size:.98rem;line-height:1.7;color:var(--on-dark)}
+.q p::before{content:"“";display:block;font:400 2.6rem/1 var(--display);color:var(--gold);height:.55em;margin-bottom:6px}
+.q-banner{margin-top:64px;text-align:center;border-block:1px solid var(--line-dark);padding:40px 0}
+.q-banner p{font:italic 400 clamp(1.6rem,3.4vw,2.5rem)/1.3 var(--display);color:var(--on-dark)}
+.q-banner em{color:var(--gold)}
+.proof-cta{margin-top:64px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px}
+.proof-cta p{text-wrap:balance;font:400 clamp(1.4rem,2.6vw,1.9rem) var(--display);color:var(--on-dark)}
+
+.lightbox{position:fixed;inset:0;z-index:80;background:rgba(6,5,5,.94);display:grid;place-items:center;padding:calc(20px + env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) calc(20px + env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px))}
+.lightbox[hidden]{display:none}
+.lightbox img{max-width:min(720px,100%);max-height:100%;object-fit:contain;border-radius:8px}
+.lb-close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:calc(18px + env(safe-area-inset-right,0px));width:46px;height:46px;border-radius:50%;border:1px solid var(--gold);background:var(--black);color:var(--gold);font-size:1.6rem;line-height:1;cursor:pointer}
+
+@media(max-width:900px){.q-grid.three{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){
+  .ba-grid,.q-grid,.q-grid.three{grid-template-columns:1fr}
+  .video-grid{grid-template-columns:minmax(0,340px)}
+  .tab{padding:10px 14px;letter-spacing:.1em}
+  .tabs{width:100%;justify-content:space-between}
+}
+@media(max-width:440px){.tab{padding:10px 12px;font-size:.64rem;letter-spacing:.06em}.tab small{display:none}}
+
+/* ESSÊNCIA + CTA */
+.essence{text-align:center;position:relative;overflow:hidden;background:radial-gradient(700px 420px at 50% 0%,rgba(205,178,122,.14),transparent 70%),var(--black)}
+.essence .inner{max-width:780px;margin-inline:auto}
+.essence h2{font-size:clamp(2.1rem,4.6vw,3.6rem)}
+.essence .lead{margin-inline:auto}
+.essence .ornament{max-width:220px;margin:0 auto 26px}
+.essence .ornament img{width:84px;height:auto}
+.essence .ornament{max-width:360px}
+.essence .ctas{justify-content:center;margin-top:38px}
+.final-card{margin:70px auto 0;max-width:720px;border:1px solid var(--line-dark);padding:clamp(30px,5vw,50px)}
+.final-card .wordmark{font-size:clamp(2.4rem,6vw,3.8rem)}
+.final-card p{margin-top:16px;color:var(--on-dark-muted)}
+.wa-line{margin-top:22px;font-size:.84rem;color:var(--on-dark-muted)}
+.wa-line code{font-family:var(--body);color:var(--gold-soft);user-select:all}
+
+footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30px;font-size:.86rem}
+.foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:center}
+.foot-logo img{width:min(260px,70vw);height:auto}
+.foot nav{display:flex;gap:24px;flex-wrap:wrap}
+.foot a:hover{color:var(--gold)}
+.copy{border-top:1px solid var(--line-dark);margin-top:34px;padding-top:22px;font-size:.74rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+.wa{position:fixed;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:55;width:58px;height:58px;border-radius:50%;background:var(--black);color:var(--gold);border:1px solid var(--gold);display:grid;place-items:center;box-shadow:0 14px 34px -10px rgba(0,0,0,.6);transition:.3s}
+.wa:hover{background:var(--gold);color:var(--black)}
+.wa svg{width:26px;height:26px}
+
+.rv{transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.js .rv:not(.in){transform:translateY(16px)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}.js .rv:not(.in){transform:none}}
+
+/* CELULAR */
+@media(max-width:900px){
+  .what-grid{grid-template-columns:1fr;gap:28px}
+  .wordmark{font-size:clamp(3.2rem,16vw,4.6rem)}
+}
+@media(max-width:600px){
+  section{padding-block:64px}
+  .hero{padding-top:calc(112px + env(safe-area-inset-top,0px));padding-bottom:64px}
+  .hero .kicker{letter-spacing:.16em;font-size:.66rem}
+  .hero h1{font-size:clamp(2.1rem,9.6vw,2.6rem)}
+  .lead{font-size:1rem}
+  .ctas{flex-direction:column;align-items:stretch}
+  .ctas .btn,.proof-cta .btn,.final-card .btn{justify-content:center;text-align:center}
+  .btn{padding:16px 22px;letter-spacing:.14em}
+  .creds{margin-top:34px}
+  .creds b{font-size:1.1rem}
+  .creds span{font-size:.66rem;letter-spacing:.02em;line-height:1.35}
+  .portrait .plate{padding:12px 16px}
+  .plate small{letter-spacing:.16em;font-size:.54rem}
+  h2{font-size:clamp(1.85rem,8.4vw,2.3rem)}
+  .sec-head{margin-bottom:34px}
+  .idcard{padding:26px 22px}
+  .idcard .roles{letter-spacing:.14em}
+  .ind{padding:22px 18px}
+  .alert{padding:18px}
+  .must{padding:20px;gap:14px}
+  .must p{font-size:1.05rem}
+  .proof-head{margin-bottom:30px}
+  .tabs{margin-bottom:32px}
+  .ba-grid,.video-grid{gap:22px}
+  .story{padding:24px 20px;margin-bottom:44px}
+  .objection{margin-top:40px}
+  .objection h3{font-size:1.3rem;gap:12px}
+  .q{padding:22px 20px}
+  .q-banner,.proof-cta{margin-top:44px}
+  .final-card{margin-top:44px;padding:28px 20px}
+  .foot{flex-direction:column;align-items:flex-start;gap:24px}
+  .foot nav{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 22px}
+  .copy{flex-direction:column}
+  .wa{width:54px;height:54px}
+}
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="logo"><img src="img/logo-monograma.png" alt=""><span><b>Jéssica Sousa</b><small>Centro Estético</small></span></a>
+    <nav class="menu" id="menu">
+      <a href="#sobre">Sobre</a>
+      <a href="#metodo">O método</a>
+      <a href="#etapas">Como funciona</a>
+      <a href="#indicacoes">Indicações</a>
+      <a href="#provas">Provas</a>
+    </nav>
+    <a class="btn btn-gold js-wa" href="#">Agendar avaliação</a>
+    <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero dark">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="kicker">Esteticista · Cosmetóloga · Biomédica</span>
+      <h1>Muito além de clarear manchas, é cuidar da pele com <em>estratégia</em>.</h1>
+      <p class="lead">Clareamento facial e cuidado de peles com melasma e hiperpigmentações, com avaliação criteriosa, planejamento individual e acompanhamento em cada etapa.</p>
+      <div class="ctas">
+        <a class="btn btn-gold js-wa" href="#"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.6-4-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.3Z"/></svg>Agendar avaliação</a>
+        <a class="btn btn-line" href="#provas">Ver resultados reais</a>
+      </div>
+      <ul class="creds">
+        <li><b>+1.000</b><span>mulheres atendidas</span></li>
+        <li><b>Clean Pro</b><span>método exclusivo</span></li>
+        <li><b>Pós</b><span>em Saúde Estética</span></li>
+      </ul>
+    </div>
+    <div class="portrait">
+      <div class="frame"><img src="img/jessica-hero.jpg" alt="Jéssica Sousa sentada em poltrona, de terninho vermelho"></div>
+      <div class="plate"><b>Jéssica Sousa</b><small>Criadora do Método Clean Pro</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="sobre" class="about">
+  <div class="wrap about-grid">
+    <aside class="idcard rv">
+      <img class="photo" src="img/jessica-close.jpg" alt="Retrato de Jéssica Sousa">
+      <p class="name">Jéssica Sousa</p>
+      <p class="roles">Esteticista · Cosmetóloga · Biomédica</p>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11v5c3 2 7 2 10 0v-5"/></svg><span>Estética e Cosmetologia<small>Formação</small></span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11v5c3 2 7 2 10 0v-5"/></svg><span>Biomedicina<small>Formação</small></span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11v5c3 2 7 2 10 0v-5"/></svg><span>Saúde Estética<small>Pós-graduação</small></span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="9" r="5"/><path d="M8.5 13 7 21l5-3 5 3-1.5-8"/></svg><span>Método Clean Pro<small>Criadora</small></span></li>
+      </ul>
+      <p class="quote">“Uma profissional movida pelo conhecimento, pela excelência e pelo compromisso com o cuidado individualizado.”</p>
+    </aside>
+    <div>
+      <span class="eyebrow">Conheça Jéssica Sousa</span>
+      <h2>Estética, saúde da pele e <em>autoestima</em> feminina.<small>Uma trajetória dedicada à transformação da autoestima de cada mulher.</small></h2>
+      <p class="lead">Jéssica Sousa é profissional da área da estética e saúde, com formação em Estética e Cosmetologia, Biomedicina e pós-graduação em Saúde Estética.</p>
+      <p class="lead">Ao longo de sua trajetória, construiu sua atuação com foco na estética facial, especialmente no clareamento facial e no cuidado de peles com hiperpigmentações e melasma.</p>
+      <p class="lead">Com experiência em mais de 1.000 mulheres atendidas, desenvolveu um olhar individualizado para compreender as necessidades de cada pele, valorizando não apenas a aparência, mas também a saúde, o cuidado e a autoestima de cada mulher.</p>
+      <p class="lead">É criadora do Método Clean Pro, um método exclusivo desenvolvido para o cuidado e clareamento facial.</p>
+      <div class="focus"><span>Clareamento facial</span><span>Melasma</span><span>Hiperpigmentações</span><span>Saúde da pele</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="metodo" class="dark what">
+  <div class="wrap what-grid">
+    <div>
+      <p class="wordmark"><span>Método</span>Clean <em>Pro</em></p>
+    </div>
+    <div>
+      <span class="eyebrow">O que é o Método Clean Pro?</span>
+      <p class="tagline" style="margin-top:22px">Muito além de clarear manchas, é cuidar da pele com estratégia, individualidade e acompanhamento.</p>
+      <p class="lead">O Método Clean Pro é um método exclusivo desenvolvido por Jéssica Sousa, direcionado ao cuidado e clareamento facial, com atenção especial às peles que apresentam manchas, hiperpigmentações e melasma.</p>
+      <p class="lead">Sua proposta é oferecer um cuidado estruturado e individualizado, respeitando as características, necessidades e condições de cada pele.</p>
+      <p class="lead">Cada jornada começa com uma avaliação criteriosa, na qual são identificadas as principais necessidades da pele para que seja elaborado um planejamento de tratamento adequado.</p>
+    </div>
+  </div>
+</section>
+
+<section id="etapas" class="dark how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Como funciona o método</span>
+        <h2>Cinco etapas que se <em>complementam</em>.</h2>
+      </div>
+    </div>
+    <ol class="steps">
+      <li class="rv"><h3>Avaliação individualizada</h3><p>Análise das condições da pele, histórico, queixas e necessidades específicas.</p></li>
+      <li class="rv"><h3>Planejamento personalizado</h3><p>Definição da estratégia de cuidado mais adequada para cada pessoa.</p></li>
+      <li class="rv"><h3>Tratamento profissional</h3><p>Realização dos cuidados e procedimentos indicados, de acordo com a avaliação e o planejamento estabelecido.</p></li>
+      <li class="rv"><h3>Home Care</h3><p>Orientações para os cuidados em casa, com uma rotina direcionada às necessidades da pele.</p></li>
+      <li class="rv"><h3>Acompanhamento e manutenção</h3><p>Monitoramento da evolução da pele e ajustes nos cuidados sempre que necessário.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="indicacoes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <span class="eyebrow">Para quem é indicado</span>
+        <h2>Para quem deseja tratar manchas e <em>melhorar</em> a aparência da pele.</h2>
+      </div>
+    </div>
+    <div class="ind-grid">
+      <div class="ind"><span class="n">01</span><div><h3>Melasma</h3><p>Manchas acastanhadas, comuns em testa, maçãs do rosto e buço.</p></div></div>
+      <div class="ind"><span class="n">02</span><div><h3>Sardas</h3><p>Pequenos pontos de pigmento espalhados pela pele.</p></div></div>
+      <div class="ind"><span class="n">03</span><div><h3>Manchas solares</h3><p>Pigmentação causada pela exposição ao sol ao longo dos anos.</p></div></div>
+      <div class="ind"><span class="n">04</span><div><h3>Manchas de acne</h3><p>Marcas que permanecem depois das lesões de acne.</p></div></div>
+      <div class="ind"><span class="n">05</span><div><h3>Hiperpigmentações</h3><p>Áreas da pele mais escuras que o tom natural.</p></div></div>
+      <div class="ind"><span class="n">06</span><div><h3>Marcas escurecidas</h3><p>Regiões escurecidas que comprometem a uniformidade da pele.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="provas" class="dark proof">
+  <div class="wrap">
+    <div class="proof-head">
+      <span class="eyebrow">Provas sociais</span>
+      <h2>Mulheres reais. Peles reais. <em>Resultados reais.</em></h2>
+      <p class="lead">Veja, ouça e leia quem já passou pelo Método Clean Pro. Nada aqui é ilustrativo: são clientes atendidas pela Jéssica.</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Tipos de prova social">
+      <button class="tab" role="tab" id="tab-videos" aria-controls="painel-videos" aria-selected="true" data-panel="painel-videos"><span>Vídeos</span><small>2</small></button>
+      <button class="tab" role="tab" id="tab-fotos" aria-controls="painel-fotos" aria-selected="false" data-panel="painel-fotos"><span>Antes e depois</span><small>5</small></button>
+      <button class="tab" role="tab" id="tab-relatos" aria-controls="painel-relatos" aria-selected="false" data-panel="painel-relatos"><span>Depoimentos</span><small>12</small></button>
+    </div>
+
+        <div class="panel" id="painel-videos" role="tabpanel" aria-labelledby="tab-videos">
+      <div class="video-grid">
+        <figure class="vcard">
+          <div class="vframe"><video controls playsinline preload="none" poster="video/capa-1.jpg" src="video/depoimento-1.mp4"></video></div>
+          <figcaption><b>Relato de cliente</b><span>Vídeo · 55 s</span></figcaption>
+        </figure>
+        <figure class="vcard">
+          <div class="vframe"><video controls playsinline preload="none" poster="video/capa-2.jpg" src="video/depoimento-2.mp4"></video></div>
+          <figcaption><b>Relato de cliente</b><span>Vídeo · 2 min</span></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="panel" id="painel-fotos" role="tabpanel" aria-labelledby="tab-fotos" hidden>
+      <div class="ba-grid">
+        <figure class="ba-card feature">
+          <div class="pair"><button class="shot" data-zoom="img/provas/caso-1-antes.jpg" aria-label="Ampliar foto antes, caso 1"><img src="img/provas/caso-1-antes.jpg" alt="Caso 1, antes do tratamento"><span class="tag">Antes</span></button><button class="shot" data-zoom="img/provas/caso-1-depois.jpg" aria-label="Ampliar foto depois, caso 1"><img src="img/provas/caso-1-depois.jpg" alt="Caso 1, depois do tratamento"><span class="tag gold">Depois</span></button></div>
+          <figcaption><b>Caso 01</b><span>Melasma e manchas</span></figcaption>
+        </figure>
+        <figure class="ba-card">
+          <div class="pair"><button class="shot" data-zoom="img/provas/caso-2-antes.jpg" aria-label="Ampliar foto antes, caso 2"><img src="img/provas/caso-2-antes.jpg" alt="Caso 2, antes do tratamento" loading="lazy"><span class="tag">Antes</span></button><button class="shot" data-zoom="img/provas/caso-2-depois.jpg" aria-label="Ampliar foto depois, caso 2"><img src="img/provas/caso-2-depois.jpg" alt="Caso 2, depois do tratamento" loading="lazy"><span class="tag gold">Depois</span></button></div>
+          <figcaption><b>Caso 02</b><span>Hiperpigmentação</span></figcaption>
+        </figure>
+        <figure class="ba-card">
+          <div class="pair"><button class="shot" data-zoom="img/provas/caso-3-antes.jpg" aria-label="Ampliar foto antes, caso 3"><img src="img/provas/caso-3-antes.jpg" alt="Caso 3, antes do tratamento" loading="lazy"><span class="tag">Antes</span></button><button class="shot" data-zoom="img/provas/caso-3-depois.jpg" aria-label="Ampliar foto depois, caso 3"><img src="img/provas/caso-3-depois.jpg" alt="Caso 3, depois do tratamento" loading="lazy"><span class="tag gold">Depois</span></button></div>
+          <figcaption><b>Caso 03</b><span>Melasma e manchas</span></figcaption>
+        </figure>
+        <figure class="ba-card">
+          <div class="pair"><button class="shot" data-zoom="img/provas/caso-4-antes.jpg" aria-label="Ampliar foto antes, caso 4"><img src="img/provas/caso-4-antes.jpg" alt="Caso 4, antes do tratamento" loading="lazy"><span class="tag">Antes</span></button><button class="shot" data-zoom="img/provas/caso-4-depois.jpg" aria-label="Ampliar foto depois, caso 4"><img src="img/provas/caso-4-depois.jpg" alt="Caso 4, depois do tratamento" loading="lazy"><span class="tag gold">Depois</span></button></div>
+          <figcaption><b>Caso 04</b><span>Melasma</span></figcaption>
+        </figure>
+        <figure class="ba-card">
+          <div class="pair"><button class="shot" data-zoom="img/provas/caso-5-antes.jpg" aria-label="Ampliar foto antes, caso 5"><img src="img/provas/caso-5-antes.jpg" alt="Caso 5, antes do tratamento" loading="lazy"><span class="tag">Antes</span></button><button class="shot" data-zoom="img/provas/caso-5-depois.jpg" aria-label="Ampliar foto depois, caso 5"><img src="img/provas/caso-5-depois.jpg" alt="Caso 5, depois do tratamento" loading="lazy"><span class="tag gold">Depois</span></button></div>
+          <figcaption><b>Caso 05</b><span>Melasma</span></figcaption>
+        </figure>
+      </div>
+      <p class="fine">Toque em uma foto para ampliar. Os resultados variam de pessoa para pessoa e dependem da avaliação, do planejamento e dos cuidados em casa.</p>
+    </div>
+
+    <div class="panel" id="painel-relatos" role="tabpanel" aria-labelledby="tab-relatos" hidden>
+      <article class="story">
+        <span class="kicker">Relato completo</span>
+        <blockquote>
+          <p>Após algumas consultas e tentativas frustradas com diferentes tratamentos e especialistas, encontrei a Jéssica, altamente recomendada e especializada em tratamentos de melasma.</p>
+          <p>Na primeira consulta, ela fez uma avaliação detalhada da minha pele e explicou as possíveis causas do melasma, incluindo fatores hormonais e exposição solar. Ela ressaltou a importância de um tratamento personalizado e persistente.</p>
+          <p>Segui à risca todas as orientações. Depois de um mês de tratamento, fiquei encantada com os resultados. <mark>Minhas manchas de melasma praticamente sumiram</mark>, e minha pele estava rejuvenescida e saudável. Mais importante ainda, recuperei minha autoestima e confiança.</p>
+          <p>Eu continuo seguindo minha rotina de cuidados para manter minha pele bonita e prevenir o retorno do melasma. Super recomendo essa excelente profissional.</p>
+        </blockquote>
+        <footer>Cliente do Método Clean Pro</footer>
+      </article>
+
+      <div class="objection">
+        <h3><span>“Já tentei de tudo e nada funcionou.”</span></h3>
+        <div class="q-grid">
+          <blockquote class="q"><p>Antes já achava que não tinha mais solução, pois já tinha testado tudo e nada dava certo. <mark>Hoje vejo o resultado em poucos meses.</mark> Cada dia que olho no espelho durante o tratamento tenho mais prazer de cuidar do rosto.</p><footer>Cliente do Método Clean Pro</footer></blockquote>
+          <blockquote class="q"><p>Tirou minha angústia e me deu esperança de uma pele melhor. <mark>Minha pele está clareando a cada dia mais</mark> e as cicatrizes minimizando. Já tem melhorado, seguindo todas as dicas dela.</p><footer>Elaine</footer></blockquote>
+        </div>
+      </div>
+
+      <div class="objection">
+        <h3><span>“Vou ser bem acompanhada?”</span></h3>
+        <div class="q-grid">
+          <blockquote class="q"><p>Uma profissional maravilhosa que se preocupa com seus pacientes <mark>desde a avaliação até a finalização</mark>. Só tenho a agradecer por tudo, desde a avaliação até os atendimentos on-line e a finalização.</p><footer>Cliente do Método Clean Pro</footer></blockquote>
+          <blockquote class="q"><p>Você trouxe de volta minha autoestima com seu talento. Sou sua paciente e sei como você trata suas pacientes: <mark>com muita responsabilidade, cuidado e muito carinho.</mark></p><footer>Cliente do Método Clean Pro</footer></blockquote>
+        </div>
+      </div>
+
+      <div class="objection">
+        <h3><span>“Os outros vão notar a diferença?”</span></h3>
+        <div class="q-grid three">
+          <blockquote class="q"><p>Eu era tão escondida por maquiagem que <mark>hoje estou saindo sem usar maquiagem</mark> e me sentindo mil vezes melhor com o resultado do meu rosto.</p><footer>Cliente do Método Clean Pro</footer></blockquote>
+          <blockquote class="q"><p>Estou muito feliz com o resultado. <mark>Muitas pessoas já me perguntaram o que eu fiz no rosto.</mark> Você foi uma bênção na minha vida.</p><footer>Cliente do Método Clean Pro</footer></blockquote>
+          <blockquote class="q"><p>Você não tem noção do quanto é bom ir a um lugar e <mark>apenas um batonzinho ser suficiente</mark>, sem ter que esconder as manchas do rosto.</p><footer>Cliente do Método Clean Pro</footer></blockquote>
+        </div>
+      </div>
+
+      <div class="objection">
+        <h3><span>“Vale o investimento?”</span></h3>
+        <div class="q-grid three">
+          <blockquote class="q"><p>Antes não postava minhas fotos por conta das manchas. Agora estou muito feliz de poder sorrir sem manchas marcando meu rosto nas fotos. <mark>Dinheiro nenhum paga essa felicidade.</mark></p><footer>Cliente do Método Clean Pro</footer></blockquote>
+          <blockquote class="q"><p>Uma sensação maravilhosa é você se olhar no espelho e <mark>se sentir linda, com a autoestima lá em cima.</mark> Gratidão, Jéssica, por tudo.</p><footer>Cliente do Método Clean Pro</footer></blockquote>
+          <blockquote class="q"><p>Tô amando o resultado, <mark>livre de melasma.</mark> Trabalho incrível e todo carinho e cuidado.</p><footer>Ivone</footer></blockquote>
+        </div>
+      </div>
+
+      <div class="q-banner">
+        <p>“Você foi uma fada que realizou meu grande desejo. <em>Me amando de novo.</em>”</p>
+      </div>
+    </div>
+
+    <div class="proof-cta">
+      <p>A próxima história pode ser a sua.</p>
+      <a class="btn btn-gold js-wa" href="#">Quero agendar minha avaliação</a>
+    </div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="lb-close" aria-label="Fechar">×</button>
+  <img alt="Foto ampliada">
+</div>
+
+<section class="care">
+  <div class="wrap care-grid">
+    <div>
+      <span class="eyebrow">Segurança em primeiro lugar</span>
+      <h2>Quando não é indicado ou exige <em>avaliação especial</em>.</h2>
+      <p class="lead">Algumas condições impedem o tratamento ou pedem um olhar ainda mais cuidadoso. Por isso, nenhuma jornada começa sem avaliação.</p>
+    </div>
+    <div>
+      <div class="alerts">
+        <div class="alert rv"><span class="pill no">Não indicado</span><h3>Gestantes</h3><p>Não podem realizar o Método Clean Pro.</p></div>
+        <div class="alert rv"><span class="pill no">Não indicado</span><h3>Tratamento oncológico</h3><p>Não indicado para pessoas durante o tratamento.</p></div>
+        <div class="alert rv"><span class="pill eval">Avaliação especial</span><h3>Roacutan (isotretinoína)</h3><p>Quem utiliza ou suspendeu recentemente precisa de avaliação criteriosa.</p></div>
+        <div class="alert rv"><span class="pill eval">Avaliação especial</span><h3>Rosácea</h3><p>Exige avaliação individual das condições e da sensibilidade da pele.</p></div>
+      </div>
+      <div class="must rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><p>A avaliação profissional é indispensável antes de iniciar o tratamento.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="essence dark">
+  <div class="wrap">
+    <div class="inner">
+      <div class="ornament"><img src="img/logo-monograma.png" alt="Monograma JS"></div>
+      <span class="eyebrow">A essência do Clean Pro</span>
+      <h2>Não é sobre seguir uma fórmula igual para todas. É sobre <em>compreender</em> cada pele.</h2>
+      <p class="lead">Cada pele possui uma história, características e necessidades próprias. Por isso, o Método Clean Pro valoriza a individualidade, a constância e o acompanhamento profissional, construindo uma estratégia de cuidado direcionada a cada uma.</p>
+      <div class="final-card">
+        <p class="wordmark"><span>Método</span>Clean <em>Pro</em></p>
+        <p>Uma experiência de cuidado facial pensada para valorizar a saúde, a aparência e a autoestima da sua pele.</p>
+        <div class="ctas"><a class="btn btn-gold js-wa" href="#">Agendar minha avaliação</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot">
+      <a href="#top" class="foot-logo"><img src="img/logo-completo.png" alt="Centro Estético Jessica Sousa — Estética, Saúde, Beleza"></a>
+      <nav><a href="#sobre">Sobre</a><a href="#metodo">O método</a><a href="#indicacoes">Indicações</a><a class="js-wa" href="#">WhatsApp</a><a class="js-ig" href="#">Instagram</a></nav>
+    </div>
+    <div class="copy"><span>© <span id="y">2026</span> Centro Estético Jéssica Sousa · Atendimento: <span style="white-space:nowrap">(75) 99800-9902</span></span><span>Esteticista · Cosmetóloga · Biomédica</span></div>
+  </div>
+</footer>
+
+<a class="wa js-wa" href="#" aria-label="Agendar pelo WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.6-4-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.3Z"/></svg></a>
+
+<script>
+const WHATSAPP = "https://wa.me/5575998009902?text=" + encodeURIComponent("Olá! Vim pelo site e gostaria de agendar minha avaliação do Método Clean Pro.");
+const INSTAGRAM = "https://www.instagram.com/jessicasousa_esteticaa/";
+document.documentElement.classList.add('js');
+document.querySelectorAll('.js-wa').forEach(a=>{a.href=WHATSAPP;a.target="_blank";a.rel="noopener"});
+document.querySelectorAll('.js-ig').forEach(a=>{a.href=INSTAGRAM;a.target="_blank";a.rel="noopener"});
+document.getElementById('y').textContent=new Date().getFullYear();
+
+const hd=document.querySelector('header');
+const onScroll=()=>hd.classList.toggle('scrolled',scrollY>30);
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+const menu=document.getElementById('menu'),burger=document.getElementById('burger');
+burger.onclick=()=>{const o=menu.classList.toggle('open');burger.setAttribute('aria-expanded',o)};
+menu.querySelectorAll('a').forEach(a=>a.onclick=()=>{menu.classList.remove('open');burger.setAttribute('aria-expanded',false)});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+
+// Abas de provas sociais
+const tabs=[...document.querySelectorAll('.tab')];
+const showPanel=t=>{tabs.forEach(x=>{const on=x===t;x.setAttribute('aria-selected',on);document.getElementById(x.dataset.panel).hidden=!on})};
+tabs.forEach(t=>t.addEventListener('click',()=>showPanel(t)));
+// Se os vídeos ainda não foram enviados, a aba de vídeos some e "Antes e depois" abre primeiro
+const vids=[...document.querySelectorAll('#painel-videos video')];let falhas=0;
+vids.forEach(v=>v.addEventListener('error',()=>{v.closest('.vcard').hidden=true;if(++falhas===vids.length){document.getElementById('tab-videos').hidden=true;showPanel(document.getElementById('tab-fotos'))}},true));
+
+document.querySelectorAll('video').forEach(v=>v.addEventListener('play',()=>document.querySelectorAll('video').forEach(o=>{if(o!==v)o.pause()})));
+
+// Ampliar fotos
+const lb=document.getElementById('lightbox'),lbImg=lb.querySelector('img');
+document.querySelectorAll('.shot').forEach(b=>b.addEventListener('click',()=>{lbImg.src=b.dataset.zoom;lbImg.alt=b.querySelector('img').alt;lb.hidden=false}));
+lb.addEventListener('click',e=>{if(e.target!==lbImg)lb.hidden=true});
+addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true});
+</script>
+</body>
+</html>
