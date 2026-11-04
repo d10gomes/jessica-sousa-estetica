@@ -1260,7 +1260,7 @@ h2 em,h1 em{font-weight:400!important}
     <p>Cookies são pequenos arquivos guardados no seu navegador. Neste site:</p>
     <ul>
       <li><b>Essencial:</b> guardamos a sua escolha sobre cookies (“aceito” ou “recusado”) no armazenamento do seu navegador, para não perguntar de novo a cada visita. Ela fica até você apagar os dados do navegador.</li>
-      <li><b>Medição (com o seu aceite):</b> se você clicar em “Aceitar cookies”, guardamos no seu navegador um código aleatório que não identifica você, para contar visitas e visitantes únicos. Registramos de forma anônima: páginas e seções vistas, tempo no site, até onde a página foi rolada, botões clicados, tipo de aparelho e por onde você chegou (por exemplo, Instagram ou anúncio). Não registramos o seu nome, telefone nem endereço IP nessas métricas. Se você clicar em “Recusar”, nada disso é coletado.</li>
+      <li><b>Medição (com o seu aceite):</b> se você clicar em “Aceitar cookies”, guardamos no seu navegador um código aleatório que não identifica você, para contar visitas e visitantes únicos. Registramos de forma anônima: páginas e seções vistas, tempo no site, até onde a página foi rolada, botões clicados, tipo de aparelho e por onde você chegou (por exemplo, Instagram ou anúncio). Também registramos a cidade e o estado aproximados de onde vem o acesso, calculados pela rede de internet no momento da visita, sem guardar o endereço IP. Não registramos o seu nome nem o seu telefone nessas métricas. Se você fizer a avaliação online ou enviar uma proposta de parceria, esse histórico de navegação fica associado ao seu cadastro, para entendermos como chegou até nós. Se você clicar em “Recusar”, nada disso é coletado.</li>
       <li><b>Ferramentas de anúncios:</b> no momento, o site não utiliza Pixel da Meta nem Google Analytics. Se passar a utilizar, eles também só serão ativados depois do seu aceite.</li>
     </ul>
     <p>Você pode mudar sua escolha a qualquer momento pelo link “Gerenciar cookies” no rodapé, ou apagar os cookies nas configurações do seu navegador.</p>
@@ -1390,7 +1390,7 @@ function uuid(){return (crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xx
 function met(tipo,valor){
   if(!MET||!SUPABASE_URL)return;
   const body={visitante:MET.v,sessao:MET.s,tipo,valor:valor==null?null:String(valor).slice(0,80)};
-  if(tipo==='visita')Object.assign(body,{dispositivo:MET.d,origem:ORIGEM.utm_source||null,midia:ORIGEM.utm_medium||null,campanha:ORIGEM.utm_campaign||null,referencia:ORIGEM.referrer||null,novo:MET.novo});
+  if(tipo==='visita')Object.assign(body,{cidade:MET.geo.cidade||null,estado:MET.geo.estado||null,pais:MET.geo.pais||null,dispositivo:MET.d,origem:ORIGEM.utm_source||null,midia:ORIGEM.utm_medium||null,campanha:ORIGEM.utm_campaign||null,referencia:ORIGEM.referrer||null,novo:MET.novo});
   try{fetch(SUPABASE_URL+'/rest/v1/eventos',{method:'POST',keepalive:true,headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(body)}).catch(()=>{})}catch(e){}
 }
 function iniciarMetricas(){
@@ -1399,8 +1399,9 @@ function iniciarMetricas(){
   if(!v){v=uuid();novo=true;try{localStorage.setItem('jsousa-vid',v)}catch(e){}}
   let s=null;try{s=sessionStorage.getItem('jsousa-sid')}catch(e){}
   if(!s){s=uuid();try{sessionStorage.setItem('jsousa-sid',s)}catch(e){}}
-  const w=innerWidth;MET={v,s,novo,d:w<700?'celular':w<1100?'tablet':'computador'};
-  met('visita');
+  const w=innerWidth;MET={v,s,novo,d:w<700?'celular':w<1100?'tablet':'computador',geo:{}};
+  const ctl=new AbortController();setTimeout(()=>ctl.abort(),2500);
+  fetch('/api/geo',{signal:ctl.signal}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(g=>{MET.geo={cidade:(g.cidade||'').slice(0,80)||null,estado:(g.estado||'').slice(0,10)||null,pais:(g.pais||'').slice(0,4)||null};met('visita')});
   // tempo na página: um sinal a cada 15 s com a aba visível (até 30 min)
   let pings=0;setInterval(()=>{if(document.visibilityState==='visible'&&pings<120){pings++;met('ping')}},15000);
   // rolagem
@@ -1509,7 +1510,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();
   const cond=resp.condicoes.filter(x=>x!=='Nenhuma');
   const lead={nome,whatsapp:fone,cidade,queixa:resp.queixa,tempo:resp.tempo,historico:resp.historico,condicoes:cond,presencial:resp.presencial,inicio:resp.inicio,
     elegibilidade,temperatura,consentimento_dados:true,consentimento_saude:true,consentimento_marketing:document.getElementById('q-c3').checked,
-    utm_source:ORIGEM.utm_source||null,utm_medium:ORIGEM.utm_medium||null,utm_campaign:ORIGEM.utm_campaign||null,utm_content:ORIGEM.utm_content||null,utm_term:ORIGEM.utm_term||null,referrer:ORIGEM.referrer||null};
+    utm_source:ORIGEM.utm_source||null,utm_medium:ORIGEM.utm_medium||null,utm_campaign:ORIGEM.utm_campaign||null,utm_content:ORIGEM.utm_content||null,utm_term:ORIGEM.utm_term||null,referrer:ORIGEM.referrer||null,visitante:MET?MET.v:null};
   await salvar(lead);
   rastrear('Lead',{queixa:resp.queixa,temperatura});
   btn.disabled=false;btn.textContent='Ver meu resultado';
@@ -1550,7 +1551,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();
     if(msg){erro.textContent=msg;erro.hidden=false;return}
     if(v('p-hp'))return;
     const btn=document.getElementById('p-enviar');btn.disabled=true;btn.textContent='Enviando…';
-    const dados={responsavel:resp,espaco:esp,cidade:cid,area:ar,profissionais:marcados('p-prof'),profissionais_outros:v('p-prof-outros')||null,interesse:marcados('p-int'),whatsapp:fone,instagram:v('p-insta')||null,mensagem:v('p-msg')||null,consentimento:true,utm_source:ORIGEM.utm_source||null};
+    const dados={responsavel:resp,espaco:esp,cidade:cid,area:ar,profissionais:marcados('p-prof'),profissionais_outros:v('p-prof-outros')||null,interesse:marcados('p-int'),whatsapp:fone,instagram:v('p-insta')||null,mensagem:v('p-msg')||null,consentimento:true,utm_source:ORIGEM.utm_source||null,visitante:MET?MET.v:null};
     let ok=false;
     if(SUPABASE_URL){const c=new AbortController(),t=setTimeout(()=>c.abort(),6000);
       try{const r=await fetch(SUPABASE_URL+'/rest/v1/parcerias',{method:'POST',signal:c.signal,headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(dados)});ok=r.ok}catch(e){}finally{clearTimeout(t)}}

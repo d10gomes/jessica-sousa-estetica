@@ -113,6 +113,11 @@ table.t th,table.t td{text-align:left;padding:8px 6px;border-bottom:1px solid #E
 table.t th{font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 table.t td.n{text-align:right;font-variant-numeric:tabular-nums}
 table.t th.n{text-align:right}
+.tscroll{overflow-x:auto}
+.tscroll table{min-width:640px}
+.who b{font-weight:600}
+.who small{display:block;color:var(--muted);font-size:.78rem}
+.tag-l{display:inline-block;font:600 .68rem var(--body);letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:3px 8px;background:#F3E6D8;color:#7A4A2C}
 @media(max-width:800px){.grid2{grid-template-columns:1fr}.fstep{grid-template-columns:110px 1fr 60px}}
 </style>
 </head>
@@ -167,13 +172,17 @@ table.t th.n{text-align:right}
         <div class="panel"><h3>Dispositivo</h3><p class="sub">Sessões por tipo de aparelho</p><div id="c-disp" class="hbars"></div></div>
         <div class="panel"><h3>O que mais é visto</h3><p class="sub">Sessões que chegaram a cada seção</p><div id="c-secoes" class="hbars"></div></div>
         <div class="panel"><h3>Até onde rolam a página</h3><p class="sub">Sessões que passaram de cada ponto</p><div id="c-rol" class="hbars"></div></div>
+        <div class="panel wide"><h3>De onde acessam</h3><p class="sub">Cidade e estado aproximados de cada visita (pela rede de internet, sem guardar IP)</p><div id="c-cidades" class="tscroll"></div></div>
+        <div class="panel"><h3>Por estado</h3><p class="sub">Visitas por estado</p><div id="c-estados" class="hbars"></div></div>
+        <div class="panel"><h3>Por país</h3><p class="sub">Visitas por país</p><div id="c-paises" class="hbars"></div></div>
+        <div class="panel wide"><h3>Quem visitou o site</h3><p class="sub">Cada linha é uma pessoa (aparelho). O nome aparece quando ela fez a avaliação ou enviou uma parceria; as demais ficam anônimas, conforme a LGPD.</p><div id="c-vis" class="tscroll"></div></div>
         <div class="panel wide"><h3>Horários de acesso</h3><p class="sub">Visitas por hora do dia (horário da Bahia). Bom para escolher a hora dos posts e anúncios.</p><div id="c-hora"></div></div>
         <div class="panel"><h3>Botões mais clicados</h3><p class="sub">Botão · seção da página</p><div id="c-ctas" class="hbars"></div></div>
         <div class="panel"><h3>Provas sociais</h3><p class="sub">Vídeos assistidos e abas abertas</p><div id="c-provas" class="hbars"></div></div>
         <div class="panel"><h3>Queixas das avaliações</h3><p class="sub">Principal queixa informada</p><div id="c-queixas" class="hbars"></div></div>
         <div class="panel"><h3>Temperatura das avaliações</h3><p class="sub">Classificação automática</p><div id="c-temp" class="hbars"></div></div>
       </div>
-      <p class="note-m">As métricas contam apenas visitantes que aceitaram os cookies, conforme a LGPD. Por isso, os números de visitas tendem a ser menores que o total real de acessos. As avaliações são contadas todas.</p>
+      <p class="note-m">A localização é aproximada (cidade da operadora de internet) e pode indicar uma cidade vizinha. As métricas contam apenas visitantes que aceitaram os cookies, conforme a LGPD. Por isso, os números de visitas tendem a ser menores que o total real de acessos. As avaliações são contadas todas.</p>
     </section>
     <div id="v-leads">
     <section class="kpis" aria-label="Resumo">
@@ -327,6 +336,7 @@ async function carregarMetricas(){
   bars($('c-ctas'),m.ctas||[],c=>c.nome,c=>c.cliques);
   bars($('c-provas'),[...(m.videos||[]).map(v=>({n:v.nome+' (play)',v:v.plays})),...(m.abas||[]).map(a=>({n:'Aba '+a.nome,v:a.sessoes}))],x=>x.n,x=>x.v);
   bars($('c-queixas'),L.queixas||[],q=>q.nome||'—',q=>q.n);
+  carregarGeo(dias);
   bars($('c-temp'),[['Quente',L.quente],['Morna',L.morna],['Fria',L.fria],['Contraindicado',L.contraindicado]].filter(x=>x[1]).map(([n,v])=>({n,v})),x=>x.n,x=>x.v,x=>pct(x.v,L.total)+'%');
 }
 
@@ -364,6 +374,19 @@ $('p-exportar').addEventListener('click',()=>{const cols=['created_at','espaco',
   const cel=v=>{v=Array.isArray(v)?v.join(', '):v??'';v=String(v);if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
   const csv='﻿'+cols.join(';')+'\n'+parcs.map(l=>cols.map(c=>cel(c==='created_at'?data(l[c]):l[c])).join(';')).join('\n');
   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=`parcerias-${new Date().toISOString().slice(0,10)}.csv`;a.click()});
+
+const UF={'AC':'Acre','AL':'Alagoas','AP':'Amapá','AM':'Amazonas','BA':'Bahia','CE':'Ceará','DF':'Distrito Federal','ES':'Espírito Santo','GO':'Goiás','MA':'Maranhão','MT':'Mato Grosso','MS':'Mato Grosso do Sul','MG':'Minas Gerais','PA':'Pará','PB':'Paraíba','PR':'Paraná','PE':'Pernambuco','PI':'Piauí','RJ':'Rio de Janeiro','RN':'Rio Grande do Norte','RS':'Rio Grande do Sul','RO':'Rondônia','RR':'Roraima','SC':'Santa Catarina','SP':'São Paulo','SE':'Sergipe','TO':'Tocantins'};
+async function carregarGeo(dias){
+  const [{data:g},{data:v}]=await Promise.all([db.rpc('painel_geo',{dias}),db.rpc('painel_visitantes',{dias})]);
+  const c=(g&&g.cidades)||[];
+  $('c-cidades').innerHTML=c.length?`<table class="t"><thead><tr><th>Cidade</th><th>Estado</th><th class="n">Visitas</th><th class="n">Pessoas</th><th class="n">Avaliações</th></tr></thead><tbody>${c.map(r=>`<tr><td>${esc(r.cidade)}</td><td>${esc(UF[r.estado]||r.estado||'—')}</td><td class="n">${nf(r.visitas)}</td><td class="n">${nf(r.visitantes)}</td><td class="n">${nf(r.avaliacoes)}</td></tr>`).join('')}</tbody></table>`:'<p class="empty-m">Ainda sem dados no período.</p>';
+  bars($('c-estados'),((g&&g.estados)||[]),e=>UF[e.estado]||e.estado,e=>e.visitas);
+  bars($('c-paises'),((g&&g.paises)||[]),e=>e.pais==='BR'?'Brasil':e.pais,e=>e.visitas);
+  const L=v||[];
+  $('c-vis').innerHTML=L.length?`<table class="t"><thead><tr><th>Pessoa</th><th>Local</th><th>Aparelho</th><th>Origem</th><th class="n">Visitas</th><th class="n">Tempo total</th><th>Última visita</th></tr></thead><tbody>${L.map(r=>{
+    const quem=r.lead?`<b>${esc(r.lead)}</b><small><span class="tag-l">Avaliação · ${esc(TEMP[r.lead_temp]||'')}</span></small>`:r.parceria?`<b>${esc(r.parceria)}</b><small><span class="tag-l">Parceria</span></small>`:`Visitante ${esc(String(r.visitante).slice(0,6))}<small>${r.abriu?'Abriu a avaliação e não concluiu':'Anônimo'}</small>`;
+    return `<tr class="who"><td>${quem}</td><td>${esc([r.cidade,r.estado].filter(Boolean).join(' – ')||'—')}</td><td>${esc(r.dispositivo||'—')}</td><td>${esc(r.origem||'—')}</td><td class="n">${nf(r.sessoes)}</td><td class="n">${dur(r.tempo_seg)}</td><td>${data(r.ultima)}</td></tr>`}).join('')}</tbody></table>`:'<p class="empty-m">Ainda sem dados no período.</p>';
+}
 </script>
 </body>
 </html>
