@@ -634,6 +634,20 @@ h2 em,h1 em{font-weight:400!important}
   .hero h1{font-size:clamp(2.1rem,9vw,2.6rem)}
   .social{margin-bottom:16px}
 }
+/* abertura: foto recortada, sem fundo, integrada à página */
+.portrait{width:min(520px,100%);position:relative;isolation:isolate}
+.portrait::after{content:"";position:absolute;z-index:-1;left:6%;right:2%;top:8%;bottom:6%;border-radius:50% 50% 46% 46%/42% 42% 58% 58%;background:radial-gradient(circle at 45% 35%,#F3DCCB 0%,#E9CDB8 45%,rgba(233,205,184,0) 72%)}
+.portrait .frame{aspect-ratio:auto;border-radius:0;box-shadow:none;background:none;overflow:visible}
+.portrait .frame img{width:100%;height:auto;object-fit:contain;filter:none;-webkit-mask-image:linear-gradient(to left,transparent 0,#000 16%);mask-image:linear-gradient(to left,transparent 0,#000 16%)}
+.portrait .plate{left:0;top:6%;bottom:auto}
+@media(max-width:920px){
+  .portrait{max-width:380px}
+  .portrait .frame{aspect-ratio:auto}
+  .portrait .frame img{object-position:center}
+  .portrait .plate{top:2%;padding:10px 14px}
+}
+.portrait .plate{position:relative;left:auto;top:auto;bottom:auto;margin:6px auto 0;width:max-content;max-width:100%;text-align:center;background:#FFF9F4;border:1px solid var(--line)}
+@media(max-width:920px){.portrait{max-width:300px}.portrait .plate{top:auto;margin-top:4px}}
 </style>
 </head>
 <body>
@@ -673,7 +687,7 @@ h2 em,h1 em{font-weight:400!important}
       </ul>
     </div>
     <div class="portrait">
-      <div class="frame"><img src="img/jessica-hero.jpg" alt="Jéssica Sousa sentada em poltrona, de terninho vermelho"></div>
+      <div class="frame"><img src="img/jessica-hero-recorte.webp" alt="Jéssica Sousa sentada em poltrona, de terninho vermelho" width="860" height="1316"></div>
       <div class="plate"><b>Jéssica Sousa</b><small>Criadora do Método Clean Pro</small></div>
     </div>
   </div>
