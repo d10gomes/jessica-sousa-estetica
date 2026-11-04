@@ -328,6 +328,77 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
 .privacy-box h3{font:600 1.08rem var(--body);color:#14110F}
 .privacy-box p,.privacy-box li{color:var(--muted);font-size:1rem}
 
+/* SUA PRIMEIRA AVALIAÇÃO + PERGUNTAS FREQUENTES */
+.faqsec{background:var(--off);--muted:#3B352E;--gold-deep:#7A5E28;color:#1B1815}
+.faqsec h2{font-weight:600;color:#14110F}
+.faqsec h2 em{font-weight:500}
+.faqsec .eyebrow{font-weight:600;color:var(--gold-deep)}
+.faqsec .lead{color:var(--muted);font-size:1.08rem}
+.first{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,90px);align-items:start}
+.first>div{min-width:0}
+.flow{list-style:none;display:grid;gap:14px}
+.flow li{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;background:#FFFDF9;border:1px solid #E3DACB;padding:22px}
+.flow .fn{width:44px;height:44px;border-radius:50%;background:var(--black);color:var(--gold);display:grid;place-items:center;font:600 1rem var(--body)}
+.flow h3{font:600 1.1rem/1.3 var(--body);color:#14110F;margin-bottom:4px}
+.flow p{font-size:1rem;line-height:1.6;color:var(--muted)}
+.faq{max-width:860px;margin:clamp(64px,8vw,100px) auto 0}
+.faq-title{text-align:center;margin-bottom:28px}
+.faq details{background:#FFFDF9;border:1px solid #E3DACB;padding:0 22px;margin-bottom:10px}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 0;font:600 1.06rem/1.4 var(--body);color:#14110F}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 1.6rem/1 var(--body);color:var(--gold-deep);transition:transform .25s;flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 0 20px;font-size:1rem;line-height:1.7;color:var(--muted);max-width:68ch}
+.faq details a{color:var(--gold-deep);font-weight:600}
+.faq-cta{margin-top:48px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px}
+.faq-cta p{font:600 clamp(1.4rem,2.6vw,1.9rem) var(--display);color:#14110F}
+@media(max-width:900px){.first{grid-template-columns:1fr}}
+@media(max-width:600px){.flow li{padding:18px;gap:14px;grid-template-columns:38px 1fr}.flow .fn{width:38px;height:38px}.faq details{padding:0 16px}.faq summary{font-size:1rem}.faq-cta .btn{align-self:stretch;justify-content:center}}
+
+/* AVALIAÇÃO ONLINE (QUESTIONÁRIO) */
+.quiz{position:fixed;inset:0;z-index:85;background:rgba(6,5,5,.86);display:grid;place-items:center;padding:calc(16px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.quiz[hidden]{display:none}
+.quiz-box{background:var(--off);color:#14110F;width:100%;max-width:560px;max-height:100%;overflow:auto;border-radius:16px;padding:20px clamp(20px,4vw,36px) 26px;display:flex;flex-direction:column;--muted:#3B352E;--gold-deep:#7A5E28}
+.quiz-top{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex:none}
+.quiz-box>form,.q-direct{flex:none}
+.q-back,.q-close{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid #D9CFBF;background:#fff;color:#14110F;font-size:1.5rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+.q-back[disabled]{visibility:hidden}
+.q-progress{flex:1;height:4px;background:#E3DACB;border-radius:4px;overflow:hidden}
+.q-progress span{display:block;height:100%;width:14%;background:var(--gold-deep);transition:width .35s}
+.q-kicker{font:600 .7rem var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:10px}
+.q-step{border:0;margin:0;padding:0;min-width:0}
+.q-step legend{font:600 clamp(1.45rem,4.6vw,1.8rem)/1.2 var(--display);color:#14110F;margin-bottom:18px;padding:0}
+.q-help{font-size:.92rem;color:var(--muted);margin:-6px 0 14px}
+.q-opts{display:grid;gap:10px}
+.q-opt{text-align:left;font:500 1rem/1.4 var(--body);color:#14110F;background:#fff;border:1.5px solid #DCD2C2;border-radius:12px;padding:15px 18px;cursor:pointer;transition:border-color .2s,background .2s;display:flex;align-items:center;gap:12px}
+.q-opt::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid #BFB29C;transition:.2s}
+.multi .q-opt::before{border-radius:5px}
+.q-opt:hover{border-color:var(--gold-deep)}
+.q-opt[aria-pressed="true"]{border-color:var(--gold-deep);background:#FBF4E6}
+.q-opt[aria-pressed="true"]::before{background:var(--gold-deep);border-color:var(--gold-deep);box-shadow:inset 0 0 0 3px #FBF4E6}
+.q-next{margin-top:20px;width:100%;justify-content:center}
+.q-next[disabled]{opacity:.45;pointer-events:none}
+.q-field{display:flex;flex-direction:column;gap:6px;font:600 .9rem var(--body);color:#14110F;margin-bottom:14px}
+.q-field input{font:400 1.05rem var(--body);color:#14110F;background:#fff;border:1.5px solid #DCD2C2;border-radius:10px;padding:14px 16px;width:100%}
+.q-field input:focus{outline:none;border-color:var(--gold-deep);box-shadow:0 0 0 3px rgba(138,109,53,.18)}
+.q-check{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;font-size:.92rem;line-height:1.5;color:var(--muted);margin-bottom:12px;cursor:pointer}
+.q-check input{width:20px;height:20px;margin-top:1px;accent-color:#7A5E28}
+.q-check .linklike{color:var(--gold-deep);font-weight:600}
+.q-error{background:#FCECE8;color:#8A2A16;border-radius:10px;padding:10px 14px;font-size:.92rem;margin-top:6px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.q-direct{text-align:center;font-size:.88rem;color:var(--muted);margin-top:18px}
+.q-direct a{color:var(--gold-deep);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.q-result{text-align:center}
+.q-result .r-icon{width:62px;height:62px;border-radius:50%;margin:4px auto 16px;display:grid;place-items:center;background:var(--black);color:var(--gold)}
+.q-result .r-icon svg{width:30px;height:30px}
+.q-result h3{font:600 1.7rem/1.2 var(--display);margin-bottom:10px}
+.q-result p{color:var(--muted);font-size:1rem;line-height:1.65}
+.q-result .r-sum{text-align:left;background:#fff;border:1px solid #E3DACB;border-radius:12px;padding:16px 18px;margin:18px 0;font-size:.94rem;line-height:1.7}
+.q-result .r-sum b{color:#14110F}
+.q-result .r-note{background:#FBF4E6;border:1px solid #E8D9B8;border-radius:12px;padding:14px 16px;text-align:left;font-size:.94rem;margin:14px 0}
+.q-result .btn{width:100%;justify-content:center;margin-top:8px}
+@media(max-width:600px){.quiz{padding:0}.quiz-box{max-width:none;height:100%;border-radius:0;padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}}
+
 /* CELULAR */
 @media(max-width:900px){
   .what-grid{grid-template-columns:1fr;gap:28px}
@@ -382,6 +453,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
       <a href="#etapas">Como funciona</a>
       <a href="#indicacoes">Indicações</a>
       <a href="#provas">Provas</a>
+      <a href="#duvidas">Dúvidas</a>
     </nav>
     <a class="btn btn-gold js-wa" href="#">Agendar avaliação</a>
     <button class="burger" id="burger" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span></button>
@@ -605,7 +677,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
   <img alt="Foto ampliada">
 </div>
 
-<section class="care">
+<section class="care" id="cuidados">
   <div class="wrap care-grid">
     <div>
       <span class="eyebrow">Segurança em primeiro lugar</span>
@@ -620,6 +692,37 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
         <div class="alert rv"><span class="pill eval">Avaliação especial</span><h3>Rosácea</h3><p>Exige avaliação individual das condições e da sensibilidade da pele.</p></div>
       </div>
       <div class="must rv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg><p>A avaliação profissional é indispensável antes de iniciar o tratamento.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="duvidas" class="faqsec">
+  <div class="wrap">
+    <div class="first">
+      <div>
+        <span class="eyebrow">Sua primeira avaliação</span>
+        <h2>Simples, do primeiro contato ao seu <em>plano</em>.</h2>
+        <p class="lead">Cada pele é um caso único. Por isso, o valor do tratamento é apresentado somente na avaliação, depois de entender a sua pele e montar o seu planejamento.</p>
+      </div>
+      <ol class="flow">
+        <li><span class="fn">1</span><div><h3>Avaliação online</h3><p>Responda 7 perguntas rápidas sobre a sua pele. Leva menos de 1 minuto.</p></div></li>
+        <li><span class="fn">2</span><div><h3>Contato pelo WhatsApp</h3><p>A Jéssica recebe as suas respostas, tira suas dúvidas e agenda o melhor horário para você.</p></div></li>
+        <li><span class="fn">3</span><div><h3>Avaliação presencial</h3><p>Análise da pele, do histórico e das suas queixas, com o planejamento e os valores do seu tratamento.</p></div></li>
+      </ol>
+    </div>
+    <div class="faq">
+      <h2 class="faq-title">Perguntas <em>frequentes</em></h2>
+      <details><summary>Quanto custa o tratamento?</summary><p>Cada pele é um caso único: tipo de mancha, profundidade, histórico e rotina mudam o planejamento. Por isso, os valores são apresentados somente na avaliação, junto com o plano de tratamento indicado para você.</p></details>
+      <details><summary>O atendimento é presencial ou online?</summary><p>O tratamento é realizado somente de forma presencial, no Centro Estético Jéssica Sousa. Em alguns casos, a avaliação inicial pode ser feita online. Consulte essa possibilidade pelo WhatsApp.</p></details>
+      <details><summary>Quantas sessões vou precisar?</summary><p>Depende do tipo de mancha, da profundidade e de como a sua pele responde. O número de sessões e o intervalo entre elas são definidos no seu planejamento personalizado, depois da avaliação.</p></details>
+      <details><summary>Em quanto tempo vejo resultado?</summary><p>Varia de pessoa para pessoa. A evolução é acompanhada de perto em cada etapa, e seguir as orientações de home care faz toda a diferença no resultado.</p></details>
+      <details><summary>O melasma pode voltar?</summary><p>O melasma pede cuidado contínuo. Por isso, o Método Clean Pro inclui home care, acompanhamento e manutenção, para preservar o resultado conquistado.</p></details>
+      <details><summary>O procedimento dói?</summary><p>O seu conforto faz parte do cuidado. Na avaliação, a Jéssica explica cada etapa do procedimento indicado para o seu caso e tira todas as suas dúvidas antes de começar.</p></details>
+      <details><summary>Posso fazer se estiver grávida ou usando Roacutan?</summary><p>Gestantes e pessoas em tratamento oncológico não podem realizar o Método Clean Pro. Quem usa ou suspendeu recentemente o Roacutan (isotretinoína), ou tem rosácea, precisa de avaliação especial. <a href="#cuidados">Veja todas as condições</a>.</p></details>
+    </div>
+    <div class="faq-cta">
+      <p>Pronta para dar o primeiro passo?</p>
+      <a class="btn btn-gold js-quiz" href="#avaliacao">Fazer minha avaliação online</a>
     </div>
   </div>
 </section>
@@ -644,7 +747,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
   <div class="wrap">
     <div class="foot">
       <a href="#top" class="foot-logo"><img src="img/logo-completo.png" alt="Centro Estético Jessica Sousa — Estética, Saúde, Beleza"></a>
-      <nav><a href="#sobre">Sobre</a><a href="#metodo">O método</a><a href="#indicacoes">Indicações</a><a class="js-wa" href="#">WhatsApp</a><a class="js-ig" href="#">Instagram</a></nav>
+      <nav><a href="#sobre">Sobre</a><a href="#metodo">O método</a><a href="#indicacoes">Indicações</a><a class="js-wa-direct" href="#">WhatsApp</a><a class="js-ig" href="#">Instagram</a></nav>
     </div>
     <div class="copy"><span>© <span id="y">2026</span> Centro Estético Jéssica Sousa · Atendimento: <span style="white-space:nowrap">(75) 99800-9902</span></span><span><button type="button" class="linklike js-privacy">Política de Privacidade</button> · <button type="button" class="linklike js-privacy-reset">Gerenciar cookies</button> · Esteticista · Cosmetóloga · Biomédica</span></div>
   </div>
@@ -652,6 +755,98 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
 
 <a class="wa js-wa" href="#" aria-label="Agendar pelo WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.3-.5 0-1 .2-3.2-.7-2.7-1.1-4.4-3.9-4.6-4-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.7-.1 1.3Z"/></svg></a>
 
+
+<div class="quiz" id="quiz" role="dialog" aria-modal="true" aria-labelledby="quiz-title" hidden>
+  <div class="quiz-box">
+    <div class="quiz-top">
+      <button type="button" class="q-back" id="q-back" aria-label="Voltar">‹</button>
+      <div class="q-progress" aria-hidden="true"><span id="q-bar"></span></div>
+      <button type="button" class="q-close" id="q-close" aria-label="Fechar">×</button>
+    </div>
+    <form id="quiz-form" novalidate>
+      <p class="q-kicker" id="quiz-title">Avaliação inicial · <span id="q-step">1</span> de 7</p>
+
+      <fieldset class="q-step" data-step="1">
+        <legend>Qual é a sua principal queixa hoje?</legend>
+        <div class="q-opts" data-name="queixa">
+          <button type="button" class="q-opt" data-value="Melasma">Melasma</button>
+          <button type="button" class="q-opt" data-value="Manchas de acne">Manchas de acne</button>
+          <button type="button" class="q-opt" data-value="Sardas">Sardas</button>
+          <button type="button" class="q-opt" data-value="Manchas solares">Manchas solares</button>
+          <button type="button" class="q-opt" data-value="Outras manchas ou não sei">Outras manchas / não sei dizer</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="q-step" data-step="2" hidden>
+        <legend>Há quanto tempo você convive com essas manchas?</legend>
+        <div class="q-opts" data-name="tempo">
+          <button type="button" class="q-opt" data-value="Menos de 1 ano">Menos de 1 ano</button>
+          <button type="button" class="q-opt" data-value="De 1 a 3 anos">De 1 a 3 anos</button>
+          <button type="button" class="q-opt" data-value="Mais de 3 anos">Mais de 3 anos</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="q-step" data-step="3" hidden>
+        <legend>Você já fez algum tratamento para as manchas?</legend>
+        <div class="q-opts" data-name="historico">
+          <button type="button" class="q-opt" data-value="Nunca tratei">Nunca tratei</button>
+          <button type="button" class="q-opt" data-value="Já tratei, mas não tive o resultado que queria">Já tratei, mas não tive o resultado que queria</button>
+          <button type="button" class="q-opt" data-value="Estou em tratamento agora">Estou em tratamento agora</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="q-step" data-step="4" hidden>
+        <legend>Alguma dessas situações se aplica a você?</legend>
+        <p class="q-help">Para a sua segurança. Marque todas que se aplicam.</p>
+        <div class="q-opts multi" data-name="condicoes">
+          <button type="button" class="q-opt" data-value="Gestante">Estou gestante</button>
+          <button type="button" class="q-opt" data-value="Tratamento oncológico">Estou em tratamento oncológico</button>
+          <button type="button" class="q-opt" data-value="Roacutan">Uso ou parei recentemente o Roacutan (isotretinoína)</button>
+          <button type="button" class="q-opt" data-value="Rosácea">Tenho rosácea</button>
+          <button type="button" class="q-opt none" data-value="Nenhuma">Nenhuma dessas</button>
+        </div>
+        <button type="button" class="btn btn-gold q-next" data-next>Continuar</button>
+      </fieldset>
+
+      <fieldset class="q-step" data-step="5" hidden>
+        <legend>O atendimento é presencial. Você consegue vir até o centro estético?</legend>
+        <label class="q-field">Sua cidade<input type="text" id="q-cidade" name="cidade" autocomplete="address-level2" maxlength="80" placeholder="Digite sua cidade"></label>
+        <div class="q-opts" data-name="presencial">
+          <button type="button" class="q-opt" data-value="Sim">Sim, consigo ir presencialmente</button>
+          <button type="button" class="q-opt" data-value="Moro em outra cidade">Moro em outra cidade e quero saber mais</button>
+        </div>
+        <p class="q-help">Em alguns casos, a avaliação inicial pode ser feita online, sempre sob consulta.</p>
+      </fieldset>
+
+      <fieldset class="q-step" data-step="6" hidden>
+        <legend>Quando você gostaria de começar?</legend>
+        <div class="q-opts" data-name="inicio">
+          <button type="button" class="q-opt" data-value="O quanto antes">O quanto antes</button>
+          <button type="button" class="q-opt" data-value="Ainda este mês">Ainda este mês</button>
+          <button type="button" class="q-opt" data-value="Nos próximos meses">Nos próximos meses</button>
+          <button type="button" class="q-opt" data-value="Só estou pesquisando">Só estou pesquisando por enquanto</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="q-step" data-step="7" hidden>
+        <legend>Para onde a Jéssica deve enviar o retorno?</legend>
+        <label class="q-field">Seu nome<input type="text" id="q-nome" name="nome" autocomplete="given-name" maxlength="80" required></label>
+        <label class="q-field">Seu WhatsApp com DDD<input type="tel" id="q-whats" name="whatsapp" autocomplete="tel-national" inputmode="tel" placeholder="(75) 99999-9999" maxlength="16" required></label>
+        <label class="hp" aria-hidden="true">Não preencha<input type="text" id="q-hp" tabindex="-1" autocomplete="off"></label>
+        <label class="q-check"><input type="checkbox" id="q-c1" required><span>Li e concordo com a <button type="button" class="linklike js-privacy">Política de Privacidade</button> e autorizo o uso dos meus dados para contato e agendamento.</span></label>
+        <label class="q-check"><input type="checkbox" id="q-c2" required><span>Autorizo o uso das informações sobre a minha saúde que informei aqui, somente para avaliar a indicação do tratamento.</span></label>
+        <label class="q-check"><input type="checkbox" id="q-c3"><span>Quero receber novidades e conteúdos da Jéssica pelo WhatsApp. <small>(opcional)</small></span></label>
+        <p class="q-error" id="q-error" role="alert" hidden></p>
+        <button type="submit" class="btn btn-gold q-next" id="q-submit">Ver meu resultado</button>
+      </fieldset>
+
+      <div class="q-step q-result" data-step="8" hidden>
+        <div id="q-res"></div>
+      </div>
+    </form>
+    <p class="q-direct" id="q-direct">Prefere conversar direto? <a class="js-wa-direct" href="#">Falar no WhatsApp</a></p>
+  </div>
+</div>
 
 <div class="cookie" id="cookie" role="dialog" aria-live="polite" aria-label="Aviso de cookies" hidden>
   <div class="cookie-box">
@@ -680,13 +875,16 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
     <h3>2. Quais dados tratamos</h3>
     <ul>
       <li><b>Dados de navegação:</b> endereço IP, tipo de dispositivo e navegador, páginas acessadas e data e hora do acesso, registrados automaticamente pelo serviço de hospedagem para o site funcionar com segurança.</li>
-      <li><b>Dados de contato:</b> nome, número de telefone e o conteúdo das mensagens que você envia ao tocar em um botão de WhatsApp. O site não possui formulários; o contato acontece diretamente no WhatsApp.</li>
+      <li><b>Dados da avaliação online:</b> nome, WhatsApp, cidade, a sua queixa principal, há quanto tempo tem as manchas, tratamentos anteriores, se você se encaixa em alguma condição que exige cuidado (gestação, tratamento oncológico, uso de Roacutan ou rosácea), quando pretende começar e por onde chegou ao site (por exemplo, um anúncio ou o Instagram).</li>
+      <li><b>Dados de contato:</b> nome, número de telefone e o conteúdo das mensagens que você envia pelo WhatsApp.</li>
       <li><b>Dados de atendimento:</b> informações sobre sua pele e saúde, histórico, fotos de evolução e ficha de avaliação, coletados apenas no atendimento e com o seu conhecimento. São dados pessoais sensíveis e recebem proteção reforçada.</li>
     </ul>
 
     <h3>3. Para que usamos e com qual base legal</h3>
     <ul>
       <li><b>Responder seu contato e agendar sua avaliação:</b> procedimentos preliminares a pedido do titular (art. 7º, V).</li>
+      <li><b>Avaliação online:</b> consentimento (art. 7º, I). As informações de saúde informadas ali são tratadas com o seu consentimento específico e destacado (art. 11, I), apenas para avaliar a indicação do tratamento e priorizar o seu atendimento.</li>
+      <li><b>Enviar novidades e conteúdos pelo WhatsApp:</b> somente se você marcar essa opção (art. 7º, I). Você pode pedir para parar a qualquer momento.</li>
       <li><b>Manter o site funcionando e seguro:</b> legítimo interesse (art. 7º, IX).</li>
       <li><b>Realizar o atendimento e manter o registro dos procedimentos:</b> tutela da saúde, cumprimento de obrigação legal e regulatória e execução de contrato (arts. 7º, II e V, e 11, II, “a” e “f”).</li>
       <li><b>Medir o uso do site e anúncios, quando houver:</b> consentimento (art. 7º, I), dado pelo botão “Aceitar cookies”.</li>
@@ -705,6 +903,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
     <p>Não vendemos seus dados. Eles podem ser tratados pelos fornecedores necessários para o site e o atendimento funcionarem:</p>
     <ul>
       <li><b>Vercel Inc.:</b> hospedagem do site.</li>
+      <li><b>Supabase:</b> armazenamento seguro das respostas da avaliação online, em servidores localizados em São Paulo, Brasil.</li>
       <li><b>Google LLC:</b> fontes tipográficas do site (Google Fonts), que recebem o endereço IP do visitante.</li>
       <li><b>Meta Platforms (WhatsApp e Instagram):</b> quando você entra em contato ou acessa nossos perfis.</li>
       <li><b>Autoridades públicas:</b> somente quando houver obrigação legal ou ordem judicial.</li>
@@ -713,6 +912,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
 
     <h3>6. Por quanto tempo guardamos</h3>
     <ul>
+      <li>Respostas da avaliação online: até 2 anos após o último contato, ou até você pedir a exclusão ou revogar o consentimento.</li>
       <li>Conversas de contato e agendamento: pelo tempo necessário ao atendimento e, depois, até 2 anos, salvo se você pedir a exclusão antes.</li>
       <li>Registros de atendimento e ficha de avaliação: pelo prazo exigido pelas normas profissionais e de saúde aplicáveis.</li>
       <li>Fotos e depoimentos publicados: enquanto durar o consentimento da cliente.</li>
@@ -720,7 +920,7 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
     </ul>
 
     <h3>7. Como protegemos</h3>
-    <p>Adotamos medidas técnicas e administrativas razoáveis para proteger seus dados contra acessos não autorizados, perda ou alteração, como acesso restrito às informações de atendimento e conexão segura (HTTPS) no site. Em caso de incidente de segurança que possa causar risco relevante, comunicaremos os titulares afetados e a ANPD, conforme o art. 48 da LGPD.</p>
+    <p>Adotamos medidas técnicas e administrativas razoáveis para proteger seus dados contra acessos não autorizados, perda ou alteração, como acesso restrito às informações de atendimento, painel de consulta protegido por senha e disponível apenas para a equipe autorizada, e conexão segura (HTTPS) no site. Em caso de incidente de segurança que possa causar risco relevante, comunicaremos os titulares afetados e a ANPD, conforme o art. 48 da LGPD.</p>
 
     <h3>8. Seus direitos</h3>
     <p>Pela LGPD (art. 18), você pode, a qualquer momento e gratuitamente:</p>
@@ -745,10 +945,8 @@ footer.site{background:#060505;color:var(--on-dark-muted);padding-block:54px 30p
 </div>
 
 <script>
-const WHATSAPP = "https://wa.me/5575998009902?text=" + encodeURIComponent("Olá! Vim pelo site e gostaria de agendar minha avaliação do Método Clean Pro.");
 const INSTAGRAM = "https://www.instagram.com/jessicasousa_esteticaa/";
 document.documentElement.classList.add('js');
-document.querySelectorAll('.js-wa').forEach(a=>{a.href=WHATSAPP;a.target="_blank";a.rel="noopener"});
 document.querySelectorAll('.js-ig').forEach(a=>{a.href=INSTAGRAM;a.target="_blank";a.rel="noopener"});
 document.getElementById('y').textContent=new Date().getFullYear();
 
@@ -786,7 +984,7 @@ const COOKIE_KEY='jsousa-cookies';
 const banner=document.getElementById('cookie'),privacy=document.getElementById('privacy');
 const lerEscolha=()=>{try{return localStorage.getItem(COOKIE_KEY)}catch(e){return null}};
 const salvarEscolha=v=>{try{localStorage.setItem(COOKIE_KEY,v)}catch(e){}};
-function liberarMedicao(){ /* inserir aqui os scripts de medição quando houver */ }
+function liberarMedicao(){carregarMedicao()}
 function aplicar(v){window.cookieConsent=v;if(v==='aceito')liberarMedicao()}
 const escolha=lerEscolha();
 if(escolha){aplicar(escolha)}else{setTimeout(()=>{banner.hidden=false},700)}
@@ -796,6 +994,125 @@ document.querySelectorAll('.js-privacy').forEach(b=>b.addEventListener('click',(
 document.querySelector('.js-privacy-reset').addEventListener('click',()=>{banner.hidden=false});
 privacy.addEventListener('click',e=>{if(e.target===privacy||e.target.closest('.privacy-close'))privacy.hidden=true});
 addEventListener('keydown',e=>{if(e.key==='Escape')privacy.hidden=true});
+
+// ================= CONFIGURAÇÃO =================
+// Preencha com os dados do projeto Supabase (Settings → API). A chave pública (anon/publishable) pode ficar no site.
+const SUPABASE_URL = "";
+const SUPABASE_KEY = "";
+// IDs de medição. Só são carregados depois que a visitante aceita os cookies.
+const META_PIXEL_ID = "";
+const GA4_ID = "";
+const WA_NUMERO = "5575998009902";
+
+// ================= ORIGEM DA VISITA (UTM) =================
+const ORIGEM=(()=>{const q=new URLSearchParams(location.search);const k=['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];let o={};
+  try{o=JSON.parse(sessionStorage.getItem('jsousa-origem')||'{}')}catch(e){}
+  if(k.some(x=>q.get(x))){o={};k.forEach(x=>{if(q.get(x))o[x]=q.get(x).slice(0,120)})}
+  if(!o.referrer&&document.referrer&&!document.referrer.includes(location.host))o.referrer=document.referrer.slice(0,200);
+  try{sessionStorage.setItem('jsousa-origem',JSON.stringify(o))}catch(e){}return o})();
+
+// ================= MEDIÇÃO (só após consentimento) =================
+function carregarMedicao(){
+  if(META_PIXEL_ID&&!window.fbq){!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init',META_PIXEL_ID);fbq('track','PageView')}
+  if(GA4_ID&&!window.gtag){const s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA4_ID;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config',GA4_ID)}
+}
+function rastrear(evento,dados){
+  if(window.cookieConsent!=='aceito')return;
+  try{if(window.fbq){['Lead','Contact'].includes(evento)?fbq('track',evento,dados||{}):fbq('trackCustom',evento,dados||{})}}catch(e){}
+  try{if(window.gtag)gtag('event',evento,dados||{})}catch(e){}
+}
+
+// ================= AVALIAÇÃO ONLINE =================
+const quiz=document.getElementById('quiz'),form=document.getElementById('quiz-form');
+const passos=[...form.querySelectorAll('.q-step')];const TOTAL=7;let passo=1;let iniciou=false;
+const resp={queixa:'',tempo:'',historico:'',condicoes:[],presencial:'',inicio:''};
+const linkWA=txt=>`https://wa.me/${WA_NUMERO}?text=${encodeURIComponent(txt)}`;
+function mostrar(n){passo=n;passos.forEach(p=>p.hidden=+p.dataset.step!==n);
+  document.getElementById('q-bar').style.width=Math.min(100,(Math.min(n,TOTAL)/TOTAL)*100)+'%';
+  document.getElementById('q-step').textContent=Math.min(n,TOTAL);
+  document.getElementById('q-back').disabled=n===1||n>TOTAL;
+  document.getElementById('quiz-title').hidden=n>TOTAL;document.getElementById('q-direct').hidden=n>TOTAL;
+  quiz.querySelector('.quiz-box').scrollTop=0;
+  const f=passos[n-1]&&passos[n-1].querySelector('.q-opt,input');if(f&&n>1)setTimeout(()=>f.focus({preventScroll:true}),60)}
+function abrirQuiz(origem){quiz.hidden=false;document.body.style.overflow='hidden';if(passo>TOTAL)reiniciar();mostrar(passo);
+  if(!iniciou){iniciou=true;rastrear('IniciouAvaliacao',{origem})}}
+function fecharQuiz(){quiz.hidden=true;document.body.style.overflow=''}
+function reiniciar(){Object.assign(resp,{queixa:'',tempo:'',historico:'',condicoes:[],presencial:'',inicio:''});form.reset();form.querySelectorAll('.q-opt').forEach(b=>b.setAttribute('aria-pressed','false'));passo=1;atualizarMulti()}
+document.querySelectorAll('.js-wa,.js-quiz').forEach(a=>{a.removeAttribute('target');a.href='#avaliacao';a.addEventListener('click',e=>{e.preventDefault();abrirQuiz(a.textContent.trim().slice(0,40)||'botão flutuante')})});
+document.querySelectorAll('.js-wa-direct').forEach(a=>{a.href=linkWA('Olá, Jéssica! Vim pelo site e gostaria de mais informações sobre o Método Clean Pro.');a.target='_blank';a.rel='noopener';a.addEventListener('click',()=>rastrear('Contact',{tipo:'direto'}))});
+document.getElementById('q-close').addEventListener('click',fecharQuiz);
+document.getElementById('q-back').addEventListener('click',()=>{if(passo>1)mostrar(passo-1)});
+quiz.addEventListener('click',e=>{if(e.target===quiz)fecharQuiz()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!quiz.hidden&&document.getElementById('privacy').hidden)fecharQuiz()});
+if(location.hash==='#avaliacao')setTimeout(()=>abrirQuiz('link direto'),400);
+
+form.querySelectorAll('.q-opts:not(.multi)').forEach(g=>g.addEventListener('click',e=>{const b=e.target.closest('.q-opt');if(!b)return;
+  g.querySelectorAll('.q-opt').forEach(x=>x.setAttribute('aria-pressed',x===b));resp[g.dataset.name]=b.dataset.value;
+  if(g.dataset.name==='presencial'&&!document.getElementById('q-cidade').value.trim()){document.getElementById('q-cidade').focus();return}
+  setTimeout(()=>mostrar(passo+1),220)}));
+document.getElementById('q-cidade').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();if(resp.presencial)mostrar(6)}});
+const multi=form.querySelector('.q-opts.multi'),btnMulti=multi.parentElement.querySelector('[data-next]');
+function atualizarMulti(){btnMulti.disabled=resp.condicoes.length===0}
+multi.addEventListener('click',e=>{const b=e.target.closest('.q-opt');if(!b)return;const v=b.dataset.value;
+  if(v==='Nenhuma'){resp.condicoes=resp.condicoes.includes('Nenhuma')?[]:['Nenhuma']}
+  else{resp.condicoes=resp.condicoes.filter(x=>x!=='Nenhuma');resp.condicoes=resp.condicoes.includes(v)?resp.condicoes.filter(x=>x!==v):[...resp.condicoes,v]}
+  multi.querySelectorAll('.q-opt').forEach(x=>x.setAttribute('aria-pressed',resp.condicoes.includes(x.dataset.value)));atualizarMulti()});
+btnMulti.addEventListener('click',()=>mostrar(5));atualizarMulti();
+
+const whats=document.getElementById('q-whats');
+form.addEventListener('input',()=>{document.getElementById('q-error').hidden=true});
+whats.addEventListener('input',()=>{let d=whats.value.replace(/\D/g,'').slice(0,11);
+  whats.value=d.length>10?`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`:d.length>6?`(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`:d.length>2?`(${d.slice(0,2)}) ${d.slice(2)}`:d});
+
+function classificar(){const c=resp.condicoes;
+  const elegibilidade=c.some(x=>['Gestante','Tratamento oncológico'].includes(x))?'nao_indicado':c.some(x=>['Roacutan','Rosácea'].includes(x))?'avaliacao_especial':'apta';
+  let temperatura='morna';
+  if(elegibilidade==='nao_indicado')temperatura='contraindicado';
+  else if(resp.inicio==='Só estou pesquisando')temperatura='fria';
+  else if(['O quanto antes','Ainda este mês'].includes(resp.inicio)&&resp.presencial==='Sim')temperatura='quente';
+  return {elegibilidade,temperatura}}
+
+async function salvar(lead){
+  if(!SUPABASE_URL||!SUPABASE_KEY)return false;
+  const ctrl=new AbortController();const t=setTimeout(()=>ctrl.abort(),6000);
+  try{const r=await fetch(SUPABASE_URL+'/rest/v1/leads',{method:'POST',signal:ctrl.signal,headers:{'apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(lead)});return r.ok}
+  catch(e){return false}finally{clearTimeout(t)}}
+
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+form.addEventListener('submit',async e=>{e.preventDefault();
+  const erro=document.getElementById('q-error');erro.hidden=true;
+  const nome=document.getElementById('q-nome').value.trim(),fone=whats.value.replace(/\D/g,''),cidade=document.getElementById('q-cidade').value.trim();
+  let msg='';
+  if(nome.length<2)msg='Digite o seu nome.';
+  else if(fone.length<10)msg='Digite um WhatsApp válido, com DDD.';
+  else if(!document.getElementById('q-c1').checked||!document.getElementById('q-c2').checked)msg='Para continuar, marque as duas autorizações obrigatórias.';
+  if(msg){erro.textContent=msg;erro.hidden=false;return}
+  if(document.getElementById('q-hp').value)return; // robô
+  const btn=document.getElementById('q-submit');btn.disabled=true;btn.textContent='Enviando…';
+  const {elegibilidade,temperatura}=classificar();
+  const cond=resp.condicoes.filter(x=>x!=='Nenhuma');
+  const lead={nome,whatsapp:fone,cidade,queixa:resp.queixa,tempo:resp.tempo,historico:resp.historico,condicoes:cond,presencial:resp.presencial,inicio:resp.inicio,
+    elegibilidade,temperatura,consentimento_dados:true,consentimento_saude:true,consentimento_marketing:document.getElementById('q-c3').checked,
+    utm_source:ORIGEM.utm_source||null,utm_medium:ORIGEM.utm_medium||null,utm_campaign:ORIGEM.utm_campaign||null,utm_content:ORIGEM.utm_content||null,utm_term:ORIGEM.utm_term||null,referrer:ORIGEM.referrer||null};
+  await salvar(lead);
+  rastrear('Lead',{queixa:resp.queixa,temperatura});
+  btn.disabled=false;btn.textContent='Ver meu resultado';
+  const primeiro=nome.split(' ')[0];
+  const texto=`Olá, Jéssica! Fiz a avaliação inicial pelo site.\n\n• Nome: ${nome}\n• Queixa: ${resp.queixa} (${resp.tempo.toLowerCase()})\n• Tratamento anterior: ${resp.historico}\n• Cidade: ${cidade||'não informada'}${resp.presencial==='Sim'?' (posso ir presencialmente)':' (moro em outra cidade)'}\n• Quero começar: ${resp.inicio}${cond.length?`\n• Observação de saúde: ${cond.join(', ')}`:''}\n\nGostaria de agendar minha avaliação.`;
+  const resumo=`<div class="r-sum"><b>Queixa:</b> ${esc(resp.queixa)} · ${esc(resp.tempo)}<br><b>Tratamento anterior:</b> ${esc(resp.historico)}<br><b>Cidade:</b> ${esc(cidade||'não informada')}<br><b>Início:</b> ${esc(resp.inicio)}</div>`;
+  const icone='<div class="r-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div>';
+  let html;
+  if(elegibilidade==='nao_indicado'){
+    html=`${icone}<h3>${esc(primeiro)}, obrigada por confiar.</h3><p>Pela sua segurança, o Método Clean Pro <b>não é indicado</b> para gestantes nem durante o tratamento oncológico. Quando essa fase passar, a Jéssica terá prazer em avaliar a sua pele.</p><div class="r-note">Se tiver dúvidas sobre o seu caso, você pode falar com a Jéssica pelo WhatsApp.</div><a class="btn btn-gold" target="_blank" rel="noopener" href="${linkWA(texto.replace('Gostaria de agendar minha avaliação.','Gostaria de tirar uma dúvida sobre o meu caso.'))}" data-wa>Tirar dúvidas no WhatsApp</a>`;
+  }else{
+    const nota=elegibilidade==='avaliacao_especial'?`<div class="r-note"><b>Atenção:</b> pelo que você informou (${esc(cond.join(', '))}), o seu caso precisa de uma <b>avaliação especial</b>. A Jéssica vai analisar com cuidado antes de indicar o tratamento.</div>`:'';
+    const fora=resp.presencial!=='Sim'?`<div class="r-note">O tratamento é presencial. Em alguns casos, a avaliação inicial pode ser feita online. A Jéssica vai te orientar.</div>`:'';
+    html=`${icone}<h3>Tudo certo, ${esc(primeiro)}!</h3><p>Agora é só enviar as suas respostas para a Jéssica no WhatsApp. Ela vai entender o seu caso e combinar o melhor horário para a sua avaliação.</p>${resumo}${nota}${fora}<a class="btn btn-gold" target="_blank" rel="noopener" href="${linkWA(texto)}" data-wa>Enviar para a Jéssica no WhatsApp</a><p style="font-size:.85rem;margin-top:12px">Os valores são apresentados na avaliação, conforme o seu caso.</p>`;
+  }
+  document.getElementById('q-res').innerHTML=html;
+  document.querySelector('#q-res [data-wa]').addEventListener('click',()=>rastrear('Contact',{tipo:'avaliacao',temperatura}));
+  mostrar(TOTAL+1);
+});
 </script>
 </body>
 </html>

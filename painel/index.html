@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Painel de Avaliações</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Painel interno: fundo claro para leitura longa, preto e dourado da marca nos destaques. */
+:root{
+  --black:#0B0A09;--gold:#CDB27A;--gold-deep:#7A5E28;--off:#F8F5EF;--card:#FFFDF9;--line:#E3DACB;
+  --text:#14110F;--muted:#4D463D;
+  --hot:#B5442F;--warm:#B8862B;--cold:#5E7A8C;--no:#6E665B;--ok:#3F7A4E;
+  --display:'Bodoni Moda',Didot,'Times New Roman',serif;--body:'Jost','Helvetica Neue',Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html,body{background:var(--off);color:var(--text);font:400 15px/1.55 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+button,input,select,textarea{font:inherit;color:inherit}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:999px;padding:11px 20px;font:600 .74rem var(--body);letter-spacing:.14em;text-transform:uppercase;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-gold{background:var(--gold);color:var(--black)}.btn-gold:hover{background:#DCC594}
+.btn-line{border-color:var(--line);background:#fff;color:var(--text)}.btn-line:hover{border-color:var(--gold-deep)}
+:focus-visible{outline:2px solid var(--gold-deep);outline-offset:2px}
+
+/* login */
+.login{min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:var(--black)}
+.login form{background:var(--off);border-radius:16px;padding:32px 28px;width:100%;max-width:400px;display:grid;gap:14px}
+.login img{width:64px;margin:0 auto 6px}
+.login h1{font:600 1.7rem var(--display);text-align:center}
+.login p{text-align:center;color:var(--muted);font-size:.92rem;margin-top:-6px}
+label{display:grid;gap:6px;font-weight:600;font-size:.88rem}
+input[type=email],input[type=password],input[type=search],select,textarea{background:#fff;border:1.5px solid #DCD2C2;border-radius:10px;padding:11px 13px;width:100%}
+.msg{background:#FCECE8;color:#8A2A16;border-radius:10px;padding:10px 12px;font-size:.9rem}
+
+/* topo */
+.top{background:var(--black);color:#F4EFE6;padding-top:env(safe-area-inset-top,0px)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:68px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:38px}
+.brand b{font:600 1.15rem var(--display);display:block;line-height:1.1}
+.brand small{font-size:.66rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.top .btn-line{background:transparent;color:#F4EFE6;border-color:rgba(205,178,122,.35)}
+
+main{padding-block:28px 60px}
+.kpis{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:12px;margin-bottom:24px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+.kpi span{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.kpi b{display:block;font:600 1.9rem/1.1 var(--display);margin-top:6px;font-variant-numeric:tabular-nums}
+.kpi small{color:var(--muted);font-size:.8rem}
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:18px}
+.tools input[type=search]{flex:1 1 220px;width:auto}
+.tools select{width:auto;flex:0 1 auto}
+.count{color:var(--muted);font-size:.9rem;margin-bottom:12px}
+
+.list{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.lead{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.lead-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.lead-h h2{font:600 1.15rem/1.25 var(--body)}
+.lead-h time{display:block;font-size:.8rem;color:var(--muted);margin-top:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:600 .68rem var(--body);letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:4px 10px;border:1px solid currentColor;white-space:nowrap}
+.t-quente{color:var(--hot)}.t-morna{color:var(--warm)}.t-fria{color:var(--cold)}.t-contraindicado{color:var(--no)}
+.e-avaliacao_especial{color:var(--warm);background:#FBF4E6}.e-nao_indicado{color:#fff;background:var(--no);border-color:var(--no)}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.9rem}
+dt{color:var(--muted)}dd{min-width:0;overflow-wrap:anywhere}
+.lead-f{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
+.lead textarea{min-height:64px;resize:vertical;font-size:.9rem}
+.saved{font-size:.78rem;color:var(--ok);min-height:1em}
+.empty{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:40px 20px;text-align:center;color:var(--muted)}
+@media(max-width:1000px){.kpis{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:560px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.list{grid-template-columns:1fr}.top .wrap{min-height:60px}.brand small{display:none}.tools select{flex:1 1 45%}}
+</style>
+</head>
+<body>
+
+<section class="login" id="tela-login">
+  <form id="form-login">
+    <img src="../img/logo-monograma.png" alt="">
+    <h1>Painel de Avaliações</h1>
+    <p>Acesso restrito à equipe do Centro Estético Jéssica Sousa.</p>
+    <label>E-mail<input type="email" id="email" autocomplete="username" required></label>
+    <label>Senha<input type="password" id="senha" autocomplete="current-password" required></label>
+    <p class="msg" id="login-msg" hidden></p>
+    <button class="btn btn-gold" type="submit" id="btn-login">Entrar</button>
+  </form>
+</section>
+
+<div id="app" hidden>
+  <header class="top">
+    <div class="wrap">
+      <div class="brand"><img src="../img/logo-monograma.png" alt=""><span><b>Avaliações online</b><small>Centro Estético Jéssica Sousa</small></span></div>
+      <button class="btn btn-line" id="sair">Sair</button>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="kpis" aria-label="Resumo">
+      <div class="kpi"><span>Total</span><b id="k-total">0</b><small id="k-semana">0 nos últimos 7 dias</small></div>
+      <div class="kpi"><span>Novos</span><b id="k-novos">0</b><small>aguardando contato</small></div>
+      <div class="kpi"><span>Quentes</span><b id="k-quentes">0</b><small>querem começar já</small></div>
+      <div class="kpi"><span>Agendadas</span><b id="k-agendadas">0</b><small>avaliações marcadas</small></div>
+      <div class="kpi"><span>Clientes</span><b id="k-clientes">0</b><small>fecharam tratamento</small></div>
+      <div class="kpi"><span>Conversão</span><b id="k-conv">0%</b><small>avaliações → clientes</small></div>
+    </section>
+
+    <div class="tools">
+      <input type="search" id="busca" placeholder="Buscar por nome, cidade ou WhatsApp" aria-label="Buscar">
+      <select id="f-status" aria-label="Filtrar por status">
+        <option value="">Todos os status</option>
+        <option value="novo">Novo</option><option value="em_conversa">Em conversa</option><option value="avaliacao_agendada">Avaliação agendada</option>
+        <option value="cliente">Cliente</option><option value="nao_fechou">Não fechou</option><option value="descartado">Descartado</option>
+      </select>
+      <select id="f-temp" aria-label="Filtrar por temperatura">
+        <option value="">Todas as temperaturas</option><option value="quente">Quente</option><option value="morna">Morna</option><option value="fria">Fria</option><option value="contraindicado">Contraindicado</option>
+      </select>
+      <button class="btn btn-line" id="atualizar">Atualizar</button>
+      <button class="btn btn-gold" id="exportar">Baixar planilha</button>
+    </div>
+    <p class="count" id="contagem"></p>
+    <div class="list" id="lista"></div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+// Mesmos dados de configuração do site (Supabase → Settings → API)
+const SUPABASE_URL = "";
+const SUPABASE_KEY = "";
+
+const STATUS={novo:'Novo',em_conversa:'Em conversa',avaliacao_agendada:'Avaliação agendada',cliente:'Cliente',nao_fechou:'Não fechou',descartado:'Descartado'};
+const TEMP={quente:'Quente',morna:'Morna',fria:'Fria',contraindicado:'Contraindicado'};
+const ELEG={apta:'Apta',avaliacao_especial:'Avaliação especial',nao_indicado:'Não indicado'};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let db=null,leads=[];
+
+if(!SUPABASE_URL||!SUPABASE_KEY||!window.supabase){$('login-msg').textContent='Painel ainda não configurado: preencha SUPABASE_URL e SUPABASE_KEY.';$('login-msg').hidden=false;$('btn-login').disabled=true}
+else{db=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);db.auth.getSession().then(({data})=>{if(data.session)entrar()})}
+
+$('form-login').addEventListener('submit',async e=>{e.preventDefault();if(!db)return;
+  $('login-msg').hidden=true;$('btn-login').disabled=true;$('btn-login').textContent='Entrando…';
+  const {error}=await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('senha').value});
+  $('btn-login').disabled=false;$('btn-login').textContent='Entrar';
+  if(error){$('login-msg').textContent='E-mail ou senha incorretos.';$('login-msg').hidden=false;return}
+  entrar()});
+$('sair').addEventListener('click',async()=>{await db.auth.signOut();location.reload()});
+
+async function entrar(){$('tela-login').hidden=true;$('app').hidden=false;await carregar()}
+async function carregar(){
+  const {data,error}=await db.from('leads').select('*').order('created_at',{ascending:false}).limit(2000);
+  if(error){$('lista').innerHTML=`<div class="empty">Não foi possível carregar as avaliações. Confira se este e-mail está autorizado na tabela <b>admins</b>.</div>`;return}
+  leads=data||[];resumo();render()}
+function resumo(){const sem=Date.now()-7*864e5,c=s=>leads.filter(l=>l.status===s).length;
+  $('k-total').textContent=leads.length;$('k-semana').textContent=leads.filter(l=>new Date(l.created_at)>sem).length+' nos últimos 7 dias';
+  $('k-novos').textContent=c('novo');$('k-quentes').textContent=leads.filter(l=>l.temperatura==='quente'&&['novo','em_conversa'].includes(l.status)).length;
+  const ag=c('avaliacao_agendada'),cl=c('cliente'),nf=c('nao_fechou');$('k-agendadas').textContent=ag;$('k-clientes').textContent=cl;
+  $('k-conv').textContent=(cl+nf?Math.round(cl/(cl+nf)*100):0)+'%'}
+function filtrados(){const q=$('busca').value.trim().toLowerCase(),st=$('f-status').value,tp=$('f-temp').value;
+  return leads.filter(l=>(!st||l.status===st)&&(!tp||l.temperatura===tp)&&(!q||[l.nome,l.cidade,l.whatsapp].join(' ').toLowerCase().includes(q)))}
+const fone=n=>{const d=String(n);return d.length===11?`(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}`:d.length===10?`(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}`:d};
+const data=d=>new Date(d).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+function render(){const L=filtrados();$('contagem').textContent=`${L.length} de ${leads.length} avaliações`;
+  if(!L.length){$('lista').innerHTML='<div class="empty">Nenhuma avaliação encontrada.</div>';return}
+  $('lista').innerHTML=L.map(l=>{const origem=[l.utm_source,l.utm_campaign].filter(Boolean).join(' · ')||(l.referrer?'Link externo':'Direto');
+    const wa=`https://wa.me/55${l.whatsapp}?text=${encodeURIComponent(`Olá, ${l.nome.split(' ')[0]}! Aqui é a Jéssica Sousa. Recebi a sua avaliação pelo site e quero te ajudar com o seu caso.`)}`;
+    return `<article class="lead" data-id="${l.id}">
+      <div class="lead-h"><div><h2>${esc(l.nome)}</h2><time>${data(l.created_at)}</time></div>
+        <div class="chips"><span class="chip t-${l.temperatura}">${TEMP[l.temperatura]}</span>${l.elegibilidade!=='apta'?`<span class="chip e-${l.elegibilidade}">${ELEG[l.elegibilidade]}</span>`:''}</div></div>
+      <dl>
+        <dt>WhatsApp</dt><dd>${fone(l.whatsapp)}</dd>
+        <dt>Queixa</dt><dd>${esc(l.queixa)} · ${esc(l.tempo)}</dd>
+        <dt>Histórico</dt><dd>${esc(l.historico)}</dd>
+        <dt>Saúde</dt><dd>${l.condicoes?.length?esc(l.condicoes.join(', ')):'Nenhuma condição informada'}</dd>
+        <dt>Cidade</dt><dd>${esc(l.cidade||'—')} · ${l.presencial==='Sim'?'vem presencialmente':'outra cidade'}</dd>
+        <dt>Início</dt><dd>${esc(l.inicio)}</dd>
+        <dt>Origem</dt><dd>${esc(origem)}</dd>
+        <dt>Novidades</dt><dd>${l.consentimento_marketing?'Aceita receber':'Não aceitou'}</dd>
+      </dl>
+      <div class="lead-f"><select aria-label="Status" data-f="status">${Object.entries(STATUS).map(([k,v])=>`<option value="${k}"${k===l.status?' selected':''}>${v}</option>`).join('')}</select>
+        <a class="btn btn-gold" href="${wa}" target="_blank" rel="noopener">WhatsApp</a></div>
+      <textarea aria-label="Observações" placeholder="Observações internas (ex.: avaliação marcada dia 10, às 15h)" data-f="observacoes" maxlength="2000">${esc(l.observacoes||'')}</textarea>
+      <span class="saved" aria-live="polite"></span>
+    </article>`}).join('')}
+['busca','f-status','f-temp'].forEach(id=>$(id).addEventListener('input',render));
+$('atualizar').addEventListener('click',carregar);
+$('lista').addEventListener('change',async e=>{const el=e.target.closest('[data-f]');if(!el)return;const card=el.closest('.lead'),id=card.dataset.id,campo=el.dataset.f,val=el.value;
+  const ok=card.querySelector('.saved');ok.textContent='Salvando…';
+  const {error}=await db.from('leads').update({[campo]:val||null}).eq('id',id);
+  if(error){ok.style.color='#8A2A16';ok.textContent='Não foi possível salvar. Tente de novo.';return}
+  ok.style.color='';ok.textContent='Salvo';const l=leads.find(x=>x.id===id);l[campo]=val;resumo();setTimeout(()=>ok.textContent='',2000)});
+$('exportar').addEventListener('click',()=>{const cols=['created_at','nome','whatsapp','cidade','queixa','tempo','historico','condicoes','presencial','inicio','elegibilidade','temperatura','status','observacoes','utm_source','utm_medium','utm_campaign','consentimento_marketing'];
+  const cel=v=>{v=Array.isArray(v)?v.join(', '):v??'';v=String(v);if(/^[=+\-@]/.test(v))v="'"+v;return '"'+v.replace(/"/g,'""')+'"'};
+  const csv='﻿'+cols.join(';')+'\n'+filtrados().map(l=>cols.map(c=>cel(c==='created_at'?data(l[c]):l[c])).join(';')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download=`avaliacoes-${new Date().toISOString().slice(0,10)}.csv`;a.click()});
+</script>
+</body>
+</html>
