@@ -16,7 +16,6 @@ Site do Centro Estético Jéssica Sousa e do Método Clean Pro, com captação e
 7. Provas sociais: vídeos, antes e depois e depoimentos por objeção
 8. Quando não é indicado (contraindicações)
 9. Sua primeira avaliação + perguntas frequentes (valores só pelo WhatsApp)
-10. Parcerias: formulário para clínicas e profissionais
 11. Fechamento, unidades (Palmeiras – Praça Souto Soares, Centro; Seabra; Ibitiara – BA) e rodapé
 
 Também: aviso de cookies, política de privacidade (LGPD), avaliação online de 7 perguntas e barra fixa de agendamento no celular.
@@ -25,6 +24,10 @@ Também: aviso de cookies, política de privacidade (LGPD), avaliação online d
 
 - `index.html`: página principal
 - `painel/`: painel com Avaliações, Parcerias e Métricas do site
+- `parcerias/`: página separada de parcerias (/parcerias)
+- `privacidade/`: página da Política de Privacidade (/privacidade)
+- `api/capi.js`: API de Conversões da Meta (precisa de META_PIXEL_ID e META_CAPI_TOKEN na Vercel)
+- `img/og.jpg`: imagem de prévia ao compartilhar o link (1200×630)
 - `api/geo.js`: cidade/estado aproximados da visita (sem guardar IP)
 - `vercel.json`: links curtos rastreados (/bio, /stories, /avaliar, /destaque, /direct, /whats)
 - `supabase/schema.sql`: estrutura do banco (projeto `jessica-sousa-leads`, São Paulo)
@@ -51,10 +54,13 @@ O site só consegue cadastrar dados; ler exige login de um e-mail listado em `ad
 | Direct | /direct |
 | WhatsApp (status/listas) | /whats |
 | Anúncios | /?utm_source=meta&utm_medium=anuncio&utm_campaign=NOME |
-| Parcerias | /#parcerias |
+| Parcerias | /parcerias |
 
 ## Pendências
 
 - Política de privacidade: CNPJ/CPF, encarregado de dados e e-mail de contato
 - Domínio próprio (sugestão: jessicasousaestetica.com.br)
-- IDs do Pixel da Meta e do Google Analytics (opcional)
+- Meta: preencher META_PIXEL_ID em index.html e parcerias/index.html, e META_PIXEL_ID + META_CAPI_TOKEN nas variáveis da Vercel
+- Endereços e mapas de Seabra e Ibitiara
+- Horários de atendimento (schema e site)
+- Confirmar registro no CRBM
