@@ -690,6 +690,8 @@ h2 em,h1 em{font-weight:400!important}
 .pf-ok .btn{margin-top:14px}
 @media(max-width:900px){.parc-grid{grid-template-columns:1fr}}
 @media(max-width:560px){.pf-row{grid-template-columns:1fr}}
+.q-urg{display:flex;gap:10px;align-items:flex-start;background:#F8E9DC;border:1px solid #E6CDB8;color:#6B3E24;border-radius:12px;padding:12px 14px;font:500 .92rem/1.45 var(--body);margin:-4px 0 16px}
+.q-urg svg{width:20px;height:20px;flex:none;margin-top:1px}
 </style>
 </head>
 <body>
@@ -1185,12 +1187,13 @@ h2 em,h1 em{font-weight:400!important}
       </fieldset>
 
       <fieldset class="q-step" data-step="6" hidden>
-        <legend>Quando você gostaria de começar?</legend>
+        <legend>Quando você quer fazer a sua avaliação?</legend>
+        <p class="q-urg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>A agenda de avaliações é limitada por semana. Escolha agora para garantir prioridade.</p>
         <div class="q-opts" data-name="inicio">
-          <button type="button" class="q-opt" data-value="O quanto antes">O quanto antes</button>
+          <button type="button" class="q-opt" data-value="Hoje mesmo">Hoje mesmo, se tiver horário</button>
+          <button type="button" class="q-opt" data-value="Esta semana">Ainda esta semana</button>
+          <button type="button" class="q-opt" data-value="Próxima semana">Na próxima semana</button>
           <button type="button" class="q-opt" data-value="Ainda este mês">Ainda este mês</button>
-          <button type="button" class="q-opt" data-value="Nos próximos meses">Nos próximos meses</button>
-          <button type="button" class="q-opt" data-value="Só estou pesquisando">Só estou pesquisando por enquanto</button>
         </div>
       </fieldset>
 
@@ -1487,8 +1490,8 @@ function classificar(){const c=resp.condicoes;
   const elegibilidade=c.some(x=>['Gestante','Tratamento oncológico'].includes(x))?'nao_indicado':c.some(x=>['Roacutan','Rosácea'].includes(x))?'avaliacao_especial':'apta';
   let temperatura='morna';
   if(elegibilidade==='nao_indicado')temperatura='contraindicado';
-  else if(resp.inicio==='Só estou pesquisando')temperatura='fria';
-  else if(['O quanto antes','Ainda este mês'].includes(resp.inicio)&&resp.presencial)temperatura='quente';
+  else if(['Hoje mesmo','Esta semana'].includes(resp.inicio))temperatura='quente';
+  else if(resp.inicio==='Ainda este mês')temperatura='fria';
   return {elegibilidade,temperatura}}
 
 async function salvar(lead){
@@ -1517,8 +1520,8 @@ form.addEventListener('submit',async e=>{e.preventDefault();
   rastrear('Lead',{queixa:resp.queixa,temperatura});
   btn.disabled=false;btn.textContent='Ver meu resultado';
   const primeiro=nome.split(' ')[0];
-  const texto=`Olá, Jéssica! Fiz a avaliação inicial pelo site.\n\n• Nome: ${nome}\n• Queixa: ${resp.queixa} (${resp.tempo.toLowerCase()})\n• Tratamento anterior: ${resp.historico}\n• Cidade: ${cidade||'não informada'}\n• Avaliação: ${resp.presencial}\n• Quero começar: ${resp.inicio}${cond.length?`\n• Observação de saúde: ${cond.join(', ')}`:''}\n\nGostaria de agendar minha avaliação.`;
-  const resumo=`<div class="r-sum"><b>Queixa:</b> ${esc(resp.queixa)} · ${esc(resp.tempo)}<br><b>Tratamento anterior:</b> ${esc(resp.historico)}<br><b>Cidade:</b> ${esc(cidade||'não informada')}<br><b>Início:</b> ${esc(resp.inicio)}</div>`;
+  const texto=`Olá, Jéssica! Fiz a avaliação inicial pelo site.\n\n• Nome: ${nome}\n• Queixa: ${resp.queixa} (${resp.tempo.toLowerCase()})\n• Tratamento anterior: ${resp.historico}\n• Cidade: ${cidade||'não informada'}\n• Avaliação: ${resp.presencial}\n• Quero agendar: ${resp.inicio}${cond.length?`\n• Observação de saúde: ${cond.join(', ')}`:''}\n\nGostaria de agendar minha avaliação.`;
+  const resumo=`<div class="r-sum"><b>Queixa:</b> ${esc(resp.queixa)} · ${esc(resp.tempo)}<br><b>Tratamento anterior:</b> ${esc(resp.historico)}<br><b>Cidade:</b> ${esc(cidade||'não informada')}<br><b>Quer agendar:</b> ${esc(resp.inicio)}</div>`;
   const icone='<div class="r-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></div>';
   let html;
   if(elegibilidade==='nao_indicado'){
@@ -1526,7 +1529,7 @@ form.addEventListener('submit',async e=>{e.preventDefault();
   }else{
     const nota=elegibilidade==='avaliacao_especial'?`<div class="r-note"><b>Atenção:</b> pelo que você informou (${esc(cond.join(', '))}), o seu caso precisa de uma <b>avaliação especial</b>. A Jéssica vai analisar com cuidado antes de indicar o tratamento.</div>`:'';
     const fora=resp.presencial==='Online'?`<div class="r-note">Sua avaliação será online. O tratamento é realizado presencialmente, em uma das unidades: Palmeiras, Seabra ou Ibitiara – BA.</div>`:'';
-    html=`${icone}<h3>Tudo certo, ${esc(primeiro)}!</h3><p>Agora é só enviar as suas respostas para a Jéssica no WhatsApp. Ela vai entender o seu caso e combinar o melhor horário para a sua avaliação.</p>${resumo}${nota}${fora}<a class="btn btn-gold" target="_blank" rel="noopener" href="${linkWA(texto)}" data-wa>Enviar para a Jéssica no WhatsApp</a><p style="font-size:.85rem;margin-top:10px">Se o WhatsApp não abrir, chame no <b style="white-space:nowrap">(75) 99800-9902</b>.</p><p style="font-size:.85rem;margin-top:12px">Valores e horários são informados pela Jéssica no WhatsApp.</p>`;
+    html=`${icone}<h3>Tudo certo, ${esc(primeiro)}!</h3><p>Agora é só enviar as suas respostas para a Jéssica no WhatsApp. Ela vai entender o seu caso e combinar o melhor horário para a sua avaliação.</p>${resumo}${nota}${fora}<a class="btn btn-gold" target="_blank" rel="noopener" href="${linkWA(texto)}" data-wa>Garantir meu horário no WhatsApp</a><p style="font-size:.85rem;margin-top:10px">Se o WhatsApp não abrir, chame no <b style="white-space:nowrap">(75) 99800-9902</b>.</p><p style="font-size:.85rem;margin-top:12px">Valores e horários são informados pela Jéssica no WhatsApp.</p>`;
   }
   document.getElementById('q-res').innerHTML=html;
   alvoWA(document.querySelector('#q-res [data-wa]'));

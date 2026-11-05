@@ -266,7 +266,7 @@ function render(){const L=filtrados();$('contagem').textContent=`${L.length} de 
         <dt>Histórico</dt><dd>${esc(l.historico)}</dd>
         <dt>Saúde</dt><dd>${l.condicoes?.length?esc(l.condicoes.join(', ')):'Nenhuma condição informada'}</dd>
         <dt>Cidade</dt><dd>${esc(l.cidade||'—')}</dd><dt>Avaliação</dt><dd>${esc(l.presencial||'—')}</dd>
-        <dt>Início</dt><dd>${esc(l.inicio)}</dd>
+        <dt>Quer agendar</dt><dd>${esc(l.inicio)}</dd>
         <dt>Origem</dt><dd>${esc(origem)}</dd>
         <dt>No site</dt><dd>${(()=>{const h=hist[l.id];if(!h)return '<span style="color:var(--muted)">Sem histórico (recusou cookies ou outro aparelho)</span>';const d=s=>{s=Math.round(s||0);return s<60?s+'s':Math.floor(s/60)+'min'};return `<b>${h.visitas} visita${h.visitas===1?'':'s'}</b> · ${h.antes} antes da avaliação${h.depois?` · <b style="color:var(--hot)">voltou ${h.depois}x depois</b>`:''}<br><small style="color:var(--muted)">Tempo total ${d(h.tempo_seg)} · 1º acesso ${new Date(h.primeira).toLocaleDateString('pt-BR')} · último ${new Date(h.ultima).toLocaleDateString('pt-BR')}</small>`})()}</dd>
         <dt>Novidades</dt><dd>${l.consentimento_marketing?'Aceita receber':'Não aceitou'}</dd>
@@ -329,7 +329,7 @@ async function carregarMetricas(){
   colunas($('c-hora'),Array.from({length:24},(_,h)=>({t:h+'h',y:hm[h]||0})),p=>p.t);
   const fs=[['Visitaram o site',f.visitas],['Abriram a avaliação',f.abriram],['Concluíram',f.concluiram],['Foram ao WhatsApp',f.whatsapp]];
   $('c-funil').innerHTML=f.visitas?fs.map(([n,v])=>`<div class="fstep"><span>${n}</span><span class="trk"><span style="width:${Math.max(4,pct(v,f.visitas))}%">${nf(v)}</span></span><span class="pct">${pct(v,f.visitas)}%</span></div>`).join(''):'<p class="empty-m">Ainda sem dados no período.</p>';
-  const pergunta=['','Queixa','Tempo das manchas','Tratamento anterior','Saúde','Cidade e formato','Quando começar','Nome e WhatsApp'];
+  const pergunta=['','Queixa','Tempo das manchas','Tratamento anterior','Saúde','Cidade e formato','Quando agendar','Nome e WhatsApp'];
   bars($('c-etapas'),(m.etapas||[]).filter(e=>e.etapa>=1&&e.etapa<=7),e=>`${e.etapa}. ${pergunta[e.etapa]}`,e=>e.sessoes);
   const o=m.origens||[];
   $('c-origens').innerHTML=o.length?`<table class="t"><thead><tr><th>Origem</th><th class="n">Visitas</th><th class="n">Avaliações</th><th class="n">Conversão</th></tr></thead><tbody>${o.map(r=>`<tr><td>${esc(r.nome)}</td><td class="n">${nf(r.visitas)}</td><td class="n">${nf(r.avaliacoes)}</td><td class="n">${pct(r.avaliacoes,r.visitas)}%</td></tr>`).join('')}</tbody></table>`:'<p class="empty-m">Ainda sem dados no período.</p>';
