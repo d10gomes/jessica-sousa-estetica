@@ -17,7 +17,7 @@ Site do Centro Estético Jéssica Sousa e do Método Clean Pro, com captação e
 8. Quando não é indicado (contraindicações)
 9. Sua primeira avaliação + perguntas frequentes (valores só pelo WhatsApp)
 10. Parcerias: formulário para clínicas e profissionais
-11. Fechamento, endereço (Praça Souto Soares, Centro, Palmeiras – BA) e rodapé
+11. Fechamento, unidades (Palmeiras – Praça Souto Soares, Centro; Seabra; Ibitiara – BA) e rodapé
 
 Também: aviso de cookies, política de privacidade (LGPD), avaliação online de 7 perguntas e barra fixa de agendamento no celular.
 
