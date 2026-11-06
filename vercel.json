@@ -1,10 +1,45 @@
 {
   "redirects": [
-    { "source": "/bio", "destination": "/?utm_source=instagram&utm_medium=bio", "permanent": false },
-    { "source": "/stories", "destination": "/?utm_source=instagram&utm_medium=stories", "permanent": false },
-    { "source": "/destaque", "destination": "/?utm_source=instagram&utm_medium=destaque", "permanent": false },
-    { "source": "/direct", "destination": "/?utm_source=instagram&utm_medium=direct", "permanent": false },
-    { "source": "/whats", "destination": "/?utm_source=whatsapp&utm_medium=status", "permanent": false },
-    { "source": "/avaliar", "destination": "/?utm_source=instagram&utm_medium=stories#avaliacao", "permanent": false }
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "jessica-sousa-estetica.vercel.app"
+        }
+      ],
+      "destination": "https://www.jessicasousaestetica.com.br/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/bio",
+      "destination": "/?utm_source=instagram&utm_medium=bio",
+      "permanent": false
+    },
+    {
+      "source": "/stories",
+      "destination": "/?utm_source=instagram&utm_medium=stories",
+      "permanent": false
+    },
+    {
+      "source": "/destaque",
+      "destination": "/?utm_source=instagram&utm_medium=destaque",
+      "permanent": false
+    },
+    {
+      "source": "/direct",
+      "destination": "/?utm_source=instagram&utm_medium=direct",
+      "permanent": false
+    },
+    {
+      "source": "/whats",
+      "destination": "/?utm_source=whatsapp&utm_medium=status",
+      "permanent": false
+    },
+    {
+      "source": "/avaliar",
+      "destination": "/?utm_source=instagram&utm_medium=stories#avaliacao",
+      "permanent": false
+    }
   ]
 }

@@ -1,9 +1,11 @@
 # Jéssica Sousa Estética
 
+Domínio oficial: https://www.jessicasousaestetica.com.br (o endereço sem www e o antigo jessica-sousa-estetica.vercel.app redirecionam para ele).
+
 Site do Centro Estético Jéssica Sousa e do Método Clean Pro, com captação e qualificação de clientes, parcerias, métricas próprias e painel de gestão.
 
-- Site: https://jessica-sousa-estetica.vercel.app
-- Painel (restrito): https://jessica-sousa-estetica.vercel.app/painel
+- Site: https://www.jessicasousaestetica.com.br
+- Painel (restrito): https://www.jessicasousaestetica.com.br/painel
 
 ## Seções da página
 
@@ -59,7 +61,6 @@ O site só consegue cadastrar dados; ler exige login de um e-mail listado em `ad
 ## Pendências
 
 - Política de privacidade: CNPJ/CPF, encarregado de dados e e-mail de contato
-- Domínio próprio (sugestão: jessicasousaestetica.com.br)
 - Meta: preencher META_PIXEL_ID em index.html e parcerias/index.html, e META_PIXEL_ID + META_CAPI_TOKEN nas variáveis da Vercel
 - Endereços e mapas de Seabra e Ibitiara
 - Horários de atendimento (schema e site)
